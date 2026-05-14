@@ -1,0 +1,56 @@
+[
+  {
+    "id": "asics",
+    "slug": "asics",
+    "name": "ASICS",
+    "isActive": true
+  },
+  {
+    "id": "nike",
+    "slug": "nike",
+    "name": "Nike",
+    "isActive": true
+  },
+  {
+    "id": "adidas",
+    "slug": "adidas",
+    "name": "adidas",
+    "isActive": true
+  },
+  {
+    "id": "hoka",
+    "slug": "hoka",
+    "name": "HOKA",
+    "isActive": true
+  },
+  {
+    "id": "brooks",
+    "slug": "brooks",
+    "name": "Brooks",
+    "isActive": true
+  },
+  {
+    "id": "saucony",
+    "slug": "saucony",
+    "name": "Saucony",
+    "isActive": true
+  },
+  {
+    "id": "new-balance",
+    "slug": "new-balance",
+    "name": "New Balance",
+    "isActive": true
+  },
+  {
+    "id": "mizuno",
+    "slug": "mizuno",
+    "name": "Mizuno",
+    "isActive": true
+  },
+  {
+    "id": "on",
+    "slug": "on",
+    "name": "On",
+    "isActive": true
+  }
+]

@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "0.1.0",
+  "methodologyVersion": "mvp-explainable-rules-2026-04",
+  "language": "nl",
+  "purpose": "Eerste uitlegbare aanbevelingslogica voor de keuzehulp. De regels vertalen een lopersprofiel naar een matchscore, redenen en trade-offs zonder productkwaliteit, gebruikersreview en retailerprijs door elkaar te halen.",
+  "inputs": {
+    "experienceLevel": {
+      "label": "Loopervaring",
+      "values": ["beginner", "recreational", "experienced"]
+    },
+    "runningGoal": {
+      "label": "Loopdoel",
+      "values": ["start_running", "general_fitness", "faster_5k_10k", "half_marathon_marathon", "trail_running"]
+    },
+    "targetDistance": {
+      "label": "Afstand",
+      "values": ["5k", "10k", "half_marathon", "marathon", "trail"]
+    },
+    "weeklyFrequency": {
+      "label": "Aantal trainingen per week",
+      "values": ["1_2", "3_4", "5_plus"]
+    },
+    "preferredSurface": {
+      "label": "Ondergrond",
+      "values": ["road", "trail", "mixed"]
+    },
+    "preferredFeel": {
+      "label": "Gewenst loopgevoel",
+      "values": ["soft", "balanced", "responsive"]
+    },
+    "supportNeed": {
+      "label": "Gewenste ondersteuning",
+      "values": ["neutral", "some_support", "stability", "not_sure"]
+    },
+    "injurySensitivity": {
+      "label": "Blessuregevoeligheid",
+      "values": ["low", "medium", "high"]
+    },
+    "fitPreference": {
+      "label": "Pasvormvoorkeur",
+      "values": ["narrow", "regular", "wide", "not_sure"]
+    },
+    "budgetMax": {
+      "label": "Maximaal budget",
+      "type": "number",
+      "currency": "EUR"
+    }
+  },
+  "scoreModel": {
+    "maxBaseScore": 100,
+    "minimumUsefulScore": 50,
+    "shortlistSize": 5,
+    "scoreBands": [
+      {
+        "min": 82,
+        "label": "Zeer sterke match",
+        "explanation": "Past duidelijk bij de belangrijkste antwoorden en heeft weinig harde tegenargumenten."
+      },
+      {
+        "min": 68,
+        "label": "Goede match",
+        "explanation": "Past bij de hoofdsituatie, maar heeft een of twee duidelijke trade-offs."
+      },
+      {
+        "min": 50,
+        "label": "Mogelijke match",
+        "explanation": "Kan werken, maar vraagt extra controle op pasvorm, ondersteuning of gebruiksdoel."
+      }
+    ],
+    "weights": {
+      "surfaceMatch": 16,
+      "goalAndUseCaseMatch": 18,
+      "distanceMatch": 12,
+      "supportMatch": 16,
+      "feelMatch": 12,
+      "fitMatch": 9,
+      "experienceSafety": 7,
+      "budgetFit": 6,
+      "editorialQuality": 4
+    },
+    "penalties": {
+      "wrongSurface": -30,
+      "carbonRaceForBeginner": -18,
+      "tooNarrowForWidePreference": -14,
+      "lowStabilityForHighSupportNeed": -16,
+      "overBudget": -10,
+      "lowComfortForInjurySensitiveRunner": -8
+    }
+  },
+  "matchingRules": [
+    {
+      "id": "surface-road",
+      "dimension": "surfaceMatch",
+      "when": { "preferredSurface": "road" },
+      "prefer": { "surfaceType": ["road", "mixed"] },
+      "reason": "Je loopt vooral op de weg, daarom krijgen weg- en mixed schoenen voorrang."
+    },
+    {
+      "id": "surface-trail",
+      "dimension": "surfaceMatch",
+      "when": { "preferredSurface": "trail" },
+      "prefer": { "surfaceType": ["trail"] },
+      "reason": "Voor trails is grip en bescherming belangrijker dan pure wegsnelheid."
+    },
+    {
+      "id": "goal-start-running",
+      "dimension": "goalAndUseCaseMatch",
+      "when": { "runningGoal": "start_running" },
+      "prefer": {
+        "shoeType": ["daily_trainer", "stability"],
+        "primaryUseCase": ["daily_trainer"]
+      },
+      "avoid": { "shoeType": ["race"] },
+      "reason": "Als je begint, is een voorspelbare trainingsschoen meestal logischer dan een uitgesproken wedstrijdschoen."
+    },
+    {
+      "id": "goal-faster-5k-10k",
+      "dimension": "goalAndUseCaseMatch",
+      "when": { "runningGoal": "faster_5k_10k" },
+      "prefer": {
+        "shoeType": ["tempo", "race"],
+        "responsivenessLevel": ["high"]
+      },
+      "reason": "Voor snellere 5 of 10 kilometertrainingen telt responsiviteit zwaarder."
+    },
+    {
+      "id": "goal-long-distance",
+      "dimension": "goalAndUseCaseMatch",
+      "when": { "runningGoal": "half_marathon_marathon" },
+      "prefer": {
+        "distanceBucket": ["half_marathon_plus", "10k_marathon"],
+        "cushioningLevel": ["high", "medium"]
+      },
+      "reason": "Bij langere afstanden wegen comfort, bescherming en stabiele demping zwaarder."
+    },
+    {
+      "id": "goal-trail",
+      "dimension": "goalAndUseCaseMatch",
+      "when": { "runningGoal": "trail_running" },
+      "prefer": {
+        "shoeType": ["trail"],
+        "surfaceType": ["trail"]
+      },
+      "reason": "Trailgebruik vraagt om schoenen die gebouwd zijn voor grip, ondergrondwissels en bescherming."
+    },
+    {
+      "id": "distance-short",
+      "dimension": "distanceMatch",
+      "when": { "targetDistance": ["5k", "10k"] },
+      "prefer": {
+        "distanceBucket": ["all_round", "10k_marathon"],
+        "shoeType": ["daily_trainer", "tempo", "race"]
+      },
+      "reason": "Voor kortere afstanden zijn allround trainers en snellere tempo-opties allebei relevant."
+    },
+    {
+      "id": "distance-long",
+      "dimension": "distanceMatch",
+      "when": { "targetDistance": ["half_marathon", "marathon"] },
+      "prefer": {
+        "distanceBucket": ["half_marathon_plus", "10k_marathon"],
+        "cushioningLevel": ["high", "medium"]
+      },
+      "reason": "Voor halve marathon en marathon is langdurig comfort belangrijker dan alleen laag gewicht."
+    },
+    {
+      "id": "support-neutral",
+      "dimension": "supportMatch",
+      "when": { "supportNeed": "neutral" },
+      "prefer": { "supportType": ["neutral"] },
+      "reason": "Je geeft aan geen extra stabiliteit nodig te hebben, dus neutrale schoenen krijgen voorrang."
+    },
+    {
+      "id": "support-some",
+      "dimension": "supportMatch",
+      "when": { "supportNeed": ["some_support", "not_sure"] },
+      "prefer": { "supportType": ["light_stability", "neutral", "stability"] },
+      "reason": "Bij twijfel is een stabiele of licht ondersteunende trainingsschoen vaak een veilige shortlist."
+    },
+    {
+      "id": "support-stability",
+      "dimension": "supportMatch",
+      "when": { "supportNeed": "stability" },
+      "prefer": { "supportType": ["stability", "light_stability"] },
+      "avoid": { "supportType": ["neutral"] },
+      "reason": "Je zoekt duidelijke ondersteuning, daarom wegen stabiliteitsschoenen zwaarder."
+    },
+    {
+      "id": "feel-soft",
+      "dimension": "feelMatch",
+      "when": { "preferredFeel": "soft" },
+      "prefer": {
+        "cushioningLevel": ["high"],
+        "responsivenessLevel": ["low", "medium"]
+      },
+      "reason": "Voor een zachter gevoel geven we meer gewicht aan hoge demping en een minder agressieve afwikkeling."
+    },
+    {
+      "id": "feel-balanced",
+      "dimension": "feelMatch",
+      "when": { "preferredFeel": "balanced" },
+      "prefer": {
+        "cushioningLevel": ["medium", "high"],
+        "responsivenessLevel": ["medium"]
+      },
+      "reason": "Een gebalanceerd gevoel vraagt om demping zonder dat de schoen traag of extreem zacht wordt."
+    },
+    {
+      "id": "feel-responsive",
+      "dimension": "feelMatch",
+      "when": { "preferredFeel": "responsive" },
+      "prefer": {
+        "responsivenessLevel": ["high"],
+        "shoeType": ["tempo", "race"]
+      },
+      "reason": "Voor een directer, sneller gevoel tellen responsiviteit en tempo-eigenschappen zwaarder."
+    },
+    {
+      "id": "fit-wide",
+      "dimension": "fitMatch",
+      "when": { "fitPreference": "wide" },
+      "prefer": {
+        "widthLabel": ["wide"],
+        "fitProfile": ["roomy"]
+      },
+      "avoid": {
+        "widthLabel": ["narrow"],
+        "fitProfile": ["snug"]
+      },
+      "reason": "Bij brede voeten vermijden we smalle of erg aansluitende modellen zoveel mogelijk."
+    },
+    {
+      "id": "fit-narrow",
+      "dimension": "fitMatch",
+      "when": { "fitPreference": "narrow" },
+      "prefer": {
+        "widthLabel": ["narrow", "regular"],
+        "fitProfile": ["snug", "regular"]
+      },
+      "reason": "Bij een smallere pasvormvoorkeur krijgen compactere modellen meer gewicht."
+    },
+    {
+      "id": "experience-beginner",
+      "dimension": "experienceSafety",
+      "when": { "experienceLevel": "beginner" },
+      "prefer": {
+        "shoeType": ["daily_trainer", "stability"],
+        "responsivenessLevel": ["low", "medium"]
+      },
+      "avoid": {
+        "hasCarbonPlate": true,
+        "shoeType": ["race"]
+      },
+      "reason": "Voor beginners is voorspelbaarheid belangrijker dan maximale snelheid."
+    },
+    {
+      "id": "injury-sensitive",
+      "dimension": "experienceSafety",
+      "when": { "injurySensitivity": "high" },
+      "prefer": {
+        "comfortScoreMin": 8,
+        "stabilityScoreMin": 7.5,
+        "cushioningLevel": ["medium", "high"]
+      },
+      "reason": "Bij blessuregevoeligheid wegen comfort, demping en stabiliteit extra zwaar."
+    },
+    {
+      "id": "budget-conscious",
+      "dimension": "budgetFit",
+      "when": { "budgetMax": "present" },
+      "prefer": {
+        "priceFromAtOrBelowBudget": true,
+        "valueForMoneyScoreMin": 7.5
+      },
+      "reason": "Het advies houdt rekening met je budget, maar laat waarde voor geld zwaarder wegen dan alleen de laagste prijs."
+    },
+    {
+      "id": "editorial-quality-floor",
+      "dimension": "editorialQuality",
+      "when": { "always": true },
+      "prefer": {
+        "overallScoreMin": 8
+      },
+      "reason": "Schoenen met een hogere redactionele totaalscore krijgen een kleine bonus, maar winnen niet automatisch van betere persoonlijke matches."
+    }
+  ],
+  "profilePresets": [
+    {
+      "id": "beginner-road-comfort",
+      "label": "Beginnende wegloper die comfort zoekt",
+      "profile": {
+        "experienceLevel": "beginner",
+        "runningGoal": "start_running",
+        "targetDistance": "5k",
+        "weeklyFrequency": "1_2",
+        "preferredSurface": "road",
+        "preferredFeel": "soft",
+        "supportNeed": "not_sure",
+        "injurySensitivity": "medium",
+        "fitPreference": "not_sure",
+        "budgetMax": 170
+      },
+      "expectedStrongMatches": ["nike-pegasus-41", "hoka-clifton-9", "brooks-ghost-16"]
+    },
+    {
+      "id": "stability-long-road",
+      "label": "Wegloper die stabiliteit zoekt voor langere trainingen",
+      "profile": {
+        "experienceLevel": "recreational",
+        "runningGoal": "half_marathon_marathon",
+        "targetDistance": "half_marathon",
+        "weeklyFrequency": "3_4",
+        "preferredSurface": "road",
+        "preferredFeel": "balanced",
+        "supportNeed": "stability",
+        "injurySensitivity": "high",
+        "fitPreference": "regular",
+        "budgetMax": 200
+      },
+      "expectedStrongMatches": ["asics-gel-kayano-31", "brooks-adrenaline-gts-24", "hoka-arahi-7"]
+    },
+    {
+      "id": "wide-fit-comfort",
+      "label": "Loper met brede voeten en comfortvoorkeur",
+      "profile": {
+        "experienceLevel": "recreational",
+        "runningGoal": "general_fitness",
+        "targetDistance": "10k",
+        "weeklyFrequency": "3_4",
+        "preferredSurface": "road",
+        "preferredFeel": "soft",
+        "supportNeed": "neutral",
+        "injurySensitivity": "medium",
+        "fitPreference": "wide",
+        "budgetMax": 190
+      },
+      "expectedStrongMatches": ["new-balance-fresh-foam-x-1080v13", "brooks-ghost-16", "nike-vomero-17"]
+    },
+    {
+      "id": "tempo-runner",
+      "label": "Ervaren loper die sneller wil trainen",
+      "profile": {
+        "experienceLevel": "experienced",
+        "runningGoal": "faster_5k_10k",
+        "targetDistance": "10k",
+        "weeklyFrequency": "3_4",
+        "preferredSurface": "road",
+        "preferredFeel": "responsive",
+        "supportNeed": "neutral",
+        "injurySensitivity": "low",
+        "fitPreference": "regular",
+        "budgetMax": 220
+      },
+      "expectedStrongMatches": ["saucony-endorphin-speed-4", "adidas-adizero-boston-12", "adidas-adizero-adios-pro-3"]
+    },
+    {
+      "id": "trail-runner",
+      "label": "Loper die vooral trails wil lopen",
+      "profile": {
+        "experienceLevel": "recreational",
+        "runningGoal": "trail_running",
+        "targetDistance": "trail",
+        "weeklyFrequency": "1_2",
+        "preferredSurface": "trail",
+        "preferredFeel": "balanced",
+        "supportNeed": "neutral",
+        "injurySensitivity": "medium",
+        "fitPreference": "regular",
+        "budgetMax": 180
+      },
+      "expectedStrongMatches": ["hoka-speedgoat-6"]
+    }
+  ],
+  "explanationTemplates": {
+    "primaryReason": "Past goed omdat {matchedFactors}.",
+    "secondaryReason": "Daarnaast sluit de schoen aan op {supportingFactors}.",
+    "tradeoff": "Let op: {tradeoffFactors}.",
+    "budgetTradeoff": "Deze schoen past inhoudelijk goed, maar zit boven je opgegeven budget.",
+    "fitTradeoff": "Controleer de pasvorm extra goed, omdat dit model mogelijk minder aansluit bij je voetbreedte.",
+    "confidenceNote": "Dit is een regelgebaseerde MVP-aanbeveling. De uitleg is bewust zichtbaar zodat je de match kunt controleren."
+  },
+  "tradeoffRules": [
+    {
+      "id": "soft-but-less-fast",
+      "when": {
+        "preferredFeel": "soft",
+        "shoeResponsivenessLevel": ["low"]
+      },
+      "text": "veel zachtheid betekent meestal minder direct tempo-gevoel"
+    },
+    {
+      "id": "fast-but-less-stable",
+      "when": {
+        "preferredFeel": "responsive",
+        "shoeType": ["race", "tempo"],
+        "shoeStabilityScoreMax": 7.2
+      },
+      "text": "snelle schoenen voelen vaak minder rustig en stabiel"
+    },
+    {
+      "id": "stability-but-heavier",
+      "when": {
+        "supportNeed": "stability",
+        "shoeWeightGramsMin": 290
+      },
+      "text": "extra steun betekent vaak ook wat meer gewicht"
+    },
+    {
+      "id": "trail-not-road-specialist",
+      "when": {
+        "preferredSurface": "trail",
+        "shoeSurfaceType": "trail"
+      },
+      "text": "een trailschoen is minder logisch voor dagelijks asfalt"
+    }
+  ],
+  "trustRules": [
+    "Prijs mag meewegen, maar een goedkope schoen wint niet automatisch.",
+    "Onze algemene beoordeling en jouw persoonlijke match blijven apart zichtbaar.",
+    "Elke aanbeveling moet uitleggen waarom de schoen past en waar je op moet letten.",
+    "Als er weinig passende schoenen zijn, leggen we dat eerlijk uit.",
+    "Carbon wedstrijdschoenen raden we niet standaard aan voor beginners."
+  ]
+}

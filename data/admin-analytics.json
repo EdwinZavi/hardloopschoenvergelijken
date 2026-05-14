@@ -1,0 +1,101 @@
+{
+  "seedStatus": "demo_seed",
+  "dataSource": "demo_seed_no_external_tracking",
+  "generatedAt": "2026-04-30T09:00:00.000+02:00",
+  "period": {
+    "month": "2026-04",
+    "locale": "nl-NL"
+  },
+  "visitorsThisMonth": 18420,
+  "visitorsLastMonth": 15180,
+  "pageViews": 68490,
+  "choiceHelperStarts": 3920,
+  "comparisonStarts": 2145,
+  "affiliateClicks": 1288,
+  "accountsTotal": 6420,
+  "accountsNewThisMonth": 735,
+  "newsletterSubscribers": 4895,
+  "returningVisitorRate": 0.34,
+  "topPages": [
+    {
+      "path": "/schoenen",
+      "title": "Hardloopschoenen vergelijken",
+      "pageViews": 12840,
+      "visitors": 8210,
+      "conversionSignal": "comparison"
+    },
+    {
+      "path": "/keuzehulp",
+      "title": "Keuzehulp hardloopschoenen",
+      "pageViews": 9450,
+      "visitors": 7190,
+      "conversionSignal": "choice_helper"
+    },
+    {
+      "path": "/schoenen/asics-gel-nimbus-26",
+      "title": "ASICS Gel-Nimbus 26 review en prijzen",
+      "pageViews": 5120,
+      "visitors": 3840,
+      "conversionSignal": "affiliate_click"
+    },
+    {
+      "path": "/schoenen/brooks-ghost-16",
+      "title": "Brooks Ghost 16 review en prijzen",
+      "pageViews": 4385,
+      "visitors": 3195,
+      "conversionSignal": "affiliate_click"
+    },
+    {
+      "path": "/advies/beste-hardloopschoenen-beginners",
+      "title": "Beste hardloopschoenen voor beginners",
+      "pageViews": 3975,
+      "visitors": 2860,
+      "conversionSignal": "content"
+    },
+    {
+      "path": "/methodologie",
+      "title": "Hoe wij hardloopschoenen beoordelen",
+      "pageViews": 1680,
+      "visitors": 1295,
+      "conversionSignal": "newsletter"
+    }
+  ],
+  "funnel": [
+    {
+      "id": "visit",
+      "label": "Bezoekers",
+      "visitors": 18420,
+      "conversionRateFromPrevious": null
+    },
+    {
+      "id": "product-or-advice-view",
+      "label": "Bekijkt schoen of advies",
+      "visitors": 10875,
+      "conversionRateFromPrevious": 0.59
+    },
+    {
+      "id": "choice-helper-start",
+      "label": "Start keuzehulp",
+      "visitors": 3920,
+      "conversionRateFromPrevious": 0.36
+    },
+    {
+      "id": "comparison-start",
+      "label": "Start vergelijking",
+      "visitors": 2145,
+      "conversionRateFromPrevious": 0.55
+    },
+    {
+      "id": "retailer-click",
+      "label": "Klikt naar aanbieder",
+      "visitors": 1288,
+      "conversionRateFromPrevious": 0.6
+    },
+    {
+      "id": "account-or-newsletter",
+      "label": "Maakt account aan of schrijft zich in",
+      "visitors": 980,
+      "conversionRateFromPrevious": 0.76
+    }
+  ]
+}

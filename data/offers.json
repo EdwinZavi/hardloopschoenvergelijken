@@ -1,0 +1,164 @@
+[
+  {
+    "id": "offer-kayano-runningdirect",
+    "shoeId": "asics-gel-kayano-31",
+    "retailer": "RunningDirect",
+    "price": 189.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/asics-gel-kayano-31"
+  },
+  {
+    "id": "offer-kayano-all4running",
+    "shoeId": "asics-gel-kayano-31",
+    "retailer": "All4Running",
+    "price": 184.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/asics-gel-kayano-31-a4r"
+  },
+  {
+    "id": "offer-nimbus-runningdirect",
+    "shoeId": "asics-gel-nimbus-26",
+    "retailer": "RunningDirect",
+    "price": 179.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/asics-gel-nimbus-26"
+  },
+  {
+    "id": "offer-pegasus-nike",
+    "shoeId": "nike-pegasus-41",
+    "retailer": "Nike",
+    "price": 139.99,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/nike-pegasus-41"
+  },
+  {
+    "id": "offer-pegasus-all4running",
+    "shoeId": "nike-pegasus-41",
+    "retailer": "All4Running",
+    "price": 134.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/nike-pegasus-41-a4r"
+  },
+  {
+    "id": "offer-vomero-runningdirect",
+    "shoeId": "nike-vomero-17",
+    "retailer": "RunningDirect",
+    "price": 159.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/nike-vomero-17"
+  },
+  {
+    "id": "offer-boston-adidas",
+    "shoeId": "adidas-adizero-boston-12",
+    "retailer": "adidas",
+    "price": 159.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/adizero-boston-12"
+  },
+  {
+    "id": "offer-boston-run2day",
+    "shoeId": "adidas-adizero-boston-12",
+    "retailer": "Run2Day",
+    "price": 149.95,
+    "currency": "EUR",
+    "availability": "low_stock",
+    "url": "https://example.com/adizero-boston-12-r2d"
+  },
+  {
+    "id": "offer-adiospro-adidas",
+    "shoeId": "adidas-adizero-adios-pro-3",
+    "retailer": "adidas",
+    "price": 249.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/adizero-adios-pro-3"
+  },
+  {
+    "id": "offer-clifton-all4running",
+    "shoeId": "hoka-clifton-9",
+    "retailer": "All4Running",
+    "price": 149.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/hoka-clifton-9"
+  },
+  {
+    "id": "offer-arahi-runningdirect",
+    "shoeId": "hoka-arahi-7",
+    "retailer": "RunningDirect",
+    "price": 154.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/hoka-arahi-7"
+  },
+  {
+    "id": "offer-ghost-brooks",
+    "shoeId": "brooks-ghost-16",
+    "retailer": "Brooks",
+    "price": 149.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/brooks-ghost-16"
+  },
+  {
+    "id": "offer-adrenaline-all4running",
+    "shoeId": "brooks-adrenaline-gts-24",
+    "retailer": "All4Running",
+    "price": 154.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/brooks-adrenaline-gts-24"
+  },
+  {
+    "id": "offer-speed-saucony",
+    "shoeId": "saucony-endorphin-speed-4",
+    "retailer": "Saucony",
+    "price": 189.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/saucony-endorphin-speed-4"
+  },
+  {
+    "id": "offer-1080-nb",
+    "shoeId": "new-balance-fresh-foam-x-1080v13",
+    "retailer": "New Balance",
+    "price": 189.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/nb-1080v13"
+  },
+  {
+    "id": "offer-rider-mizuno",
+    "shoeId": "mizuno-wave-rider-28",
+    "retailer": "Mizuno",
+    "price": 149.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/mizuno-wave-rider-28"
+  },
+  {
+    "id": "offer-cloudmonster-on",
+    "shoeId": "on-cloudmonster-2",
+    "retailer": "On",
+    "price": 189.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/on-cloudmonster-2"
+  },
+  {
+    "id": "offer-speedgoat-all4running",
+    "shoeId": "hoka-speedgoat-6",
+    "retailer": "All4Running",
+    "price": 159.95,
+    "currency": "EUR",
+    "availability": "in_stock",
+    "url": "https://example.com/hoka-speedgoat-6"
+  }
+]

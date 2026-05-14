@@ -1,0 +1,42 @@
+[
+  {
+    "shoeId": "asics-gel-kayano-31",
+    "sourceName": "ASICS Outlet UK",
+    "sourceUrl": "https://outlet.asics.com/gb/en-gb/gel-kayano-31/p/1011B867-003.html"
+  },
+  {
+    "shoeId": "asics-gel-nimbus-26",
+    "sourceName": "ASICS Germany",
+    "sourceUrl": "https://www.asics.com/de/en-de/gel-nimbus-26/p/1011B794-101.html"
+  },
+  {
+    "shoeId": "nike-pegasus-41",
+    "sourceName": "Nike Newsroom",
+    "sourceUrl": "https://about.nike.com/en/newsroom/releases/nike-pegasus-41-official-images"
+  },
+  {
+    "shoeId": "hoka-clifton-9",
+    "sourceName": "HOKA AU",
+    "sourceUrl": "https://au.hoka.com/products/m-clifton-9-1127895-ost-ost"
+  },
+  {
+    "shoeId": "brooks-ghost-16",
+    "sourceName": "Brooks Running",
+    "sourceUrl": "https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/ghost-16/1104181D240.085.html"
+  },
+  {
+    "shoeId": "brooks-adrenaline-gts-24",
+    "sourceName": "Brooks Running",
+    "sourceUrl": "https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/adrenaline-gts-24/110437.html"
+  },
+  {
+    "shoeId": "saucony-endorphin-speed-4",
+    "sourceName": "Saucony Europe",
+    "sourceUrl": "https://www.saucony.com/LU/en_LU/endorphin-speed-4/58852M.html"
+  },
+  {
+    "shoeId": "hoka-speedgoat-6",
+    "sourceName": "HOKA AU",
+    "sourceUrl": "https://au.hoka.com/products/m-speedgoat-6-1147791-bblc-bblc"
+  }
+]

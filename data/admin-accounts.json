@@ -1,0 +1,38 @@
+[
+  {
+    "id": "admin_owner_product_001",
+    "seedStatus": "demo_seed",
+    "name": "Eigenaar Product Owner",
+    "email": "owner@loopwijzer.local",
+    "role": "owner",
+    "status": "active",
+    "lastLoginAt": "2026-04-30T08:42:00.000+02:00",
+    "mfaStatus": "enabled",
+    "createdAt": "2026-01-12T10:15:00.000+01:00",
+    "notes": "Professioneel seed-account voor eigenaar/product owner. Geen echt persoonsgegeven."
+  },
+  {
+    "id": "admin_editor_001",
+    "seedStatus": "demo_seed",
+    "name": "Redactie Demo",
+    "email": "redactie@example.invalid",
+    "role": "editor",
+    "status": "active",
+    "lastLoginAt": "2026-04-29T16:20:00.000+02:00",
+    "mfaStatus": "enabled",
+    "createdAt": "2026-02-03T11:30:00.000+01:00",
+    "notes": "Demo-account voor redactionele beoordeling en methodologiebeheer."
+  },
+  {
+    "id": "admin_data_001",
+    "seedStatus": "demo_seed",
+    "name": "Data Beheer Demo",
+    "email": "data-beheer@example.invalid",
+    "role": "data_manager",
+    "status": "invited",
+    "lastLoginAt": null,
+    "mfaStatus": "pending",
+    "createdAt": "2026-04-18T09:05:00.000+02:00",
+    "notes": "Demo-account voor productdata, offers en importcontrole."
+  }
+]

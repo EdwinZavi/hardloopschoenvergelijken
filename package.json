@@ -1,0 +1,29 @@
+{
+  "name": "hardloopschoenvergelijken",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "check:feed-staging": "node scripts/seed-feed-staging.mjs --dry-run",
+    "seed:feed-staging": "node scripts/seed-feed-staging.mjs",
+    "seed:supabase": "node scripts/seed-supabase.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.3",
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  }
+}
