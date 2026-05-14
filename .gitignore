@@ -2,6 +2,7 @@
 .env.*
 !.env.example
 .next/
+.vercel/
 node_modules/
 tsconfig.tsbuildinfo
 .DS_Store

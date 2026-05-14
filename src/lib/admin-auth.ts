@@ -4,13 +4,25 @@ import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 
 const cookieName = "loopwijzer_admin";
+const localAdminSessionSecret = "loopwijzer-local-admin-session";
+const localAdminPassword = "loopwijzer-admin";
+
+function requiredProductionEnv(key: "ADMIN_SESSION_SECRET" | "ADMIN_PASSWORD") {
+  const value = process.env[key];
+
+  if (process.env.NODE_ENV === "production" && !value) {
+    throw new Error(`${key} ontbreekt. Stel deze in als Vercel environment variable voordat admin in productie gebruikt wordt.`);
+  }
+
+  return value;
+}
 
 function sessionSecret() {
-  return process.env.ADMIN_SESSION_SECRET ?? "loopwijzer-local-admin-session";
+  return requiredProductionEnv("ADMIN_SESSION_SECRET") ?? localAdminSessionSecret;
 }
 
 function adminPassword() {
-  return process.env.ADMIN_PASSWORD ?? "loopwijzer-admin";
+  return requiredProductionEnv("ADMIN_PASSWORD") ?? localAdminPassword;
 }
 
 function sign(value: string) {

@@ -110,7 +110,7 @@ export default function PrivacyPage() {
             <ul>
               <li>De adminsessiecookie blijft maximaal 8 uur geldig.</li>
               <li>Keuzehulp-antwoorden bewaren we niet langer dan nodig voor het tonen van het advies, tenzij we later een expliciete opslagfunctie bouwen.</li>
-              <li>Technische logs bewaren we zo kort mogelijk voor beveiliging, foutopsporing en beheer; de exacte termijn moet voor productie nog worden vastgesteld met de hostinginrichting.</li>
+              <li>Technische logs bewaren we maximaal 30 dagen voor beveiliging, foutopsporing en beheer, tenzij langere bewaring nodig is voor onderzoek naar misbruik of wettelijke verplichtingen.</li>
               <li>Reviews bewaren we later zolang ze gepubliceerd zijn of totdat verwijdering passend en mogelijk is.</li>
             </ul>
           </PolicySection>
