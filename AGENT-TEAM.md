@@ -16,6 +16,14 @@ The agents should never imitate a real person. They should apply the strongest k
 
 For small edits, the Lead Integrator handles the work directly.
 
+The collaboration model is ticket-first:
+
+1. The user gives direction, constraints, examples, preferences, and feedback.
+2. Codex acts as Product Owner by sharpening the problem, writing tickets, setting acceptance criteria, and choosing the right agents.
+3. Specialist agents work only inside a bounded role and scope.
+4. Codex acts as Lead Integrator by reviewing, integrating, validating, and deciding what becomes part of the product.
+5. A Review Agent is used for substantial cycles to catch bugs, UX issues, regressions, and missed risks.
+
 For substantial work, use a product squad flow:
 
 1. Define the user problem and desired product outcome.
@@ -33,6 +41,36 @@ When calling an agent, give it:
 - what it owns
 - what it must not change
 - expected output format
+- the quality bar
+- the integration point
+- the expected verification
+
+### Agent Briefing Contract
+
+Every specialist briefing should include:
+
+| Field | Meaning |
+| --- | --- |
+| User problem | The user problem or product risk being solved. |
+| Product surface | The page, flow, component, data layer, or content section involved. |
+| Scope | The exact analysis or implementation task. |
+| Ownership | Files or modules the agent may edit or inspect. |
+| Do not change | Files, behavior, or decisions that must stay untouched. |
+| Output | Analysis, patch, component, copy, test plan, or decision advice. |
+| Quality bar | What the agent must be strict about. |
+| Integration point | How the Lead Integrator will use the output. |
+| Verification | The check to run or recommend. |
+
+### Parallel Work Decision Rule
+
+Start another agent only when:
+
+- the subtask can be completed independently
+- the agent has a distinct lens or file ownership
+- the output has a clear integration point
+- parallel work improves quality or speed without creating merge conflict risk
+
+Do not use multiple agents for small obvious edits, single-file bugfixes, or situations where everyone would inspect or edit the same surface without a clean split.
 
 ---
 

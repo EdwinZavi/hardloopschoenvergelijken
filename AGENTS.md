@@ -370,6 +370,18 @@ Use `AGENT-TEAM.md` as the specialist agent library. It defines the individual e
 The lead agent remains responsible for product direction, integration, testing, and final quality.
 Specialist agents may be used in parallel when the work can be split cleanly without file conflicts.
 
+### Collaboration Contract
+
+The working model is:
+
+1. The user gives direction, goals, examples, constraints, and feedback.
+2. Codex acts as Product Owner: clarify the user problem, write tickets, define acceptance criteria, and choose the right agents.
+3. Specialist agents receive bounded scopes, output formats, ownership, and a do-not-change list.
+4. Codex acts as Lead Integrator: review agent output, merge only what improves the product, resolve conflicts, validate, and explain the result.
+5. For substantial cycles, use a Review Agent after integration to catch bugs, UX regressions, missing tests, and trust risks.
+
+Do not treat agents as loose helpers. Treat them as a coordinated product squad whose work must move users from confusion to confidence.
+
 ### Default Roles
 
 Use these roles when the task is large enough to benefit from parallel work:
@@ -444,6 +456,22 @@ For each substantial build cycle:
 6. Integrate only work that improves clarity, trust, comparison, or personal guidance.
 7. Run validation before calling the cycle complete.
 
+### Ticket And Briefing Standard
+
+Every agent ticket should include:
+
+- user problem
+- product surface
+- scope
+- ownership
+- do-not-change list
+- expected output
+- quality bar
+- integration point
+- verification
+
+The Lead Integrator writes the tickets before agents start. Agents should not infer broad ownership from a vague request.
+
 ### File Ownership Rule
 
 When agents edit code, assign non-overlapping ownership.
@@ -462,6 +490,8 @@ Every completed build cycle should end with:
 - typecheck where applicable
 - production build where applicable
 - browser check for changed flows
+- review findings handled or consciously parked
+- important decisions reflected in the relevant roadmap, ticket, or audit document
 - short summary of what changed and why it matters
 
 ### When Not To Use Multiple Agents

@@ -12,6 +12,27 @@ Loopwijzer moet uiteindelijk beheerd kunnen worden als een betrouwbare agent-ged
 
 Agents zijn dus geen losse chathelpers. Ze vormen een operationeel systeem rond de website.
 
+## Samenwerkingsmodel
+
+De vaste samenwerking is ticket-first:
+
+1. Jij geeft richting, wensen, voorbeelden, grenzen en feedback. Dat mag ruw of onvolledig zijn.
+2. Codex scherpt het probleem aan: user problem, gewenste uitkomst, scope, risico's en mogelijke agent-splitsing.
+3. Codex treedt op als Product Owner: schrijft tickets, bepaalt prioriteit en kiest welke agents echte waarde toevoegen.
+4. Specialistische agents krijgen een afgebakende rol, outputvorm, file ownership en een duidelijke niet-wijzigen lijst.
+5. Agents werken alleen parallel wanneer hun subtaken onafhankelijk genoeg zijn.
+6. Codex treedt daarna op als Lead Integrator: reviewt agentoutput, lost conflicten op, integreert alleen wat productwaarde toevoegt en valideert de flow.
+7. Een Review Agent wordt ingezet bij substantiële bouwcycli om bugs, UX-risico's, regressies, performanceproblemen en testgaten te vinden.
+8. Codex koppelt terug wat is veranderd, welke keuzes zijn gemaakt, wat is getest en wat de volgende concrete stap is.
+
+| Rol | Verantwoordelijkheid | Output |
+| --- | --- | --- |
+| Jij | Geeft context, doelen, voorkeuren, voorbeelden, grenzen en feedback op wat goed of niet goed voelt. | Input, keuzes, prioriteiten en akkoord op belangrijke richting. |
+| Codex als Product Owner | Scherpt het probleem aan, bewaakt productwaarde, vertaalt input naar tickets en kiest welke agents nodig zijn. | Heldere tickets, acceptatiecriteria, agentbriefings en prioritering. |
+| Specialistische agents | Voeren afgebakende taken uit binnen hun eigen scope en zonder elkaars files te overschrijven. | Analyse, code, copy, data-aanpassingen, componenten of testresultaten. |
+| Codex als Lead Integrator | Reviewt agentoutput, integreert alleen wat waarde toevoegt, test de flow en vat het resultaat samen. | Werkende verbetering, validatie, beslissingen en volgende concrete stap. |
+| Review Agent | Controleert na integratie of het resultaat echt klopt. | Findings met ernst, locatie, risico en aanbevolen fix. |
+
 ## Kernprincipe
 
 Agents mogen:
@@ -33,6 +54,90 @@ Agents mogen niet zonder expliciete publicatieregel:
 - affiliate-gedreven rankings maken
 - productscore of aanbevelingen aanpassen zonder review
 - gebruikersreviews verzinnen of samenvattingen als feit presenteren zonder bron
+
+## Wanneer parallel werken
+
+Parallelle agents zijn het sterkst wanneer elke agent een eigen lens, eigen scope en duidelijke output heeft. Ze zijn zwak wanneer meerdere agents hetzelfde probleem oplossen of tegelijk dezelfde bestanden aanpassen.
+
+| Situatie | Parallel inzetten? | Aanpak |
+| --- | --- | --- |
+| Meerdere onafhankelijke onderzoeksvragen | Ja | Laat agents apart kijken naar product, code, UX, markt of data. De lead integreert de conclusies. |
+| Meerdere losse modules of files | Ja | Geef elke engineering-agent file ownership en acceptatiecriteria. |
+| Centrale architectuurkeuze | Beperkt | Laat eventueel opties onderzoeken, maar de Lead Integrator beslist en bewaakt consistentie. |
+| Kleine bugfix | Meestal nee | Laat de lead of één agent oplossen en verifiëren. |
+| Dezelfde pagina of component verbeteren | Alleen met strakke scopes | Splits in data, copy, layout, tests of review. Niet iedereen aan dezelfde file. |
+| Review na implementatie | Ja | Laat een Review Agent zoeken naar regressies, UX-problemen en gemiste risico's. |
+
+Beslisregel: zet een extra agent alleen in als de subtaak onafhankelijk uitvoerbaar is, een eigen outputvorm heeft en de lead daarna een duidelijk integratiepunt heeft.
+
+## Agentbriefing template
+
+Gebruik dit patroon wanneer een specialist wordt ingeschakeld:
+
+| Onderdeel | Invulling |
+| --- | --- |
+| User problem | Welk probleem van de gebruiker lossen we op? |
+| Product surface | Welke pagina, flow, component, datalaag of contentsectie raakt dit? |
+| Scope | Wat moet de agent exact onderzoeken of aanpassen? |
+| Ownership | Welke bestanden of modules zijn van deze agent? |
+| Do not change | Welke bestanden, keuzes of gedrag moet ongemoeid blijven? |
+| Output | Analyse, patch, component, copy, testplan of beslisadvies. |
+| Quality bar | Waar moet de agent extra streng op zijn? |
+| Integration point | Waar moet Codex de output op aansluiten? |
+| Verification | Welke check moet worden uitgevoerd of geadviseerd? |
+
+### Standaardprompt: parallelle agent-workflow
+
+```text
+Gebruik een parallelle agent-workflow.
+
+Doel:
+[Wat willen we bereiken]
+
+Context:
+[Project, doelgroep, repo/status, belangrijke bestanden]
+
+Werkwijze:
+- Splits het werk in onafhankelijke subtaken.
+- Zet alleen parallelle agents in waar dat echte tijdwinst of kwaliteitswinst geeft.
+- Geef elke agent een duidelijke rol, scope, outputvorm en file ownership.
+- Voorkom overlap in bestanden of verantwoordelijkheden.
+- Laat de hoofdagent resultaten integreren tot één coherent besluit of implementatie.
+- Laat daarna een review-agent zoeken naar bugs, UX-problemen, regressies en gemiste risico's.
+
+Eindoutput:
+- Wat is gedaan
+- Welke agent wat heeft bijgedragen
+- Welke keuzes zijn gemaakt
+- Wat is getest
+- Wat nog open staat
+```
+
+### Standaardprompt: één specialistische agent
+
+```text
+Rol:
+[Naam agent]
+
+Taak:
+[Onderzoek of implementeer exact dit]
+
+Scope:
+[Wat valt binnen de taak]
+
+Ownership:
+[Bestanden/modules waar deze agent aan mag werken]
+
+Niet wijzigen:
+[Bestanden/gedrag/beslissingen die ongemoeid blijven]
+
+Output:
+- 3 belangrijkste bevindingen of wijzigingen
+- concrete aanbeveling of patch
+- risico's
+- gewijzigde bestanden, indien van toepassing
+- verificatie of aanbevolen check
+```
 
 ## Operationele cadans
 
@@ -164,6 +269,22 @@ Agents mogen niet zonder expliciete publicatieregel:
 - waarom relevant voor Nederlandse lopers
 - interne links
 - publicatieadvies: publiceren / overslaan / later bijwerken
+
+## Definition of Done voor agent-bouwcycli
+
+Een bouwcyclus is pas klaar als waarde, werking en kwaliteit zichtbaar zijn gecontroleerd.
+
+- Het werk is verbonden aan een concreet gebruikersprobleem.
+- De agent-splitsing was logisch of er is bewust voor één agent gekozen.
+- File ownership en integratiepunten waren duidelijk.
+- Het datamodel of de productlogica is niet impliciet verstopt in losse UI.
+- User-facing copy is passend voor Nederlandse lopers en het vertrouwen dat Loopwijzer wil uitstralen.
+- Nieuwe aanbevelingen, scores of claims zijn uitlegbaar en niet overdreven zeker.
+- Typecheck, production build, tests of browsercheck zijn uitgevoerd waar toepasbaar.
+- Belangrijke gewijzigde flows zijn in de browser bekeken wanneer dat relevant is.
+- Reviewfeedback is beoordeeld en verwerkt of bewust geparkeerd.
+- Nieuwe beslissingen zijn vastgelegd in de relevante roadmap-, ticket- of auditdocumentatie.
+- De volgende concrete stap is helder.
 
 ## Maandelijkse blogworkflow
 
