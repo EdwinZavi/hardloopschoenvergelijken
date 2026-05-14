@@ -45,7 +45,7 @@ export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
             Lokaal wachtwoord: <strong>loopwijzer-admin</strong>
           </p>
         ) : null}
-        <p className="admin-note">Lokale MVP-login. Stel later `ADMIN_PASSWORD` en `ADMIN_SESSION_SECRET` in voor productie.</p>
+        <p className="admin-note">Alleen bedoeld voor beheerders van Loopwijzer.</p>
       </section>
     </main>
   );
