@@ -21,16 +21,6 @@ type Question<T extends keyof RecommendationProfile> = {
 
 const questions: Question<keyof RecommendationProfile>[] = [
   {
-    key: "experienceLevel",
-    title: "Hoe lang loop je al hard?",
-    helper: "Dit helpt ons bepalen of je vooral zekerheid nodig hebt of juist meer techniek en snelheid kunt kiezen.",
-    options: [
-      { value: "beginner", label: "Ik begin net", description: "Ik bouw rustig op of koop mijn eerste goede hardloopschoenen." },
-      { value: "recreational", label: "Ik loop regelmatig", description: "Ik wil een schoen die beter past bij mijn trainingen." },
-      { value: "experienced", label: "Ik loop al langer", description: "Ik weet beter welk gevoel, tempo of type schoen ik zoek." }
-    ]
-  },
-  {
     key: "runningGoal",
     title: "Waarvoor wil je de schoenen vooral gebruiken?",
     helper: "Een rustige training vraagt iets anders dan een snelle 10 kilometer of een rondje door het bos.",
@@ -40,28 +30,6 @@ const questions: Question<keyof RecommendationProfile>[] = [
       { value: "faster_5k_10k", label: "Sneller lopen", description: "Ik wil meer tempo maken op 5 of 10 kilometer." },
       { value: "half_marathon_marathon", label: "Langere afstanden", description: "Ik train voor een halve of hele marathon." },
       { value: "trail_running", label: "Onverhard lopen", description: "Ik loop vooral op bospaden, zand, modder of trailroutes." }
-    ]
-  },
-  {
-    key: "targetDistance",
-    title: "Welke afstand loop je meestal?",
-    helper: "Hoe langer je loopt, hoe belangrijker comfort en bescherming worden.",
-    options: [
-      { value: "5k", label: "Tot 5 km", description: "Korte rondes, rustig opbouwen of starten met hardlopen." },
-      { value: "10k", label: "Rond 10 km", description: "Een veelzijdige afstand met ruimte voor rustig en sneller lopen." },
-      { value: "half_marathon", label: "Halve marathon", description: "Langere trainingen waarbij comfort belangrijk wordt." },
-      { value: "marathon", label: "Marathon", description: "Veel kilometers waarbij bescherming lang prettig moet blijven." },
-      { value: "trail", label: "Trail of onverhard", description: "Afstanden op paden, zand, bos of heuvelachtig terrein." }
-    ]
-  },
-  {
-    key: "weeklyFrequency",
-    title: "Hoe vaak loop je per week?",
-    helper: "Loop je vaker, dan moet je schoen meer trainingen aankunnen.",
-    options: [
-      { value: "1_2", label: "1-2 keer", description: "Een comfortabele allround schoen is vaak genoeg." },
-      { value: "3_4", label: "3-4 keer", description: "De schoen moet rustig lopen en tempo aankunnen." },
-      { value: "5_plus", label: "5 keer of meer", description: "Dan kan een schoen voor een specifiek doel handig zijn." }
     ]
   },
   {
@@ -93,16 +61,6 @@ const questions: Question<keyof RecommendationProfile>[] = [
       { value: "balanced", label: "Normaal en stabiel", description: "Niet te zacht en niet te fel." },
       { value: "soft", label: "Zacht en comfortabel", description: "Prettig voor rustige kilometers." },
       { value: "responsive", label: "Snel en veerkrachtig", description: "Meer energie bij tempo en intervallen." }
-    ]
-  },
-  {
-    key: "injurySensitivity",
-    title: "Heb je snel last van pijntjes?",
-    helper: "Dan geven we meer gewicht aan comfort, steun en een rustige afwikkeling.",
-    options: [
-      { value: "medium", label: "Soms", description: "Ik wil liever geen onnodig risico nemen." },
-      { value: "low", label: "Bijna nooit", description: "Ik kan ook met een sportievere schoen omgaan." },
-      { value: "high", label: "Ja, regelmatig", description: "Ik wil vooral zekerheid en comfort." }
     ]
   },
   {

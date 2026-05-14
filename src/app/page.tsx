@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { formatReleaseLabel, getNewestReleaseShoes } from "@/lib/data";
 import { labels } from "@/lib/labels";
@@ -26,7 +25,7 @@ export default function HomePage() {
   return (
     <main className="page-home">
       <section className="home-hero">
-        <div>
+        <div className="home-hero-content">
           <p className="eyebrow">Hardloopschoenen vergelijken</p>
           <h1>Vind rust in het kiezen van hardloopschoenen.</h1>
           <p className="lead">
@@ -45,15 +44,6 @@ export default function HomePage() {
             <span>Uitleg per aanbeveling</span>
             <span>Nadelen zichtbaar</span>
           </div>
-        </div>
-        <div className="home-hero-image">
-          <Image
-            alt="Hardlopers op verschillende ondergronden als rustige visuele samenvatting van schoenkeuze"
-            fill
-            priority
-            sizes="(max-width: 820px) 100vw, 460px"
-            src="/images/home/running-surfaces-triptych.png"
-          />
         </div>
       </section>
 

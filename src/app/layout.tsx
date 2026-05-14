@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "Loopwijzer | Hardloopschoenen vergelijken met duidelijke keuzehulp",
   description: "Vergelijk hardloopschoenen op comfort, steun, demping, pasvorm en prijs. Loopwijzer helpt je begrijpen welke hardloopschoen bij jouw loopdoel past.",
   icons: {
-    icon: "/brand/loopwijzer-logo-cropped.png",
-    apple: "/brand/loopwijzer-logo-cropped.png"
+    icon: "/brand/loopwijzer-shoe-mark.png",
+    apple: "/brand/loopwijzer-shoe-mark.png"
   }
 };
 
