@@ -42,7 +42,7 @@ export function ProductCard({ compareDisabled, compareHref, compareLabel, shoe }
         </div>
       </dl>
       <div className="card-footer">
-        <strong>Voorlopige score {shoe.editorialScore.overall.toFixed(1)}</strong>
+        <strong>Redactionele score {shoe.editorialScore.overall.toFixed(1)}</strong>
         <span>{shoe.priceFrom === null ? formatPrice(shoe.priceFrom) : `Vanaf ${formatPrice(shoe.priceFrom)}`}</span>
         <Link href={`/schoenen/${shoe.slug}`}>Bekijk schoen</Link>
       </div>

@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 export default function IndependencePage() {
   return (
     <main className="policy-page page-policy">
-      <section className="page-hero-with-visual page-hero-with-visual-compact">
+      <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-shoe">
         <div>
           <p className="eyebrow">Onafhankelijkheid en inkomsten</p>
           <h1>Hoe we vertrouwen en commercie gescheiden houden</h1>
           <p className="lead">
-            Loopwijzer kan geld verdienen met winkelverwijzingen of samenwerkingen, maar dat mag niet bepalen welke schoen we als passend uitleggen. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen met elk een eigen rol.
+            Loopwijzer kan inkomsten ontvangen via winkelverwijzingen of samenwerkingen. Dat mag niet bepalen welke schoen we als passend uitleggen. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-product">
@@ -59,7 +59,7 @@ export default function IndependencePage() {
             <li>Of een link naar een winkel een kooplink of partnerlink is.</li>
             <li>Of een positie redactioneel, persoonlijk aanbevolen of commercieel ingekocht is.</li>
             <li>Of een score gaat over productkwaliteit, persoonlijke match, gebruikerservaring of winkelinformatie.</li>
-            <li>Wanneer informatie voorlopig is, bijvoorbeeld bij ontbrekende feeddata, onvolledige maatbeschikbaarheid of nog niet gecontroleerde productspecificaties.</li>
+            <li>Wanneer informatie nog niet volledig gecontroleerd is, bijvoorbeeld bij ontbrekende feeddata, maatbeschikbaarheid of productspecificaties.</li>
           </ul>
         </PolicySection>
 

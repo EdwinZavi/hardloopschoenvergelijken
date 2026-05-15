@@ -88,7 +88,7 @@ function highlightFor(label: string, shoe: EnrichedShoe, shoes: EnrichedShoe[]) 
 
   if (label === "Gewicht" && min((item) => item.weightGrams)) return "Lichtste";
   if (label === "Prijs vanaf" && hasAnyPrice && shoe.priceFrom !== null && min((item) => item.priceFrom ?? Number.MAX_SAFE_INTEGER)) return "Laagste prijs";
-  if (label === "Voorlopige score" && max((item) => item.editorialScore.overall)) return "Hoogste score";
+  if (label === "Redactionele score" && max((item) => item.editorialScore.overall)) return "Hoogste score";
   if (label === "Steun" && max((item) => item.editorialScore.stability)) return "Meest stabiel";
   if (label === "Gevoel bij tempo" && max((item) => item.editorialScore.responsiveness)) return "Beste tempo-gevoel";
   if (label === "Demping" && max((item) => item.editorialScore.cushioning)) return "Meeste demping";
@@ -108,7 +108,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
   if (shoes.length < 2) {
     return (
       <main className="page-compare">
-        <section className="compare-picker-hero">
+        <section className="compare-picker-hero image-hero image-hero-compare">
           <div>
             <p className="eyebrow">Schoenen vergelijken</p>
             <h1>Kies 2 tot 4 schoenen om te vergelijken</h1>
@@ -158,12 +158,14 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
 
   return (
     <main className="page-compare">
-      <section className="compare-result-hero">
-        <p className="eyebrow">Hardloopschoenen vergelijken</p>
-        <h1>Vergelijking van {shoes.length} hardloopschoenen</h1>
-        <p className="lead">
-          {shoes.map(compareLabel).join(" vs ")}. Vergelijk comfort, steun, pasvorm, gewicht en prijs naast elkaar. Zo zie je sneller welke hardloopschoen het beste aansluit op jouw manier van lopen.
-        </p>
+      <section className="compare-result-hero image-hero image-hero-compare">
+        <div>
+          <p className="eyebrow">Hardloopschoenen vergelijken</p>
+          <h1>Vergelijking van {shoes.length} hardloopschoenen</h1>
+          <p className="lead">
+            {shoes.map(compareLabel).join(" vs ")}. Vergelijk comfort, steun, pasvorm, gewicht en prijs naast elkaar. Zo zie je sneller welke hardloopschoen het beste aansluit op jouw manier van lopen.
+          </p>
+        </div>
       </section>
 
       <section className="difference-grid" aria-label="Belangrijkste verschillen">
@@ -222,7 +224,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
             <CompareRow label="Drop" shoes={shoes} render={(shoe) => `${shoe.heelDropMm} mm`} />
             <CompareRow label="Carbonplaat" shoes={shoes} render={(shoe) => (shoe.hasCarbonPlate ? "Ja" : "Nee")} />
             <CompareRow label="Waterdicht" shoes={shoes} render={(shoe) => (shoe.isWaterproof ? "Ja" : "Nee")} />
-            <CompareRow highlight label="Voorlopige score" shoes={shoes} render={(shoe) => shoe.editorialScore.overall.toFixed(1)} />
+            <CompareRow highlight label="Redactionele score" shoes={shoes} render={(shoe) => shoe.editorialScore.overall.toFixed(1)} />
             <CompareRow highlight label="Prijs vanaf" shoes={shoes} render={(shoe) => formatPrice(shoe.priceFrom)} />
           </tbody>
         </table>

@@ -79,7 +79,7 @@ export default function HomePage() {
           ))}
         </div>
         <p className="home-data-note">
-          Deze lijst gebruikt de beste beschikbare releasedata. Bij seedrecords zonder maand tonen we alleen het jaar; TradeTracker- of merkdata kan dit later verfijnen.
+          Deze lijst gebruikt de beste beschikbare releasedata. Waar een exacte maand nog ontbreekt, tonen we bewust alleen het jaar.
         </p>
       </section>
     </main>

@@ -15,12 +15,12 @@ export default function MethodologyPage() {
 
   return (
     <main className="page-methodology">
-      <section className="page-hero-with-visual page-hero-with-visual-compact">
+      <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-shoe">
         <div>
           <p className="eyebrow">Zo vergelijken we</p>
           <h1>Hoe we hardloopschoenen beoordelen</h1>
           <p className="lead">
-            We vergelijken hardloopschoenen op vaste punten en scheiden daarbij drie vragen: hoe goed is de schoen als product, hoe goed past hij bij jouw situatie en waar kun je hem kopen voor een redelijke prijs?
+            We vergelijken hardloopschoenen op vaste punten en scheiden drie signalen: productkwaliteit, persoonlijke match en koopinformatie. Zo blijft advies begrijpelijk en onafhankelijk van winkelprijzen.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-product">
@@ -137,7 +137,7 @@ export default function MethodologyPage() {
       <section>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Voorlopige beoordeling</p>
+            <p className="eyebrow">Redactionele beoordeling</p>
             <h2>Waar letten we op?</h2>
           </div>
         </div>

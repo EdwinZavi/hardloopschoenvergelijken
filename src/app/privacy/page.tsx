@@ -59,8 +59,8 @@ export default function PrivacyPage() {
               <li>Technische gegevens die nodig zijn om de website te tonen, zoals IP-adres, browser, apparaat, datum en tijd.</li>
               <li>Antwoorden in de keuzehulp, zolang die nodig zijn om aanbevelingen en uitleg in je huidige sessie te tonen.</li>
               <li>Adminsessiegegevens voor de beheeromgeving, zoals de noodzakelijke sessiecookie `loopwijzer_admin`.</li>
-              <li>Contactgegevens als je ons later via een formulier of e-mail benadert.</li>
-              <li>Reviewgegevens alleen als we later gebruikersreviews toevoegen, zoals schermnaam, ervaringstype en reviewtekst.</li>
+              <li>Contactgegevens als je ons via een formulier of e-mail benadert.</li>
+              <li>Reviewgegevens wanneer we gebruikersreviews aanbieden, zoals schermnaam, ervaringstype en reviewtekst.</li>
             </ul>
           </PolicySection>
 
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
               <li>Om op basis van keuzehulp-antwoorden een matchscore, uitleg en trade-offs te tonen.</li>
               <li>Om de adminomgeving veilig te houden en handmatige schoen-, score- en prijsdata te beheren.</li>
               <li>Om vragen te beantwoorden wanneer je zelf contact opneemt.</li>
-              <li>Om de website later met privacyvriendelijke statistieken te verbeteren, maar alleen als we analytics daadwerkelijk toevoegen en daarover vooraf duidelijk informeren.</li>
+              <li>Om de website met privacyvriendelijke statistieken te verbeteren, maar alleen als we analytics daadwerkelijk toevoegen en daarover vooraf duidelijk informeren.</li>
             </ul>
           </PolicySection>
 
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
             <p>We delen gegevens alleen wanneer dat nodig is voor de werking van de website, wanneer je daar zelf voor kiest of wanneer we daartoe wettelijk verplicht zijn. Denk aan:</p>
             <ul>
               <li>hosting en technische infrastructuur;</li>
-              <li>analytics of foutmonitoring, als die later worden toegevoegd en privacyrechtelijk zijn ingericht;</li>
+              <li>analytics of foutmonitoring, als die privacyrechtelijk zijn ingericht;</li>
               <li>retailers of affiliatepartners wanneer je zelf doorklikt naar een winkel of wanneer een noodzakelijke redirect voor de kooplink wordt gebruikt;</li>
               <li>e-mail- of contactdiensten wanneer je ons benadert.</li>
             </ul>
@@ -109,9 +109,9 @@ export default function PrivacyPage() {
           <PolicySection id="bewaren" title="Bewaartermijnen">
             <ul>
               <li>De adminsessiecookie blijft maximaal 8 uur geldig.</li>
-              <li>Keuzehulp-antwoorden bewaren we niet langer dan nodig voor het tonen van het advies, tenzij we later een expliciete opslagfunctie bouwen.</li>
+              <li>Keuzehulp-antwoorden bewaren we niet langer dan nodig voor het tonen van het advies, tenzij je expliciet kiest voor opslag.</li>
               <li>Technische logs bewaren we maximaal 30 dagen voor beveiliging, foutopsporing en beheer, tenzij langere bewaring nodig is voor onderzoek naar misbruik of wettelijke verplichtingen.</li>
-              <li>Reviews bewaren we later zolang ze gepubliceerd zijn of totdat verwijdering passend en mogelijk is.</li>
+              <li>Reviews bewaren we zolang ze gepubliceerd zijn of totdat verwijdering passend en mogelijk is.</li>
             </ul>
           </PolicySection>
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="policy-page page-policy">
-      <section className="page-hero-with-visual page-hero-with-visual-compact">
+      <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-surfaces">
         <div>
           <p className="eyebrow">Over Loopwijzer</p>
           <h1>Een rustigere manier om hardloopschoenen te kiezen.</h1>
@@ -47,7 +47,7 @@ export default function AboutPage() {
       <section className="policy-content standalone">
         <div className="policy-callout">
           <strong>Transparant in opbouw</strong>
-          <span>Loopwijzer wordt stapsgewijs uitgebreid met betere productdata, gecontroleerde prijsinformatie en meer onderbouwing per schoen. We tonen liever duidelijk wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
+          <span>Loopwijzer kiest voor gecontroleerde productdata, duidelijke prijsinformatie en onderbouwing per schoen. We tonen liever duidelijk wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
         </div>
 
         <PolicySection title="Waarom Loopwijzer bestaat">
@@ -64,7 +64,7 @@ export default function AboutPage() {
             <li>We zijn een vergelijkings- en adviesplatform, geen webshop.</li>
             <li>We tonen productinformatie, redactionele uitleg, persoonlijke match en winkelprijzen als aparte signalen.</li>
             <li>We geven geen medisch advies. Bij blessures of pijnklachten blijft persoonlijk advies van een specialist belangrijk.</li>
-            <li>We bouwen stap voor stap aan gecontroleerde productdata, betere prijsdekking, gebruikersreviews en sterkere redactionele onderbouwing.</li>
+            <li>We verbeteren productdata, prijsdekking, gebruikersreviews en redactionele onderbouwing zonder commerciële invloed op advies.</li>
           </ul>
         </PolicySection>
 

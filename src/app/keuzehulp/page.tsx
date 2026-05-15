@@ -126,7 +126,7 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
   return (
     <main className="page-helper">
       {isIntroStep ? (
-        <section className="page-hero-with-visual">
+        <section className="page-hero-with-visual image-hero image-hero-surfaces">
           <div>
             <p className="eyebrow">Keuzehulp hardloopschoenen</p>
             <h1>Welke hardloopschoen past bij jou?</h1>
@@ -230,7 +230,7 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
               <p className="eyebrow">Jouw advies</p>
               <h2>Deze hardloopschoenen passen het best bij je antwoorden</h2>
               <p>
-                De matchscore is persoonlijk. De voorlopige redactionele score blijft apart, zodat je ziet wat de kwaliteit van de schoen is en wat bij jouw situatie past.
+                De matchscore is persoonlijk. De redactionele score blijft apart, zodat je ziet wat de kwaliteit van de schoen is en wat bij jouw situatie past.
               </p>
             </div>
             <Link className="button secondary" href="/keuzehulp">

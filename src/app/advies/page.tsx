@@ -8,7 +8,7 @@ export default function AdviceIndexPage() {
 
   return (
     <main className="page-advice">
-      <section className="intent-hero">
+      <section className="intent-hero image-hero image-hero-runner">
         <div>
           <p className="eyebrow">Hardloopschoen advies</p>
           <h1>Begin bij je loopdoel, niet bij een merknaam</h1>
@@ -39,7 +39,7 @@ export default function AdviceIndexPage() {
             <ul className="check-list">
               <li>Je ziet welke verschillen voor jouw situatie belangrijk zijn.</li>
               <li>Elke pagina linkt door naar passende filters en vergelijkingen.</li>
-              <li>Scores blijven voorlopig en worden los gehouden van winkelvergoedingen.</li>
+              <li>Scores blijven los van winkelvergoedingen en partnerlinks.</li>
             </ul>
           </div>
         </aside>

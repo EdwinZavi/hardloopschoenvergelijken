@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <aside className="product-side-panel">
           <ShoeVisual shoe={shoe} size="hero" />
           <div className="score-panel">
-            <span>Voorlopige redactionele score</span>
+            <span>Redactionele score</span>
             <strong>{shoe.editorialScore.overall.toFixed(1)}</strong>
             <p>Deze score gaat over de schoen zelf. Winkelprijzen, voorraad en partnerlinks tellen niet mee in de beoordeling.</p>
           </div>
@@ -209,7 +209,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="empty-state">
             <h2>Prijsvergelijking in voorbereiding</h2>
             <p>
-              We tonen pas winkelprijzen wanneer offers handmatig gecontroleerd zijn of via een betrouwbare feed binnenkomen. Zo voorkomen we dat prototypeprijzen als echte koopinformatie worden gebruikt.
+              We tonen pas winkelprijzen wanneer aanbiedingen gecontroleerd zijn of via een betrouwbare feed binnenkomen. Zo voorkomen we dat onzekere prijsinformatie als koopadvies wordt gebruikt.
             </p>
           </div>
         )}

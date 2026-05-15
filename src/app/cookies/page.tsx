@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 const cookieRows = [
   ["loopwijzer_admin", "Noodzakelijk", "Herkent een ingelogde beheerder in de adminomgeving. httpOnly, SameSite=Lax en in productie Secure.", "Maximaal 8 uur", "Nee"],
-  ["Analytics", "Toekomstig", "Alleen als we privacyvriendelijke statistieken toevoegen.", "Nog niet actief", "Afhankelijk van inrichting"],
-  ["Marketing of tracking", "Toekomstig", "Alleen als we later advertentie-, tracking- of affiliatecookies op Loopwijzer plaatsen.", "Nog niet actief", "Ja, vooraf"]
+  ["Analytics", "Niet actief", "Alleen als we privacyvriendelijke statistieken toevoegen.", "Niet actief", "Afhankelijk van inrichting"],
+  ["Marketing of tracking", "Niet actief", "Alleen als we advertentie-, tracking- of affiliatecookies op Loopwijzer plaatsen.", "Niet actief", "Ja, vooraf"]
 ];
 
 export default function CookiesPage() {
@@ -18,7 +18,7 @@ export default function CookiesPage() {
       <p className="eyebrow">Cookiebeleid</p>
       <h1>Welke cookies gebruikt Loopwijzer?</h1>
       <p className="lead">
-        Cookies zijn kleine bestanden die een website nodig kan hebben om goed te werken, voorkeuren te onthouden of gebruik te meten. Loopwijzer gebruikt in de huidige MVP alleen noodzakelijke cookies voor de beheeromgeving.
+        Cookies zijn kleine bestanden die een website nodig kan hebben om goed te werken, voorkeuren te onthouden of gebruik te meten. Loopwijzer gebruikt nu alleen noodzakelijke cookies voor de beheeromgeving.
       </p>
 
       <section className="policy-summary">
@@ -32,7 +32,7 @@ export default function CookiesPage() {
         </article>
         <article>
           <strong>Toestemming waar nodig</strong>
-          <span>Tracking, marketing en niet-noodzakelijke affiliatecookies plaatsen we later pas na toestemming.</span>
+          <span>Tracking, marketing en niet-noodzakelijke affiliatecookies plaatsen we alleen na toestemming.</span>
         </article>
       </section>
 
@@ -83,13 +83,13 @@ export default function CookiesPage() {
 
           <PolicySection id="analytics" title="Analytische cookies">
             <p>
-              We gebruiken nu geen analyticscookies voor gewone bezoekers. Als we later privacyvriendelijke analytics toevoegen, richten we die zo sober mogelijk in. Beperkte analytics met weinig privacy-impact kan onder voorwaarden zonder toestemming, maar we informeren bezoekers daar altijd duidelijk over en leggen vast welke gegevens worden gemeten.
+              We gebruiken nu geen analyticscookies voor gewone bezoekers. Als we privacyvriendelijke analytics toevoegen, richten we die zo sober mogelijk in. Beperkte analytics met weinig privacy-impact kan onder voorwaarden zonder toestemming, maar we informeren bezoekers daar altijd duidelijk over en leggen vast welke gegevens worden gemeten.
             </p>
           </PolicySection>
 
           <PolicySection id="tracking" title="Tracking en marketingcookies">
             <p>
-              We plaatsen geen trackingcookies zonder toestemming. Als we later marketing-, advertentie- of affiliate-trackingcookies op Loopwijzer gebruiken, vragen we vooraf toestemming via een cookiemelding. Marketingcategorieën worden niet vooraf aangevinkt.
+              We plaatsen geen trackingcookies zonder toestemming. Als we marketing-, advertentie- of affiliate-trackingcookies op Loopwijzer gebruiken, vragen we vooraf toestemming via een cookiemelding. Marketingcategorieën worden niet vooraf aangevinkt.
             </p>
           </PolicySection>
 
@@ -108,7 +108,7 @@ export default function CookiesPage() {
 
           <PolicySection id="instellingen" title="Cookie-instellingen">
             <p>
-              Omdat Loopwijzer nu geen tracking- of marketingcookies plaatst, tonen we geen cookiebanner. Als we later cookies gebruiken waarvoor toestemming nodig is, voegen we duidelijke keuzes toe: noodzakelijke cookies, analytics en marketing/tracking. Bezoekers moeten hun keuze kunnen wijzigen of intrekken.
+              Omdat Loopwijzer nu geen tracking- of marketingcookies plaatst, tonen we geen cookiebanner. Als we cookies gebruiken waarvoor toestemming nodig is, voegen we duidelijke keuzes toe: noodzakelijke cookies, analytics en marketing/tracking. Bezoekers moeten hun keuze kunnen wijzigen of intrekken.
             </p>
             <p>Laatst bijgewerkt: 26 april 2026.</p>
           </PolicySection>

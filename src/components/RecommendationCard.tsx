@@ -15,7 +15,7 @@ export function RecommendationCard({ shoe, result }: RecommendationCardProps) {
       <ShoeVisual shoe={shoe} />
       <div className="score-row">
         <span className="match-score">Match {result.matchScore}%</span>
-        <span>Voorlopige score {shoe.editorialScore.overall.toFixed(1)}</span>
+        <span>Redactionele score {shoe.editorialScore.overall.toFixed(1)}</span>
       </div>
       <h3>{shoe.fullName}</h3>
       <div className="advice-marker">

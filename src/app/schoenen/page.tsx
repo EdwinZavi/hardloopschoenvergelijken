@@ -112,7 +112,7 @@ function getActiveFilters(filters: Filters) {
 }
 
 const sortLabels = {
-  editorial: "Beste voorlopige score",
+  editorial: "Beste redactionele score",
   price: "Laagste prijs",
   weight: "Lichtste eerst",
   value: "Beste prijs-kwaliteit"
@@ -129,7 +129,7 @@ export default async function ShoesPage({ searchParams }: { searchParams: Search
 
   return (
     <main className="page-shoes">
-      <section className="page-hero-with-visual page-hero-with-visual-compact">
+      <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-compare">
         <div>
           <p className="eyebrow">Alle hardloopschoenen</p>
           <h1>Hardloopschoenen vergelijken</h1>
@@ -204,7 +204,7 @@ export default async function ShoesPage({ searchParams }: { searchParams: Search
             </label>
 
             <label>
-              <span>Minimale voorlopige score</span>
+              <span>Minimale redactionele score</span>
               <input name="minScore" type="number" min="6" max="10" step="0.1" defaultValue={filters.minScore ?? ""} placeholder="Bijv. 8.0" />
             </label>
 
