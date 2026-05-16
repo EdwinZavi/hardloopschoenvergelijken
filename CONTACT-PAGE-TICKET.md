@@ -20,8 +20,7 @@ Maak `/contact` de centrale plek voor formele bedrijfsgegevens van Loopwijzer en
   - beheerder/handelsnaam
   - KvK-nummer
   - vestigingsadres
-  - algemene contactmail
-  - privacycontact
+  - een centraal contactmailadres
 - Bewaar bedrijfsgegevens centraal in code, zodat contact en privacy niet uiteen gaan lopen.
 - Houd privacybeleid juridisch correct door de verantwoordelijke daar ook te blijven noemen.
 
@@ -35,7 +34,8 @@ Maak `/contact` de centrale plek voor formele bedrijfsgegevens van Loopwijzer en
 ## Acceptatiecriteria
 
 - Footer toont alleen merk en navigatielinks.
-- Contactpagina bevat een duidelijke sectie `Bedrijfsgegevens`.
+- Contactpagina bevat een duidelijke sectie `Contactgegevens`.
+- Contactpagina gebruikt een centraal e-mailadres: `info@hardloopschoenvergelijken.nl`.
 - Er staan geen demo-BV of placeholder-KvK-gegevens in publieke broncode.
 - Typecheck en production build slagen.
 

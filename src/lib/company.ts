@@ -5,6 +5,6 @@ export const companyInfo = {
   address: "Pelikaanstraat 39",
   postalCode: "9713 BW",
   city: "Groningen",
-  generalEmail: "contact@loopwijzer.nl",
-  privacyEmail: "privacy@loopwijzer.nl"
+  generalEmail: "info@hardloopschoenvergelijken.nl",
+  privacyEmail: "info@hardloopschoenvergelijken.nl"
 };
