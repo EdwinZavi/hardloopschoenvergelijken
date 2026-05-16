@@ -21,13 +21,11 @@ export default function ContactPage() {
           Loopwijzer wordt beheerd door {companyInfo.legalName}. Gebruik het onderstaande e-mailadres voor algemene vragen, correcties, samenwerkingen, privacyverzoeken en productinformatie.
         </p>
         <ul>
-          <li>Platform: {companyInfo.platformName}</li>
           <li>Beheerder: {companyInfo.legalName}</li>
           <li>KvK-nummer: {companyInfo.chamberOfCommerceNumber}</li>
           <li>
             Vestigingsadres: {companyInfo.address}, {companyInfo.postalCode} {companyInfo.city}
           </li>
-          <li>Markt: Nederland</li>
           <li>
             E-mail: <a href={`mailto:${companyInfo.generalEmail}`}>{companyInfo.generalEmail}</a>
           </li>

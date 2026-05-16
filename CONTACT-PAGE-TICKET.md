@@ -16,7 +16,6 @@ Maak `/contact` de centrale plek voor formele bedrijfsgegevens van Loopwijzer en
 
 - Verwijder de KvK-vermelding uit de footer.
 - Toon op `/contact` alleen de noodzakelijke trustgegevens:
-  - platformnaam
   - beheerder/handelsnaam
   - KvK-nummer
   - vestigingsadres
