@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Privacybeleid | Loopwijzer",
@@ -45,12 +46,17 @@ export default function PrivacyPage() {
         <div className="policy-content">
           <PolicySection id="verantwoordelijke" title="Wie is verantwoordelijk?">
             <p>
-              Loopwijzer is verantwoordelijk voor de verwerking van persoonsgegevens die nodig zijn om deze website, de keuzehulp, contactmogelijkheden en beheeromgeving te laten werken.
+              {companyInfo.legalName} is verantwoordelijk voor de verwerking van persoonsgegevens die nodig zijn om Loopwijzer, de keuzehulp, contactmogelijkheden en beheeromgeving te laten werken.
             </p>
             <ul>
-              <li>Platform: Loopwijzer</li>
+              <li>Platform: {companyInfo.platformName}</li>
+              <li>Beheerder: {companyInfo.legalName}</li>
+              <li>KvK-nummer: {companyInfo.chamberOfCommerceNumber}</li>
+              <li>
+                Vestigingsadres: {companyInfo.address}, {companyInfo.postalCode} {companyInfo.city}
+              </li>
               <li>Markt: Nederland</li>
-              <li>Privacycontact: privacy@loopwijzer.nl</li>
+              <li>Privacycontact: {companyInfo.privacyEmail}</li>
             </ul>
           </PolicySection>
 
@@ -131,7 +137,7 @@ export default function PrivacyPage() {
             </p>
             <div className="policy-callout">
               <strong>Vragen over privacy</strong>
-              <span>Mail privacy@loopwijzer.nl als je vragen hebt over gegevens, keuzehulp-antwoorden, correctie of verwijdering.</span>
+              <span>Mail {companyInfo.privacyEmail} als je vragen hebt over gegevens, keuzehulp-antwoorden, correctie of verwijdering.</span>
             </div>
           </PolicySection>
         </div>

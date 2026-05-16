@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Contact | Loopwijzer",
@@ -37,13 +38,18 @@ export default function ContactPage() {
       <section className="policy-section">
         <h2>Verantwoordelijke en contact</h2>
         <p>
-          Loopwijzer is verantwoordelijk voor de inhoud, productvergelijking en keuzehulp op deze website. Voor formele vragen, correcties of privacyverzoeken kun je contact opnemen via de adressen hierboven.
+          Loopwijzer wordt beheerd door {companyInfo.legalName}. Voor formele vragen, correcties of privacyverzoeken kun je contact opnemen via de adressen hierboven.
         </p>
         <ul>
-          <li>Platform: Loopwijzer</li>
+          <li>Platform: {companyInfo.platformName}</li>
+          <li>Beheerder: {companyInfo.legalName}</li>
+          <li>KvK-nummer: {companyInfo.chamberOfCommerceNumber}</li>
+          <li>
+            Vestigingsadres: {companyInfo.address}, {companyInfo.postalCode} {companyInfo.city}
+          </li>
           <li>Markt: Nederland</li>
-          <li>Algemeen contact: contact@loopwijzer.nl</li>
-          <li>Privacycontact: privacy@loopwijzer.nl</li>
+          <li>Algemeen contact: {companyInfo.generalEmail}</li>
+          <li>Privacycontact: {companyInfo.privacyEmail}</li>
         </ul>
       </section>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
+import { companyInfo } from "@/lib/company";
 
 export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>) {
   const pathname = usePathname();
@@ -28,6 +29,9 @@ export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>
       <footer className="site-footer">
         <BrandLogo />
         <div className="footer-copy">
+          <span>
+            {companyInfo.platformName} wordt beheerd door {companyInfo.legalName}, KvK {companyInfo.chamberOfCommerceNumber}.
+          </span>
           <nav aria-label="Footer navigatie">
             <Link href="/schoenen">Schoenen</Link>
             <Link href="/keuzehulp">Keuzehulp</Link>
