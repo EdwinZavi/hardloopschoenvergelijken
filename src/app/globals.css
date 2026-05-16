@@ -56,12 +56,17 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: "Atkinson Hyperlegible", "Inter", "Source Sans 3", Arial, Helvetica, sans-serif;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 @keyframes pageFadeUp {
@@ -2337,6 +2342,14 @@ main > .lead,
   overflow-x: auto;
 }
 
+.mobile-scroll-hint {
+  color: var(--muted);
+  display: none;
+  font-size: 13px;
+  font-weight: 800;
+  margin: -6px 0 10px;
+}
+
 .comparison-table {
   border-collapse: collapse;
   min-width: 860px;
@@ -2362,6 +2375,7 @@ main > .lead,
 
 .comparison-table thead th:first-child,
 .comparison-table tbody th {
+  background: var(--surface-muted);
   left: 0;
   min-width: 170px;
   position: sticky;
@@ -3427,7 +3441,7 @@ main > .lead,
   .comparison-table thead th:first-child,
   .comparison-table tbody th {
     min-width: 128px;
-    position: static;
+    position: sticky;
   }
 
   .helper-actions,
@@ -3472,7 +3486,7 @@ main > .lead,
   .home-hero {
     gap: 24px;
     min-height: 0;
-    padding: 16px 0 28px;
+    padding: 28px;
   }
 
   .home-hero h1 {
@@ -3518,6 +3532,242 @@ main > .lead,
   .admin-hero h1,
   .admin-login-panel h1 {
     font-size: 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  main {
+    padding: 12px 14px 48px;
+  }
+
+  .site-header,
+  .site-footer {
+    border-radius: 24px;
+    gap: 12px;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 12px;
+  }
+
+  .brand-logo {
+    gap: 9px;
+    max-width: 100%;
+  }
+
+  .brand-mark {
+    height: 34px;
+    width: 72px;
+  }
+
+  .brand-wordmark {
+    min-width: 0;
+  }
+
+  .brand-wordmark strong {
+    display: block;
+    font-size: 16px;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .brand-wordmark span {
+    font-size: 11px;
+  }
+
+  .site-header nav {
+    -webkit-overflow-scrolling: touch;
+    align-self: stretch;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    padding: 2px 2px 4px;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .site-header nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-header nav a {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    flex: 0 0 auto;
+    font-size: 13px;
+    padding: 8px 11px;
+  }
+
+  .site-footer nav {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .site-footer nav a {
+    white-space: normal;
+  }
+
+  .home-hero,
+  .image-hero,
+  .page-hero-with-visual.image-hero,
+  .intent-hero.image-hero,
+  .compare-picker-hero.image-hero,
+  .compare-result-hero.image-hero {
+    border-radius: 28px;
+    margin-bottom: 18px;
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .home-hero::before,
+  .image-hero::before {
+    opacity: 0.38;
+  }
+
+  .home-hero::after,
+  .image-hero::after {
+    background: linear-gradient(180deg, rgba(4, 13, 31, 0.88) 0%, rgba(4, 13, 31, 0.76) 62%, rgba(4, 13, 31, 0.58) 100%);
+  }
+
+  .home-hero h1,
+  .image-hero h1,
+  .image-hero h2,
+  .compare-picker-hero h1,
+  .compare-result-hero h1,
+  .page-hero-with-visual h1,
+  .intent-hero h1 {
+    font-size: 34px;
+    line-height: 1.04;
+  }
+
+  .home-hero .lead,
+  .image-hero .lead,
+  .lead {
+    font-size: 17px;
+  }
+
+  .home-trust-line {
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .actions {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .button,
+  .compare-link {
+    justify-content: center;
+    min-height: 44px;
+    text-align: center;
+  }
+
+  .filter-panel,
+  .product-card,
+  .panel,
+  .method-strip,
+  .result-toolbar,
+  .compare-tray,
+  .compare-selection-bar {
+    border-radius: 20px;
+  }
+
+  .filter-panel {
+    padding: 14px;
+  }
+
+  .filter-form {
+    gap: 12px;
+  }
+
+  .result-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .card-footer {
+    align-items: stretch;
+    display: grid;
+    gap: 8px;
+  }
+
+  .card-footer span {
+    white-space: normal;
+  }
+
+  .card-footer a {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 12px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .spec-grid {
+    gap: 12px;
+  }
+
+  .option-card {
+    min-height: 0;
+    padding: 13px 14px;
+  }
+
+  .helper-actions > span:empty {
+    display: none;
+  }
+
+  .compare-selection-bar {
+    position: sticky;
+    top: 8px;
+    z-index: 5;
+  }
+
+  .compare-selection-bar p,
+  .compare-tray p,
+  .policy-section li {
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-scroll-hint {
+    display: block;
+  }
+
+  .comparison-table {
+    min-width: 620px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px;
+  }
+
+  .comparison-table thead th:first-child,
+  .comparison-table tbody th {
+    min-width: 112px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-wordmark strong {
+    max-width: 214px;
+  }
+
+  .home-hero h1,
+  .image-hero h1,
+  .image-hero h2,
+  .compare-picker-hero h1,
+  .compare-result-hero h1,
+  .page-hero-with-visual h1,
+  .intent-hero h1 {
+    font-size: 31px;
   }
 }
 

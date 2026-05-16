@@ -196,6 +196,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
         </div>
       </section>
 
+      <p className="mobile-scroll-hint">Veeg horizontaal om alle schoenen en kenmerken te vergelijken.</p>
       <section className="comparison-wrap" aria-label="Vergelijkingstabel">
         <table className="comparison-table">
           <thead>
