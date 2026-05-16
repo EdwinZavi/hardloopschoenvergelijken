@@ -2,9 +2,19 @@
 
 ## Merkbasis
 
-Loopwijzer gebruikt het blauwe hardloopschoen-logo als herkenbare basis: beweging, vergelijking en zekerheid.
+De publieke merknaam is `hardloopschoenvergelijken.nl`.
+
+De slogan/pay-off is `Loopwijzer`.
+
+hardloopschoenvergelijken.nl gebruikt het blauwe hardloopschoen-logo als herkenbare basis: beweging, vergelijking en zekerheid.
 
 De huisstijl moet voelen als een betrouwbare keuzehulp voor hardlopers, niet als een kortingssite. Het logo brengt energie; de interface brengt rust, structuur en vertrouwen.
+
+## Naamgebruik
+
+- Gebruik `hardloopschoenvergelijken.nl` als afzender, merknaam, platformnaam en paginatitel.
+- Gebruik `Loopwijzer` als slogan, korte pay-off of naam voor de keuzehulpende gedachte achter het product.
+- Gebruik `Loopwijzer` niet meer als primaire merknaam in header, footer, contactpagina of metadata.
 
 ## Merkgevoel
 

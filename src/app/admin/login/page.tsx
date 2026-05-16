@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { loginAdmin } from "@/app/admin/actions";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { companyInfo } from "@/lib/company";
 
 type LoginPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export const metadata: Metadata = {
-  title: "Admin login | Loopwijzer"
+  title: `Admin login | ${companyInfo.platformName}`
 };
 
 function firstValue(value: string | string[] | undefined) {
@@ -26,7 +27,7 @@ export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
     <main className="admin-auth-page">
       <section className="admin-login-panel">
         <p className="eyebrow">Dataworkspace</p>
-        <h1>Inloggen voor Loopwijzer beheer</h1>
+        <h1>Inloggen voor {companyInfo.platformName} beheer</h1>
         <p className="lead">
           Beheer de kwaliteit van schoenen, offers, aanbevelingen en publicatierisico's voordat nieuwe content live gaat.
         </p>
@@ -45,7 +46,7 @@ export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
             Lokaal wachtwoord: <strong>loopwijzer-admin</strong>
           </p>
         ) : null}
-        <p className="admin-note">Alleen bedoeld voor beheerders van Loopwijzer.</p>
+        <p className="admin-note">Alleen bedoeld voor beheerders van {companyInfo.platformName}.</p>
       </section>
     </main>
   );

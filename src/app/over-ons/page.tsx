@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Over Loopwijzer | Hardloopschoenen vergelijken met uitleg",
-  description: "Lees waarom Loopwijzer is gebouwd en hoe we hardloopschoenen vergelijken op productkenmerken, persoonlijke match en prijs."
+  title: `Over ${companyInfo.platformName} | Hardloopschoenen vergelijken met uitleg`,
+  description: `Lees waarom ${companyInfo.platformName} is gebouwd en hoe we hardloopschoenen vergelijken op productkenmerken, persoonlijke match en prijs.`
 };
 
 export default function AboutPage() {
@@ -12,15 +13,15 @@ export default function AboutPage() {
     <main className="policy-page page-policy">
       <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-surfaces">
         <div>
-          <p className="eyebrow">Over Loopwijzer</p>
+          <p className="eyebrow">Over {companyInfo.platformName}</p>
           <h1>Een rustigere manier om hardloopschoenen te kiezen.</h1>
           <p className="lead">
-            Loopwijzer helpt Nederlandse hardlopers beter kiezen tussen hardloopschoenen. We combineren gestructureerde productinformatie, keuzehulp, redactionele beoordeling en prijsvergelijking, zonder te doen alsof één schoen voor iedereen de beste keuze is.
+            {companyInfo.platformName} helpt Nederlandse hardlopers beter kiezen tussen hardloopschoenen. Met {companyInfo.tagline} combineren we gestructureerde productinformatie, keuzehulp, redactionele beoordeling en prijsvergelijking.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-wide">
           <Image
-            alt="Hardlopers op verschillende ondergronden als beeld voor de missie van Loopwijzer"
+            alt={`Hardlopers op verschillende ondergronden als beeld voor de missie van ${companyInfo.platformName}`}
             fill
             priority
             sizes="(max-width: 820px) 100vw, 390px"
@@ -47,15 +48,15 @@ export default function AboutPage() {
       <section className="policy-content standalone">
         <div className="policy-callout">
           <strong>Transparant in opbouw</strong>
-          <span>Loopwijzer kiest voor gecontroleerde productdata, duidelijke prijsinformatie en onderbouwing per schoen. We tonen liever duidelijk wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
+          <span>{companyInfo.platformName} kiest voor gecontroleerde productdata, duidelijke prijsinformatie en onderbouwing per schoen. We tonen liever duidelijk wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
         </div>
 
-        <PolicySection title="Waarom Loopwijzer bestaat">
+        <PolicySection title={`Waarom ${companyInfo.platformName} bestaat`}>
           <p>
             Hardloopschoenen vergelijken is lastig. Merken gebruiken eigen termen, webshops sturen snel richting verkoop en veel toplijstjes leggen onvoldoende uit voor wie een schoen echt geschikt is en voor wie juist niet.
           </p>
           <p>
-            Loopwijzer is gebouwd om die keuze rustiger en beter uitlegbaar te maken. Je moet niet alleen zien welke schoenen populair of goedkoop zijn, maar vooral begrijpen welke eigenschappen passen bij jouw loopdoel, ondergrond, steunbehoefte, pasvorm en budget.
+            {companyInfo.platformName} is gebouwd om die keuze rustiger en beter uitlegbaar te maken. Je moet niet alleen zien welke schoenen populair of goedkoop zijn, maar vooral begrijpen welke eigenschappen passen bij jouw loopdoel, ondergrond, steunbehoefte, pasvorm en budget.
           </p>
         </PolicySection>
 
@@ -77,9 +78,9 @@ export default function AboutPage() {
           </p>
         </PolicySection>
 
-        <PolicySection title="Hoe Loopwijzer geld kan verdienen">
+        <PolicySection title={`Hoe ${companyInfo.platformName} geld kan verdienen`}>
           <p>
-            Loopwijzer kan inkomsten ontvangen wanneer je via een winkelverwijzing iets koopt. Een vergoeding mag onze redactionele score, keuzehulp of uitleg niet bepalen. Kooplinks en eventuele commerciële posities moeten herkenbaar zijn zodra ze publiek worden gebruikt.
+            {companyInfo.platformName} kan inkomsten ontvangen wanneer je via een winkelverwijzing iets koopt. Een vergoeding mag onze redactionele score, keuzehulp of uitleg niet bepalen. Kooplinks en eventuele commerciële posities moeten herkenbaar zijn zodra ze publiek worden gebruikt.
           </p>
           <p>
             Lees meer op <Link href="/onafhankelijkheid">Onafhankelijkheid en inkomsten</Link>.

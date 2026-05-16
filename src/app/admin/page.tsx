@@ -5,6 +5,7 @@ import { logoutAdmin } from "@/app/admin/actions";
 import { getAdminAccounts, getAdminAnalytics } from "@/lib/admin-analytics";
 import { getAdminWorkspace } from "@/lib/admin-data";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { companyInfo } from "@/lib/company";
 import { formatPrice, labels } from "@/lib/labels";
 import { getSupabaseHealth } from "@/lib/supabase/health";
 import type { ShoeType } from "@/types/product";
@@ -47,7 +48,7 @@ export default async function AdminWorkspacePage() {
     <main className="admin-workspace">
       <section className="admin-topbar" aria-label="Admin navigatie">
         <div>
-          <strong>Loopwijzer Admin</strong>
+          <strong>{companyInfo.platformName} Admin</strong>
           <span>Beheer, data, imports en publicatiecontrole</span>
         </div>
         <nav>
@@ -64,7 +65,7 @@ export default async function AdminWorkspacePage() {
       <section className="admin-hero">
         <div>
           <p className="eyebrow">Admin dashboard</p>
-          <h1>Stuur Loopwijzer op data, vertrouwen en groei.</h1>
+          <h1>Stuur {companyInfo.platformName} op data, vertrouwen en groei.</h1>
           <p className="lead">
             Dit dashboard combineert bezoekerssignalen, accountstatus, datakwaliteit en publicatieblokkades. Analytics zijn nu demo-seeddata en worden pas echte metingen na een privacybewuste trackingkeuze.
           </p>

@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Privacybeleid | Loopwijzer",
-  description: "Lees hoe Loopwijzer omgaat met persoonsgegevens, keuzehulp-antwoorden, adminsessies, affiliate links en toekomstige reviews."
+  title: `Privacybeleid | ${companyInfo.platformName}`,
+  description: `Lees hoe ${companyInfo.platformName} omgaat met persoonsgegevens, keuzehulp-antwoorden, adminsessies, affiliate links en toekomstige reviews.`
 };
 
 export default function PrivacyPage() {
   return (
     <main className="policy-page page-policy">
       <p className="eyebrow">Privacybeleid</p>
-      <h1>Hoe Loopwijzer met gegevens omgaat</h1>
+      <h1>Hoe {companyInfo.platformName} met gegevens omgaat</h1>
       <p className="lead">
-        Loopwijzer helpt je hardloopschoenen vergelijken. We verzamelen zo min mogelijk persoonsgegevens en leggen duidelijk uit welke gegevens nodig zijn om de website, keuzehulp en beheeromgeving te laten werken.
+        {companyInfo.platformName} helpt je hardloopschoenen vergelijken. We verzamelen zo min mogelijk persoonsgegevens en leggen duidelijk uit welke gegevens nodig zijn om de website, keuzehulp en beheeromgeving te laten werken.
       </p>
 
       <section className="trust-answers">
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
         <div className="policy-content">
           <PolicySection id="verantwoordelijke" title="Wie is verantwoordelijk?">
             <p>
-              {companyInfo.legalName} is verantwoordelijk voor de verwerking van persoonsgegevens die nodig zijn om Loopwijzer, de keuzehulp, contactmogelijkheden en beheeromgeving te laten werken.
+              {companyInfo.legalName} is verantwoordelijk voor de verwerking van persoonsgegevens die nodig zijn om {companyInfo.platformName}, de keuzehulp, contactmogelijkheden en beheeromgeving te laten werken.
             </p>
             <ul>
               <li>Platform: {companyInfo.platformName}</li>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
 
           <PolicySection id="affiliate" title="Affiliate links en winkels">
             <p>
-              Sommige winkelverwijzingen kunnen affiliate links zijn. Dat betekent dat Loopwijzer een vergoeding kan ontvangen als je via zo'n link iets koopt. Voor jou hoeft de prijs daardoor niet hoger te worden.
+              Sommige winkelverwijzingen kunnen affiliate links zijn. Dat betekent dat {companyInfo.platformName} een vergoeding kan ontvangen als je via zo'n link iets koopt. Voor jou hoeft de prijs daardoor niet hoger te worden.
             </p>
             <p>
               Affiliatevergoedingen mogen de redactionele score, persoonlijke matchscore of uitleg waarom een schoen bij je past niet bepalen. Als een commerciële plaatsing, advertentie of gesponsorde positie wordt gebruikt, moet die herkenbaar worden gelabeld.

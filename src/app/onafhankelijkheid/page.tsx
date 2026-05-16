@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Onafhankelijkheid en inkomsten | Loopwijzer",
-  description: "Lees hoe Loopwijzer redactionele beoordeling, aanbevelingen, winkelprijzen en mogelijke inkomsten gescheiden houdt."
+  title: `Onafhankelijkheid en inkomsten | ${companyInfo.platformName}`,
+  description: `Lees hoe ${companyInfo.platformName} redactionele beoordeling, aanbevelingen, winkelprijzen en mogelijke inkomsten gescheiden houdt.`
 };
 
 export default function IndependencePage() {
@@ -15,7 +16,7 @@ export default function IndependencePage() {
           <p className="eyebrow">Onafhankelijkheid en inkomsten</p>
           <h1>Hoe we vertrouwen en commercie gescheiden houden</h1>
           <p className="lead">
-            Loopwijzer kan inkomsten ontvangen via winkelverwijzingen of samenwerkingen. Dat mag niet bepalen welke schoen we als passend uitleggen. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen.
+            {companyInfo.platformName} kan inkomsten ontvangen via winkelverwijzingen of samenwerkingen. Dat mag niet bepalen welke schoen we als passend uitleggen. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-product">
@@ -45,9 +46,9 @@ export default function IndependencePage() {
       </section>
 
       <section className="policy-content standalone">
-        <PolicySection title="Hoe Loopwijzer inkomsten kan krijgen">
+        <PolicySection title={`Hoe ${companyInfo.platformName} inkomsten kan krijgen`}>
           <p>
-            Sommige links naar winkels kunnen affiliate links zijn. Als je via zo'n link iets koopt, kan Loopwijzer een vergoeding ontvangen. Voor jou hoeft de prijs daardoor niet hoger te worden.
+            Sommige links naar winkels kunnen affiliate links zijn. Als je via zo'n link iets koopt, kan {companyInfo.platformName} een vergoeding ontvangen. Voor jou hoeft de prijs daardoor niet hoger te worden.
           </p>
           <p>
             Deze vergoeding is bedoeld als inkomstenbron voor het platform, niet als beoordelingscriterium. Wanneer we gesponsorde plaatsingen, advertenties of commerciële samenwerkingen tonen, moeten die herkenbaar gelabeld zijn. We willen geen advies verkopen als onafhankelijk oordeel.

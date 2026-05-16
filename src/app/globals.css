@@ -272,7 +272,7 @@ textarea:focus-visible,
 }
 
 .brand-wordmark strong {
-  font-size: 21px;
+  font-size: clamp(17px, 2.2vw, 20px);
   letter-spacing: 0;
   line-height: 1;
 }

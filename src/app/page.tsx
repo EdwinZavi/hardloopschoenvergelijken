@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { formatReleaseLabel, getNewestReleaseShoes } from "@/lib/data";
 import { labels } from "@/lib/labels";
+import { companyInfo } from "@/lib/company";
 
 export default function HomePage() {
   const newestReleases = getNewestReleaseShoes(5);
@@ -29,7 +30,7 @@ export default function HomePage() {
           <p className="eyebrow">Hardloopschoenen vergelijken</p>
           <h1>Vind rust in het kiezen van hardloopschoenen.</h1>
           <p className="lead">
-            Loopwijzer helpt je begrijpen welke schoen past bij jouw doel, voeten en trainingen. Met duidelijke filters, persoonlijke keuzehulp en eerlijke vergelijking.
+            {companyInfo.platformName} helpt je begrijpen welke schoen past bij jouw doel, voeten en trainingen. Met {companyInfo.tagline} als keuzehulp vergelijk je rustiger en eerlijker.
           </p>
           <div className="actions">
             <Link className="button" href="/keuzehulp">

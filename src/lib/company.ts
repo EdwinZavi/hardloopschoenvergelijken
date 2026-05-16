@@ -1,5 +1,6 @@
 export const companyInfo = {
-  platformName: "Loopwijzer",
+  platformName: "hardloopschoenvergelijken.nl",
+  tagline: "Loopwijzer",
   legalName: "The Power of Trust",
   chamberOfCommerceNumber: "76612112",
   address: "Pelikaanstraat 39",
