@@ -31,6 +31,7 @@ De huisstijl moet voelen als een betrouwbare keuzehulp voor hardlopers, niet als
 - Houd prijsinformatie feitelijk en compact.
 - Scheid productkwaliteit, persoonlijke match en winkelinformatie zichtbaar.
 - Vermijd felle kortingsbadges, urgency en "beste deal"-taal.
+- Het UI-systeem volgt Material 3-principes voor kleurrollen, shape, elevation, states en toegankelijke controls. Zie `DESIGN-SYSTEM.md`.
 
 ## Logo
 
@@ -38,5 +39,6 @@ Publieke assets:
 
 - Origineel: `/public/brand/loopwijzer-logo.png`
 - Gecropt voor websitegebruik: `/public/brand/loopwijzer-logo-cropped.png`
+- Transparant schoenmerk: `/public/brand/loopwijzer-shoe-mark.png`
 
-Het gecropte logo wordt gebruikt in header, footer en favicon metadata.
+Het transparante schoenmerk wordt gebruikt in header en favicon metadata.
