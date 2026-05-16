@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/ProductCard";
 import { getEnrichedShoes } from "@/lib/data";
-import { getIntentPage, intentPages } from "@/lib/intent-pages";
+import { companyInfo } from "@/lib/company";
+import { getIntentPage, getIntentPageSeo, intentPages } from "@/lib/intent-pages";
 
 type IntentPageProps = {
   params: Promise<{ slug: string }>;
@@ -13,17 +15,60 @@ export function generateStaticParams() {
   return intentPages.map((page) => ({ slug: page.slug }));
 }
 
+export async function generateMetadata({ params }: IntentPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = getIntentPage(slug);
+
+  if (!page) return {};
+
+  const seo = getIntentPageSeo(slug);
+
+  return {
+    title: `${page.title} | ${companyInfo.platformName}`,
+    description: seo?.metaDescription ?? page.intro,
+    alternates: {
+      canonical: `/advies/${page.slug}`
+    }
+  };
+}
+
 export default async function IntentPage({ params }: IntentPageProps) {
   const { slug } = await params;
   const page = getIntentPage(slug);
 
   if (!page) notFound();
 
+  const seo = getIntentPageSeo(slug);
   const shoes = getEnrichedShoes().filter(page.filter).sort(page.sort).slice(0, 6);
   const compareIds = page.compareSeed.join(",");
+  const relatedPages = (seo?.relatedSlugs ?? [])
+    .map((relatedSlug) => getIntentPage(relatedSlug))
+    .filter((relatedPage): relatedPage is NonNullable<typeof relatedPage> => Boolean(relatedPage));
+  const faqSchema = seo?.faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: seo.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer
+          }
+        }))
+      }
+    : null;
 
   return (
     <main className="page-advice">
+      {faqSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema)
+          }}
+        />
+      ) : null}
       <section className="intent-hero">
         <div>
           <p className="eyebrow">{page.eyebrow}</p>
@@ -58,6 +103,25 @@ export default async function IntentPage({ params }: IntentPageProps) {
         </aside>
       </section>
 
+      {seo?.guidance.length ? (
+        <section>
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Keuzeadvies</p>
+              <h2>Waar moet je op letten?</h2>
+            </div>
+          </div>
+          <div className="grid landing-guidance-grid">
+            {seo.guidance.map((item) => (
+              <article className="panel landing-guidance-card" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="method-strip">
         <div>
           <p className="eyebrow">Makkelijk vergelijken</p>
@@ -83,6 +147,44 @@ export default async function IntentPage({ params }: IntentPageProps) {
           ))}
         </div>
       </section>
+
+      {seo?.faqs.length ? (
+        <section className="landing-faq">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Veelgestelde vragen</p>
+              <h2>Twijfels die vaak terugkomen</h2>
+            </div>
+          </div>
+          <div className="faq-list">
+            {seo.faqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {relatedPages.length ? (
+        <section className="landing-related">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Verder vergelijken</p>
+              <h2>Gerelateerde keuzevragen</h2>
+            </div>
+          </div>
+          <div className="path-grid">
+            {relatedPages.map((relatedPage) => (
+              <Link className="path-card" href={`/advies/${relatedPage.slug}`} key={relatedPage.slug}>
+                <strong>{relatedPage.title}</strong>
+                <span>{relatedPage.intro}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

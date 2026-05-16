@@ -1,7 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 import { getEnrichedShoes } from "@/lib/data";
 import { intentPages } from "@/lib/intent-pages";
+
+export const metadata: Metadata = {
+  title: `Hardloopschoen advies | ${companyInfo.platformName}`,
+  description:
+    "Bekijk adviespagina's voor hardloopschoenen per loopdoel, pasvorm, demping, stabiliteit, afstand en prijs-kwaliteit."
+};
 
 export default function AdviceIndexPage() {
   const shoes = getEnrichedShoes();
