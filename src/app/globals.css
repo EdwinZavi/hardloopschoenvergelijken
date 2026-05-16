@@ -1829,6 +1829,7 @@ main > .lead,
   border-bottom: 0;
   display: flex;
   margin-bottom: 28px;
+  padding: clamp(30px, 6vw, 64px);
 }
 
 .page-hero-with-visual.image-hero h1,
@@ -3339,6 +3340,12 @@ main > .lead,
   .compare-selection-bar {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .intent-hero.image-hero,
+  .compare-picker-hero.image-hero,
+  .compare-result-hero.image-hero {
+    padding: 32px 28px;
   }
 
   .compare-picker-hero h1,
