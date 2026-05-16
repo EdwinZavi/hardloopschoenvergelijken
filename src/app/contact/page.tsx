@@ -36,9 +36,9 @@ export default function ContactPage() {
       </section>
 
       <section className="policy-section">
-        <h2>Verantwoordelijke en contact</h2>
+        <h2>Bedrijfsgegevens</h2>
         <p>
-          Loopwijzer wordt beheerd door {companyInfo.legalName}. Voor formele vragen, correcties of privacyverzoeken kun je contact opnemen via de adressen hierboven.
+          Loopwijzer wordt beheerd door {companyInfo.legalName}. Deze gegevens staan hier zodat bezoekers, partners en affiliate-netwerken kunnen zien wie verantwoordelijk is voor de website.
         </p>
         <ul>
           <li>Platform: {companyInfo.platformName}</li>
