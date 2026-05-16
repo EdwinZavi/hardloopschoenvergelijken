@@ -23,6 +23,24 @@ Every component should follow these rules:
 - keep product facts, editorial opinion, and retailer data clearly separated
 - be reusable across multiple pages
 
+## Rendering Contract
+
+Components are server components by default.
+
+Use client components only for small leaf-level interactions that need browser state, browser APIs, or progressive enhancement.
+
+The component system should avoid unnecessary client-side rendering because the platform depends on:
+
+- fast catalog and product pages
+- shareable filter and comparison URLs
+- indexable trust and methodology content
+- server-side recommendation logic
+- clear separation between product truth and retailer offers
+
+Prefer URL search params, forms, links, native HTML, CSS, and server actions before introducing `"use client"`.
+
+If a component needs `"use client"`, document why and keep product data access, scoring, and recommendation decisions outside that component.
+
 ## Component Categories
 
 The first component library should include:

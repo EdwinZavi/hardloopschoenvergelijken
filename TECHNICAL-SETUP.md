@@ -24,6 +24,72 @@ Why this fits:
 - TypeScript keeps product fields, filters, and recommendation inputs consistent
 - the app can later move from JSON to a database without changing the UX model
 
+## Rendering Policy: Server-First
+
+The platform should default to server-rendered routes and React Server Components.
+
+Why this matters:
+
+- comparison, filtering, and choice-helper outcomes stay shareable through URLs
+- pages remain easier to index, cache, and deploy
+- less JavaScript is shipped to users
+- product facts and recommendation logic stay close to trusted server data
+- secrets such as the Supabase service role key never cross into the browser
+
+Use `"use client"` only for a small, explicit browser interaction that cannot be handled cleanly with links, forms, CSS, native HTML, server actions, or URL search params.
+
+Good reasons for a client component:
+
+- local UI state such as an open mobile menu
+- browser APIs such as focus handling, media queries, or storage
+- progressive enhancement for an existing server-driven form
+- realtime or authenticated browser behavior after RLS is configured
+- optimistic UI where the user value clearly outweighs the hydration cost
+
+Weak reasons for a client component:
+
+- fetching catalog data in the browser by default
+- keeping filter, compare, or choice-helper state only in React state
+- wrapping full page trees in client providers for convenience
+- using a client UI library when CSS, tokens, and server components are enough
+- hiding recommendation or scoring logic in browser-only code
+
+## Client Boundary Rules
+
+Keep client components as small leaf islands.
+
+Before adding `"use client"`, the ticket must answer:
+
+1. What user interaction requires browser-side rendering?
+2. Can this be solved with a link, form, server action, CSS, or native HTML?
+3. What data crosses the server/client boundary?
+4. Does the component expose product logic, private data, or secrets?
+5. What is the hydration and performance cost?
+
+Current allowed client islands:
+
+- `src/components/SiteChrome.tsx`
+  - allowed for navigation UI that needs local open/close state
+- `src/components/AutoSubmitFilterForm.tsx`
+  - allowed as progressive enhancement for server-driven filters
+- `src/lib/supabase/client.ts`
+  - allowed only for future browser-safe Supabase features with RLS
+
+Catalog pages, product pages, comparison pages, methodology pages, and recommendation results should remain server-rendered by default.
+
+Filtering should use URL search params as the source of truth.
+Comparison should use URL state such as product IDs so comparisons remain shareable.
+The choice helper should stay URL-driven until a logged-in personal environment requires saved progress.
+
+## Rendering Validation
+
+For product or frontend tickets, validate rendering decisions before completion:
+
+- run `rg -n '"use client"' src`
+- explain every new client boundary in the ticket or PR summary
+- run typecheck and production build when code changes affect routes or components
+- confirm no service role key, server-only module, or private data is imported by client code
+
 ## First Folder Structure
 
 - `data/`

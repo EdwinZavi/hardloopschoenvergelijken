@@ -334,6 +334,30 @@ When working on this project:
 
 ---
 
+## Rendering and Performance Rules
+
+Use `TECHNICAL-SETUP.md` as the source of truth for rendering decisions.
+
+Default to server-rendered pages and React Server Components. This protects speed, trust, SEO, shareable comparison URLs, and the separation between product logic and browser UI.
+
+Agents must not add `"use client"` unless the ticket explicitly justifies why browser-side rendering is required.
+
+Before adding or expanding a client component, define:
+
+1. the exact interaction that needs browser state
+2. why links, forms, server actions, CSS, native HTML, or URL search params are not enough
+3. what data crosses the server/client boundary
+4. how the change affects hydration, performance, and trust
+5. why no server-only code, service role key, or private product logic reaches the browser
+
+Keep client components as small leaf islands. Do not turn full layouts, pages, catalog flows, comparison flows, or recommendation logic into client-rendered experiences by default.
+
+Frontend Components Agents must treat server components as the default implementation.
+Data & Recommendation Logic Agents must keep scoring, matching, and trusted data access server-side unless there is a documented product reason.
+The Lead Integrator must review every new `"use client"` boundary before accepting agent work.
+
+---
+
 ## How To Work
 
 For important decisions, follow this structure:
