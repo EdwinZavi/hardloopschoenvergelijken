@@ -158,6 +158,26 @@ perfect review moderation systems
 personalized saved profiles
 complex machine-learning recommendations
 full coverage of every subcategory
+Mijnomgeving: later, niet MVP
+De volledige mijnomgeving hoort niet bij de huidige MVP. Accounts, privacykeuzes, RLS, reviewmoderatie, opgeslagen profielen en databasewerk kunnen de lancering vertragen voordat we hebben bewezen dat de kernwaarde sterk genoeg is.
+
+Voor de MVP is de belangrijkste vraag niet of gebruikers al een account kunnen maken. De belangrijkste vraag is of zij zonder account beter begrijpen welke hardloopschoenen bij hen passen, waarom die opties logisch zijn, welke alternatieven bestaan, en waar ze eerlijk kunnen kopen.
+
+Phase 1: accountloos nu
+De eerste MVP werkt zonder account. Gebruikers kunnen schoenen ontdekken, filteren, vergelijken, de keuzehulp gebruiken, productpagina's lezen en retailerprijzen bekijken zonder registratie. Eventuele voorkeuren of vergelijkingen mogen via URL's, sessiegedrag of eenvoudige browser-state werken, zolang de kernervaring snel, deelbaar en server-rendered blijft.
+
+Phase 2: reviews later
+Gebruikersreviews worden pas uitgebreid zodra de productstructuur, scoring en keuzehulp voldoende gevalideerd zijn. In de MVP mogen reviews alleen licht aanwezig zijn als placeholder, geimporteerde score of beperkte context. Een volwaardig reviewsysteem vraagt eerst om duidelijke reviewvelden, moderatiebeleid, misbruikpreventie, privacykeuzes en een onderscheid tussen gebruikerservaring, redactioneel oordeel en verkoperkwaliteit.
+
+Phase 3: persoonlijke omgeving pas na validatie
+Een persoonlijke omgeving komt pas na bewijs dat gebruikers terugkomen voor opgeslagen vergelijkingen, profielen, maat- en pasvormvoorkeuren, prijsalerts of reviewbijdragen. Voorwaarden voordat we accounts bouwen:
+
+validated repeat-use behavior
+heldere account use cases die meer waarde bieden dan een accountloze flow
+privacy- en datamodelkeuzes die passen bij Nederlands vertrouwen en AVG-verwachtingen
+server-side recommendation logic zonder private productlogica in de browser
+review- en profieldata die betrouwbaar beheerd kunnen worden
+duidelijke scheiding tussen persoonlijke voorkeuren, redactionele aanbevelingen en commerciele retailerinformatie
 Recommended MVP Dataset Size
 The MVP does not need the whole market on day one.
 
