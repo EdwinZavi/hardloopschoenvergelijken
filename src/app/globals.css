@@ -164,6 +164,30 @@ body {
   }
 }
 
+@keyframes decisionHighlight {
+  0% {
+    background-color: rgba(37, 99, 235, 0.02);
+    box-shadow: inset 3px 0 0 rgba(37, 99, 235, 0.35);
+  }
+  42% {
+    background-color: rgba(37, 99, 235, 0.16);
+    box-shadow: inset 3px 0 0 var(--brand), 0 0 0 1px rgba(37, 99, 235, 0.08);
+  }
+  100% {
+    background-color: #eff6ff;
+    box-shadow: inset 3px 0 0 var(--brand);
+  }
+}
+
+@keyframes choiceConfirm {
+  0% {
+    box-shadow: inset 0 0 0 1px var(--guide), 0 0 0 0 rgba(36, 95, 216, 0.22);
+  }
+  100% {
+    box-shadow: inset 0 0 0 1px var(--guide), 0 0 0 6px rgba(36, 95, 216, 0);
+  }
+}
+
 a {
   color: inherit;
 }
@@ -255,16 +279,32 @@ textarea:focus-visible,
   display: inline-flex;
   gap: 2px;
   padding: 2px;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
 .language-switch a {
   border-radius: 999px;
   color: var(--muted);
   padding: 5px 8px;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .language-switch a[aria-current="page"] {
   background: var(--brand-dark);
+  color: #fff;
+}
+
+.language-switch:hover {
+  background: var(--surface-muted);
+  border-color: color-mix(in srgb, var(--brand) 34%, var(--line));
+}
+
+.language-switch a:hover {
+  color: var(--brand-dark);
+  transform: translateY(-1px);
+}
+
+.language-switch a[aria-current="page"]:hover {
   color: #fff;
 }
 
@@ -641,6 +681,21 @@ main > .lead,
   animation-delay: 210ms;
 }
 
+.product-card:nth-child(5),
+.panel:nth-child(5),
+.decision-card:nth-child(5),
+.option-card:nth-child(5),
+.home-release-row:nth-child(5) {
+  animation-delay: 280ms;
+}
+
+.product-card:nth-child(6),
+.panel:nth-child(6),
+.decision-card:nth-child(6),
+.option-card:nth-child(6) {
+  animation-delay: 350ms;
+}
+
 .page-shoes .filter-panel,
 .page-shoes .result-toolbar,
 .page-shoes .active-filters,
@@ -706,6 +761,9 @@ main > .lead,
 .path-card,
 .option-card,
 .offer-row a,
+.product-card,
+.home-route-card,
+.language-switch,
 .site-header nav a,
 .site-footer a {
   transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
@@ -715,7 +773,9 @@ main > .lead,
 .compare-link:hover,
 .card-actions a:hover,
 .path-card:hover,
-.option-card:hover {
+.option-card:hover,
+.product-card:hover,
+.home-route-card:hover {
   transform: translateY(-1px);
 }
 
@@ -837,6 +897,7 @@ main > .lead,
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  animation: backgroundDrift 28s ease-in-out infinite;
   opacity: 0.48;
   z-index: -2;
 }
@@ -1812,6 +1873,11 @@ main > .lead,
   text-decoration: none;
 }
 
+.option-card:hover {
+  border-color: color-mix(in srgb, var(--brand) 34%, var(--line));
+  box-shadow: var(--md-sys-elevation-1);
+}
+
 .option-card span {
   color: var(--muted);
   line-height: 1.45;
@@ -1820,7 +1886,26 @@ main > .lead,
 .option-card.selected {
   background: var(--md-sys-color-primary-container);
   border-color: var(--guide);
+  animation: choiceConfirm 520ms ease both;
   box-shadow: inset 0 0 0 1px var(--guide);
+  position: relative;
+}
+
+.option-card.selected::after {
+  align-items: center;
+  background: var(--brand);
+  border-radius: 999px;
+  color: #fff;
+  content: "✓";
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 900;
+  height: 24px;
+  justify-content: center;
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 24px;
 }
 
 .helper-actions,
@@ -2431,6 +2516,7 @@ main > .lead,
 }
 
 .highlight-cell {
+  animation: decisionHighlight 900ms ease both;
   background: #eff6ff;
   box-shadow: inset 3px 0 0 var(--brand);
 }
@@ -2444,6 +2530,10 @@ main > .lead,
   font-weight: 800;
   margin: 0 0 8px;
   padding: 5px 8px;
+}
+
+.comparison-table tbody tr:nth-child(2n) .highlight-cell {
+  background: #f4f8ff;
 }
 
 .compare-actions {

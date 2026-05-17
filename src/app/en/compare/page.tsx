@@ -31,6 +31,28 @@ function firstValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+function strongestBy(shoes: EnrichedShoe[], selector: (shoe: EnrichedShoe) => number, direction: "high" | "low" = "high") {
+  return [...shoes].sort((a, b) => {
+    const diff = selector(a) - selector(b);
+    return direction === "high" ? -diff : diff;
+  })[0];
+}
+
+function highlightForEnglish(label: string, shoe: EnrichedShoe, shoes: EnrichedShoe[]) {
+  const max = (selector: (item: EnrichedShoe) => number) => strongestBy(shoes, selector).id === shoe.id;
+  const min = (selector: (item: EnrichedShoe) => number) => strongestBy(shoes, selector, "low").id === shoe.id;
+  const hasAnyPrice = shoes.some((item) => item.priceFrom !== null);
+
+  if (label === "Weight" && min((item) => item.weightGrams)) return "Lightest";
+  if (label === "Price from" && hasAnyPrice && shoe.priceFrom !== null && min((item) => item.priceFrom ?? Number.MAX_SAFE_INTEGER)) return "Lowest price";
+  if (label === "Editorial score" && max((item) => item.editorialScore.overall)) return "Highest score";
+  if (label === "Support" && max((item) => item.editorialScore.stability)) return "Most stable";
+  if (label === "Responsiveness" && max((item) => item.editorialScore.responsiveness)) return "Best tempo feel";
+  if (label === "Cushioning" && max((item) => item.editorialScore.cushioning)) return "Most cushioning";
+  if (label === "Fit width" && (shoe.widthLabel === "wide" || shoe.fitProfile === "roomy")) return "Roomier";
+  return undefined;
+}
+
 export default async function EnglishComparePage({ searchParams }: { searchParams: SearchParams }) {
   const shoes = getEnrichedShoes();
   const params = await searchParams;
@@ -77,9 +99,15 @@ export default async function EnglishComparePage({ searchParams }: { searchParam
                 {comparisonRows.map((row) => (
                   <tr key={row.label}>
                     <th scope="row">{row.label}</th>
-                    {selectedShoes.map((shoe) => (
-                      <td key={shoe.id}>{row.getValue(shoe)}</td>
-                    ))}
+                    {selectedShoes.map((shoe) => {
+                      const highlightLabel = highlightForEnglish(row.label, shoe, selectedShoes);
+                      return (
+                        <td className={highlightLabel ? "highlight-cell" : undefined} key={shoe.id}>
+                          {highlightLabel ? <span className="compare-badge">{highlightLabel}</span> : null}
+                          {row.getValue(shoe)}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>
