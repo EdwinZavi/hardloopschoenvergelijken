@@ -23,9 +23,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/cookies"
   ];
+  const englishStaticRoutes = [
+    "/en",
+    "/en/shoes",
+    "/en/shoe-finder",
+    "/en/compare",
+    "/en/advice",
+    "/en/methodology",
+    "/en/about",
+    "/en/contact",
+    "/en/independence",
+    "/en/privacy",
+    "/en/cookies"
+  ];
 
   return [
-    ...staticRoutes.map((path) => ({
+    ...[...staticRoutes, ...englishStaticRoutes].map((path) => ({
       url: absoluteUrl(path),
       lastModified: now,
       changeFrequency: "weekly" as const,
@@ -42,6 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.72
+    })),
+    ...getEnrichedShoes().map((shoe) => ({
+      url: absoluteUrl(`/en/shoes/${shoe.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.62
     }))
   ];
 }
