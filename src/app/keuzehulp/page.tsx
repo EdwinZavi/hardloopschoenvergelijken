@@ -136,11 +136,11 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
           </div>
           <div className="page-hero-visual page-hero-visual-portrait">
             <Image
-              alt="Hardloper op de weg als beeld voor persoonlijk passend hardloopschoenadvies"
+              alt="Hardloper op een rustige weg als beeld voor persoonlijk passend hardloopschoenadvies"
               fill
               priority
               sizes="(max-width: 820px) 100vw, 360px"
-              src="/images/home/running-surfaces-triptych.png"
+              src="/images/home/choice-road-runner.png"
             />
           </div>
         </section>

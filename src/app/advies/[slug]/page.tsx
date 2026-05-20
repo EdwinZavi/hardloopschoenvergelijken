@@ -39,6 +39,7 @@ export default async function IntentPage({ params }: IntentPageProps) {
   if (!page) notFound();
 
   const seo = getIntentPageSeo(slug);
+  const isTrailPage = page.slug === "trail";
   const shoes = getEnrichedShoes().filter(page.filter).sort(page.sort).slice(0, 6);
   const compareIds = page.compareSeed.join(",");
   const relatedPages = (seo?.relatedSlugs ?? [])
@@ -84,12 +85,12 @@ export default async function IntentPage({ params }: IntentPageProps) {
           </div>
         </div>
         <aside className="visual-panel visual-panel-portrait">
-          <div className="visual-panel-image">
+          <div className={isTrailPage ? "visual-panel-image visual-panel-image-trail" : "visual-panel-image"}>
             <Image
-              alt="Hardloper op bergpad als beeld voor het kiezen van hardloopschoenen per loopdoel"
+              alt={isTrailPage ? "Trailrunner op onverhard bospad als beeld voor grip en zekerheid" : "Hardloper op bergpad als beeld voor het kiezen van hardloopschoenen per loopdoel"}
               fill
               sizes="(max-width: 820px) 100vw, 340px"
-              src="/images/home/runner-types-trail.png"
+              src={isTrailPage ? "/images/home/trail-forest-runner.png" : "/images/home/runner-types-trail.png"}
             />
           </div>
           <div>

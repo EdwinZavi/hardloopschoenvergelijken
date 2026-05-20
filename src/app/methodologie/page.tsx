@@ -25,11 +25,11 @@ export default function MethodologyPage() {
         </div>
         <div className="page-hero-visual page-hero-visual-product">
           <Image
-            alt="Hardloopschoen als productbeeld bij de beoordelingsmethodologie"
+            alt="Close-up van hardloopschoendetails als beeld bij redactionele beoordeling"
             fill
             priority
             sizes="(max-width: 820px) 100vw, 360px"
-            src="/images/home/shoe-hero-asics.png"
+            src="/images/home/method-detail-shoe.png"
           />
         </div>
       </section>

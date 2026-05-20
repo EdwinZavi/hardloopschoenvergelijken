@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { formatReleaseLabel, getNewestReleaseShoes } from "@/lib/data";
 import { labels } from "@/lib/labels";
 import { companyInfo } from "@/lib/company";
@@ -43,9 +44,17 @@ export default function HomePage() {
             </div>
           </div>
           <div className="home-hero-panel" aria-label="Wat Loopwijzer inzichtelijk maakt">
-            <span>01</span>
-            <strong>Doel, voeten en budget naast elkaar</strong>
-            <p>Geen losse toplijstjes, maar duidelijke keuze-signalen die je helpen begrijpen waarom een schoen wel of niet past.</p>
+            <Image
+              alt="Hardloper vergelijkt meerdere hardloopschoenen rustig naast elkaar"
+              fill
+              priority
+              sizes="(max-width: 820px) 100vw, 520px"
+              src="/images/home/decision-table-compare.png"
+            />
+            <div>
+              <strong>Doel, voeten en budget naast elkaar</strong>
+              <p>Geen losse toplijstjes, maar duidelijke keuze-signalen die je helpen begrijpen waarom een schoen wel of niet past.</p>
+            </div>
           </div>
         </div>
       </section>

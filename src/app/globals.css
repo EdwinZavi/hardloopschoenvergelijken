@@ -423,7 +423,7 @@ p {
 }
 
 .home-hero::before {
-  background-image: url("/images/home/running-surfaces-triptych.png");
+  background-image: url("/images/home/decision-table-compare.png");
   background-position: 76% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -476,34 +476,51 @@ p {
 
 .home-hero-panel {
   align-self: stretch;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.94)),
-    url("/images/home/running-surfaces-triptych.png");
-  background-position: center;
-  background-size: cover;
+  background: #f8fbff;
   border: 1px solid var(--line);
   display: grid;
   min-height: 420px;
-  padding: clamp(22px, 4vw, 36px);
+  overflow: hidden;
+  padding: 0;
   place-content: end start;
+  position: relative;
+}
+
+.home-hero-panel::after {
+  background: linear-gradient(180deg, rgba(5, 18, 36, 0.08) 0%, rgba(5, 18, 36, 0.2) 45%, rgba(5, 18, 36, 0.72) 100%);
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.home-hero-panel img {
+  object-fit: cover;
+  object-position: 42% 50%;
+}
+
+.home-hero-panel > div {
+  padding: clamp(22px, 4vw, 36px);
+  position: relative;
+  z-index: 2;
 }
 
 .home-hero-panel span {
-  color: var(--accent);
+  color: #dbeafe;
   font-size: 13px;
   font-weight: 900;
   margin-bottom: 10px;
 }
 
 .home-hero-panel strong {
-  color: var(--brand-dark);
+  color: #fff;
   font-size: clamp(22px, 2.4vw, 30px);
   line-height: 1.1;
   max-width: 420px;
 }
 
 .home-hero-panel p {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.86);
   font-weight: 700;
   max-width: 420px;
 }
@@ -1037,15 +1054,15 @@ main > .lead,
 }
 
 .image-hero-surfaces::before {
-  background-image: url("/images/home/running-surfaces-triptych.png");
+  background-image: url("/images/home/choice-road-runner.png");
 }
 
 .image-hero-compare::before {
-  background-image: url("/images/home/compare-shoes-panel.png");
+  background-image: url("/images/home/decision-table-compare.png");
 }
 
 .image-hero-shoe::before {
-  background-image: url("/images/home/shoe-hero-asics.png");
+  background-image: url("/images/home/method-detail-shoe.png");
 }
 
 .image-hero-runner::before {
@@ -1111,6 +1128,18 @@ main > .lead,
 
 .visual-panel-image img {
   object-fit: cover;
+}
+
+.visual-panel-image-trail img {
+  object-position: 58% 50%;
+}
+
+.page-helper .page-hero-visual img {
+  object-position: 58% 50%;
+}
+
+.page-methodology .page-hero-visual-product img {
+  object-position: 58% 54%;
 }
 
 .visual-panel-portrait .visual-panel-image {
@@ -1894,7 +1923,7 @@ main > .lead,
 .helper-shell-visual {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 54%, rgba(255, 255, 255, 0.72) 100%),
-    url("/images/home/running-surfaces-triptych.png");
+    url("/images/home/choice-road-runner.png");
   background-position: 58% 50%;
   background-repeat: no-repeat;
   background-size: cover;

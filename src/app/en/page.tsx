@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getNewestReleaseShoes } from "@/lib/data";
 import { companyInfo } from "@/lib/company";
 import { enLabels, formatEnglishReleaseLabel } from "@/app/en/copy";
@@ -48,9 +49,17 @@ export default function EnglishHomePage() {
             </div>
           </div>
           <div className="home-hero-panel" aria-label="What Loopwijzer clarifies">
-            <span>01</span>
-            <strong>Goal, feet and budget side by side</strong>
-            <p>Not generic top lists, but clear decision signals that explain why a shoe may or may not fit.</p>
+            <Image
+              alt="Runner calmly compares multiple running shoes side by side"
+              fill
+              priority
+              sizes="(max-width: 820px) 100vw, 520px"
+              src="/images/home/decision-table-compare.png"
+            />
+            <div>
+              <strong>Goal, feet and budget side by side</strong>
+              <p>Not generic top lists, but clear decision signals that explain why a shoe may or may not fit.</p>
+            </div>
           </div>
         </div>
       </section>
