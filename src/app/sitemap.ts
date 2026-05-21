@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getEnrichedShoes } from "@/lib/data";
 import { intentPages } from "@/lib/intent-pages";
+import { englishIntentPages } from "@/lib/intent-pages-en";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hardloopschoenvergelijken.nl";
 
@@ -49,6 +50,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.85
+    })),
+    ...englishIntentPages.map((page) => ({
+      url: absoluteUrl(`/en/advice/${page.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.78
     })),
     ...getEnrichedShoes().map((shoe) => ({
       url: absoluteUrl(`/schoenen/${shoe.slug}`),

@@ -1,108 +1,159 @@
-import Link from "next/link";
 import Image from "next/image";
-import { getNewestReleaseShoes } from "@/lib/data";
-import { companyInfo } from "@/lib/company";
-import { enLabels, formatEnglishReleaseLabel } from "@/app/en/copy";
+import Link from "next/link";
+import { ShoeVisual } from "@/components/ShoeVisual";
+import { getEnrichedShoes } from "@/lib/data";
+import type { EnrichedShoe } from "@/types/product";
+import { enLabels, formatEuro } from "@/app/en/copy";
 
 export const metadata = {
   title: "Hardloopschoenvergelijken.nl in English | Loopwijzer",
   description: "English running shoe comparison for goals, fit, cushioning, support and price."
 };
 
+const m3Cards = [
+  {
+    href: "/en/shoe-finder",
+    icon: "5K",
+    title: "Choose by goal",
+    text: "For 5K, half marathon, marathon, recovery runs or daily training.",
+    cta: "Start with your goal"
+  },
+  {
+    href: "/en/advice",
+    icon: "FIT",
+    title: "Understand your fit",
+    text: "Get clarity on support, stability, cushioning and running feel.",
+    cta: "Read the guidance"
+  },
+  {
+    href: "/en/compare",
+    icon: "VS",
+    title: "Compare honestly",
+    text: "No random top lists, but clear differences per shoe.",
+    cta: "Compare models"
+  },
+  {
+    href: "/en/shoes",
+    icon: "€",
+    title: "Budget aware",
+    text: "See which shoes match your preferences and price range.",
+    cta: "Filter by budget"
+  }
+];
+
+const popularShoeIds = [
+  "nike-pegasus-41",
+  "asics-novablast-5",
+  "hoka-clifton-9",
+  "brooks-ghost-16",
+  "saucony-endorphin-speed-4",
+  "new-balance-fresh-foam-x-1080v13"
+];
+
+function getPopularShoes() {
+  const shoes = getEnrichedShoes();
+  return popularShoeIds
+    .map((id) => shoes.find((shoe) => shoe.id === id))
+    .filter((shoe): shoe is EnrichedShoe => Boolean(shoe));
+}
+
+function HomeShoeCard({ duplicate = false, shoe }: { duplicate?: boolean; shoe: EnrichedShoe }) {
+  return (
+    <article className="home-shoe-card" aria-hidden={duplicate ? "true" : undefined}>
+      <Link href={`/en/shoes/${shoe.slug}`} tabIndex={duplicate ? -1 : undefined}>
+        <span className="home-shoe-image">
+          {shoe.imageUrl ? (
+            <Image alt={shoe.fullName} fill sizes="(max-width: 820px) 82vw, 300px" src={shoe.imageUrl} />
+          ) : (
+            <ShoeVisual shoe={shoe} size="compact" />
+          )}
+        </span>
+        <span className="home-shoe-meta">{shoe.brand}</span>
+        <strong>{shoe.fullName}</strong>
+        <span className="home-shoe-category">{enLabels.shoeType[shoe.shoeType]}</span>
+        <span className="home-shoe-footer">
+          <span>{shoe.priceFrom === null ? formatEuro(shoe.priceFrom) : `From ${formatEuro(shoe.priceFrom)}`}</span>
+          <b>View shoe</b>
+        </span>
+      </Link>
+    </article>
+  );
+}
+
 export default function EnglishHomePage() {
-  const newestReleases = getNewestReleaseShoes(5);
-  const routes = [
-    {
-      href: "/en/shoe-finder",
-      label: "Start with the Shoe Finder",
-      text: "Answer a few questions and see which shoes are most logical for your running goal."
-    },
-    {
-      href: "/en/shoes",
-      label: "Browse all shoes",
-      text: "Filter by cushioning, support, fit, surface and price."
-    },
-    {
-      href: "/en/compare",
-      label: "Compare models",
-      text: "Place 2 to 4 running shoes side by side and review the important differences."
-    }
-  ];
+  const popularShoes = getPopularShoes();
 
   return (
     <main className="page-home">
-      <section className="home-section home-hero-section">
+      <section className="home-hero-section" aria-label="Compare running shoes">
+        <div className="home-hero-media" aria-hidden="true">
+          <Image alt="" fill priority sizes="100vw" src="/images/home/premium-runner-hero.png" />
+        </div>
+        <div className="home-hero-light" aria-hidden="true" />
         <div className="home-section-inner home-hero">
           <div className="home-hero-content">
             <p className="eyebrow">Compare running shoes</p>
-            <h1>Find clarity when choosing running shoes.</h1>
+            <h1>Find the running shoe that truly fits you.</h1>
             <p className="lead">
-              {companyInfo.platformName} helps you understand which shoe may suit your goal, feet and training. Loopwijzer keeps comparison practical, calm and transparent.
+              Compare shoes by goal, cushioning, support, budget and running style. Not loose top lists, but clear decision signals.
             </p>
             <div className="actions">
-              <Link className="button" href="/en/shoe-finder">
+              <Link className="button home-primary-cta" href="/en/shoe-finder">
                 Start the Shoe Finder
               </Link>
               <Link className="button secondary" href="/en/shoes">
                 Browse shoes
               </Link>
             </div>
-          </div>
-          <div className="home-hero-panel" aria-label="What Loopwijzer clarifies">
-            <Image
-              alt="Runner calmly compares multiple running shoes side by side"
-              fill
-              priority
-              sizes="(max-width: 820px) 100vw, 520px"
-              src="/images/home/decision-table-compare.png"
-            />
-            <div>
-              <strong>Goal, feet and budget side by side</strong>
-              <p>Not generic top lists, but clear decision signals that explain why a shoe may or may not fit.</p>
+            <div className="home-hero-trust" aria-label="Trust signals">
+              <span>Independent guidance</span>
+              <span>Explainable scores</span>
+              <span>Product information separate from retailers</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="home-section" aria-label="Trust signals">
+      <section className="home-section home-m3-section" aria-label="Why compare through Loopwijzer">
         <div className="home-section-inner">
-          <div className="home-section-header">
+          <div className="home-section-header home-section-header-centered">
             <div>
-              <p className="eyebrow">Why Loopwijzer</p>
-              <h2>Choosing gets easier when the differences are clear.</h2>
+              <p className="eyebrow">Why compare through Loopwijzer?</p>
+              <h2>Do not just pick the most popular shoe.</h2>
+              <p>Discover which shoe matches your body, goal and way of running.</p>
             </div>
           </div>
-          <div className="home-proof-grid">
-            <article>
-              <strong>Advice separate from retailer prices</strong>
-              <span>We separate shoe quality, personal match and retailer information.</span>
-            </article>
-            <article>
-              <strong>Reasoning behind recommendations</strong>
-              <span>You see not only which shoe may fit, but also why it is logical.</span>
-            </article>
-            <article>
-              <strong>Trade-offs made visible</strong>
-              <span>A better choice starts when limitations are clear too.</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-section home-section-muted" aria-label="Start points">
-        <div className="home-section-inner">
-          <div className="home-section-header">
-            <div>
-              <p className="eyebrow">Start here</p>
-              <h2>Choose the route that matches your question.</h2>
-            </div>
-          </div>
-          <div className="home-route-grid">
-            {routes.map((route) => (
-              <Link className="home-route-card" href={route.href} key={route.href}>
-                <strong>{route.label}</strong>
-                <span>{route.text}</span>
+          <div className="home-m3-grid">
+            {m3Cards.map((card) => (
+              <Link className="home-m3-card" href={card.href} key={card.title}>
+                <span className="home-m3-icon" aria-hidden="true">{card.icon}</span>
+                <strong>{card.title}</strong>
+                <span>{card.text}</span>
+                <em>{card.cta}</em>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-carousel-section" aria-label="Popular running shoes">
+        <div className="home-section-inner">
+          <div className="home-section-header">
+            <div>
+              <p className="eyebrow">Popular running shoes</p>
+              <h2>Models runners often compare.</h2>
+              <p>Start with familiar daily trainers and quickly see differences in cushioning, support and fit.</p>
+            </div>
+            <Link href="/en/shoes">All shoes</Link>
+          </div>
+        </div>
+        <div className="home-carousel-shell">
+          <div className="home-shoe-track">
+            {popularShoes.map((shoe) => (
+              <HomeShoeCard key={shoe.id} shoe={shoe} />
+            ))}
+            {popularShoes.map((shoe) => (
+              <HomeShoeCard duplicate key={`${shoe.id}-duplicate`} shoe={shoe} />
             ))}
           </div>
         </div>
@@ -111,7 +162,7 @@ export default function EnglishHomePage() {
       <section className="home-section" aria-label="Compare what matters">
         <div className="home-section-inner home-split-section">
           <div>
-            <p className="eyebrow">Compare what matters</p>
+            <p className="eyebrow">Compare what really makes a difference</p>
             <h2>Not just brand and price, but fit, support and use case.</h2>
             <p>
               Running shoes differ strongly by running goal. That is why we translate technical characteristics into practical decision questions.
@@ -121,41 +172,17 @@ export default function EnglishHomePage() {
             <span>Cushioning</span>
             <span>Support</span>
             <span>Fit</span>
-            <span>Surface</span>
-            <span>Tempo feel</span>
+            <span>Drop</span>
+            <span>Weight</span>
             <span>Value</span>
           </div>
-        </div>
-      </section>
-
-      <section className="home-section home-section-muted" aria-label="Newest releases">
-        <div className="home-section-inner">
-          <div className="home-section-header">
-            <div>
-              <p className="eyebrow">New in the catalog</p>
-              <h2>New models in our comparison</h2>
-            </div>
-            <Link href="/en/shoes">All shoes</Link>
-          </div>
-          <div className="home-release-list">
-            {newestReleases.map((shoe, index) => (
-              <Link className="home-release-row" href={`/en/shoes/${shoe.slug}`} key={shoe.id}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{shoe.fullName}</strong>
-                <em>{formatEnglishReleaseLabel(shoe)}</em>
-                <small>{enLabels.shoeType[shoe.shoeType]}</small>
-                <b>{shoe.editorialScore.overall.toFixed(1)}</b>
-              </Link>
-            ))}
-          </div>
-          <p className="home-data-note">This list uses the best available release data. When an exact month is missing, we intentionally show only the year.</p>
         </div>
       </section>
 
       <section className="home-section home-final-section" aria-label="Independent comparison">
         <div className="home-section-inner home-split-section">
           <div>
-            <p className="eyebrow">Trust first</p>
+            <p className="eyebrow">Why you can trust the outcome</p>
             <h2>Advice should stay explainable.</h2>
             <p>
               We build hardloopschoenvergelijken.nl as a decision platform, not a webshop. Commercial links may not steer the advice.

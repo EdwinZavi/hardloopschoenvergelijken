@@ -12,6 +12,7 @@ function toEnglishPath(pathname: string) {
   if (pathname === "/keuzehulp") return "/en/shoe-finder";
   if (pathname === "/vergelijken") return "/en/compare";
   if (pathname === "/advies") return "/en/advice";
+  if (pathname.startsWith("/advies/")) return pathname.replace("/advies/", "/en/advice/");
   if (pathname === "/methodologie") return "/en/methodology";
   if (pathname === "/over-ons") return "/en/about";
   if (pathname === "/contact") return "/en/contact";
@@ -29,6 +30,7 @@ function toDutchPath(pathname: string) {
   if (pathname === "/en/shoe-finder") return "/keuzehulp";
   if (pathname === "/en/compare") return "/vergelijken";
   if (pathname === "/en/advice") return "/advies";
+  if (pathname.startsWith("/en/advice/")) return pathname.replace("/en/advice/", "/advies/");
   if (pathname === "/en/methodology") return "/methodologie";
   if (pathname === "/en/about") return "/over-ons";
   if (pathname === "/en/contact") return "/contact";

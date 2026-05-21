@@ -18,7 +18,7 @@ export default function EnglishShoesPage() {
           <p className="eyebrow">All running shoes</p>
           <h1>Compare running shoes</h1>
           <p className="lead">
-            Browse the current catalog and compare use case, support, cushioning, fit, score and price. The English catalog is an MVP translation layer; detailed editorial verdicts will be translated in the next i18n ticket.
+            Browse the current catalog and compare use case, support, cushioning, fit, score and price.
           </p>
         </div>
       </section>
