@@ -11,7 +11,7 @@ type ScoreBand = {
 const scoreBands = recommendationRules.scoreModel.scoreBands as ScoreBand[];
 
 function scoreBand(score: number) {
-  return scoreBands.find((band) => score >= band.min)?.label ?? "Mogelijke match";
+  return scoreBands.find((band) => score >= band.min)?.label ?? "Controleerbare match";
 }
 
 function add(condition: boolean, points: number, factors: string[]) {
@@ -26,10 +26,29 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
   const roadOk = profile.preferredSurface === "road" && ["road", "mixed"].includes(shoe.surfaceType);
   const trailOk = profile.preferredSurface === "trail" && shoe.surfaceType === "trail";
   const mixedOk = profile.preferredSurface === "mixed" && ["road", "trail", "mixed"].includes(shoe.surfaceType);
-  const surface = add(roadOk || trailOk || mixedOk, 16, ["past bij de ondergrond waarop je loopt"]);
+  const surfaceUnknown = profile.preferredSurface === "not_sure";
+  const unknownSurfaceOk = surfaceUnknown && ["road", "mixed"].includes(shoe.surfaceType);
+  const surface = add(
+    roadOk || trailOk || mixedOk || unknownSurfaceOk,
+    surfaceUnknown ? 10 : 16,
+    [surfaceUnknown ? "houdt de ondergrond nog breed genoeg" : "past bij de ondergrond waarop je loopt"]
+  );
   score += surface.points;
   matchedFactors.push(...surface.factors);
-  if (!surface.points) score -= 30;
+  if (!surface.points) {
+    score += surfaceUnknown ? -4 : -30;
+    tradeoffs.push(surfaceUnknown ? "trailmodellen zijn vooral logisch als je vaak onverhard loopt" : "past minder goed bij je gekozen ondergrond");
+  }
+
+  if (profile.runningGoal === "not_sure") {
+    const match = ["daily_trainer", "stability"].includes(shoe.shoeType);
+    score += match ? 12 : 0;
+    if (match) matchedFactors.push("blijft een logische trainingsbasis als je doel nog niet vaststaat");
+    if (shoe.shoeType === "race" || shoe.hasCarbonPlate) {
+      score -= 10;
+      tradeoffs.push("een uitgesproken wedstrijdschoen vraagt om een duidelijk tempodoel");
+    }
+  }
 
   if (profile.runningGoal === "start_running") {
     const match = ["daily_trainer", "stability"].includes(shoe.shoeType);
@@ -50,7 +69,7 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
   if (profile.runningGoal === "faster_5k_10k") {
     const match = ["tempo", "race"].includes(shoe.shoeType) || shoe.responsivenessLevel === "high";
     score += match ? 18 : 0;
-    if (match) matchedFactors.push("helpt bij sneller lopen");
+    if (match) matchedFactors.push("sluit aan op sneller trainen");
   }
 
   if (profile.runningGoal === "half_marathon_marathon") {
@@ -67,15 +86,17 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
 
   const longDistance = ["half_marathon", "marathon"].includes(profile.targetDistance);
   const trailDistance = profile.targetDistance === "trail";
-  if (longDistance && ["half_marathon_plus", "10k_marathon"].includes(shoe.distanceBucket)) {
+  const distanceUnknown = profile.targetDistance === "not_sure";
+  if (distanceUnknown && ["all_round", "10k_marathon"].includes(shoe.distanceBucket)) {
+    score += 8;
+    matchedFactors.push("houdt je afstandskeuze nog open");
+  } else if (longDistance && ["half_marathon_plus", "10k_marathon"].includes(shoe.distanceBucket)) {
     score += 12;
     matchedFactors.push("genoeg bescherming voor langere trainingen");
-  }
-  if (trailDistance && shoe.shoeType === "trail" && shoe.surfaceType === "trail") {
+  } else if (trailDistance && shoe.shoeType === "trail" && shoe.surfaceType === "trail") {
     score += 12;
     matchedFactors.push("past bij trailafstanden en onverharde routes");
-  }
-  if (!longDistance && !trailDistance && ["all_round", "10k_marathon"].includes(shoe.distanceBucket)) {
+  } else if (!longDistance && !trailDistance && ["all_round", "10k_marathon"].includes(shoe.distanceBucket)) {
     score += 12;
     matchedFactors.push("past goed bij 5 tot 10 kilometer");
   }
@@ -89,6 +110,10 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
       score -= 8;
       tradeoffs.push("minder logisch als schoen voor veel wekelijkse trainingen");
     }
+  }
+  if (profile.weeklyFrequency === "not_sure" && ["daily_trainer", "stability"].includes(shoe.shoeType)) {
+    score += 4;
+    matchedFactors.push("blijft bruikbaar als je trainingsfrequentie nog niet zeker is");
   }
 
   if (profile.supportNeed === "neutral" && shoe.supportType === "neutral") {
@@ -123,6 +148,10 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
     matchedFactors.push("voelt veerkrachtig bij tempo");
     if (shoe.editorialScore.stability <= 7.2) tradeoffs.push("kan minder rustig en stabiel aanvoelen");
   }
+  if (profile.preferredFeel === "not_sure" && shoe.responsivenessLevel === "medium" && shoe.cushioningLevel !== "low") {
+    score += 8;
+    matchedFactors.push("heeft een neutraal loopgevoel zonder extreme keuze");
+  }
 
   if (profile.fitPreference === "wide") {
     if (shoe.widthLabel === "wide" || shoe.fitProfile === "roomy") {
@@ -139,17 +168,43 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
   } else if (profile.fitPreference === "regular" && shoe.widthLabel === "regular") {
     score += 7;
     matchedFactors.push("heeft een normale pasvorm");
+  } else if (profile.fitPreference === "not_sure") {
+    if (shoe.widthLabel === "regular" || shoe.fitProfile === "regular" || shoe.fitProfile === "roomy") {
+      score += 5;
+      matchedFactors.push("heeft geen uitgesproken smalle pasvorm");
+    }
+    if (shoe.widthLabel === "narrow" || shoe.fitProfile === "snug") {
+      tradeoffs.push("controleer de pasvorm extra omdat je voetbreedte nog onbekend is");
+    }
   }
 
   if (profile.experienceLevel === "beginner") {
     if (["daily_trainer", "stability"].includes(shoe.shoeType)) score += 7;
     if (shoe.hasCarbonPlate || shoe.shoeType === "race") score -= 18;
   }
+  if (profile.experienceLevel === "recreational" && ["daily_trainer", "stability", "tempo"].includes(shoe.shoeType)) {
+    score += 4;
+    matchedFactors.push("past bij recreatief trainen");
+  }
+  if (profile.experienceLevel === "experienced" && (["tempo", "race"].includes(shoe.shoeType) || shoe.responsivenessLevel === "high")) {
+    score += 4;
+    matchedFactors.push("sluit aan op meer loopervaring");
+  }
+  if (profile.experienceLevel === "not_sure") {
+    if (["daily_trainer", "stability"].includes(shoe.shoeType)) {
+      score += 5;
+      matchedFactors.push("is voorspelbaar genoeg als je ervaring nog niet zeker is");
+    }
+    if (shoe.hasCarbonPlate || shoe.shoeType === "race") {
+      score -= 10;
+      tradeoffs.push("minder logisch zolang je ervaring en tempodoel onbekend zijn");
+    }
+  }
 
   if (profile.injurySensitivity === "high") {
     if (shoe.editorialScore.comfort >= 8 && shoe.editorialScore.stability >= 7.5) {
       score += 7;
-      matchedFactors.push("scoort goed op comfort en steun");
+      matchedFactors.push("heeft sterke signalen voor comfort en steun");
     } else {
       score -= 8;
       tradeoffs.push("controleer extra of comfort en steun genoeg zijn voor jouw lichaam");
@@ -171,13 +226,17 @@ function evaluateShoe(shoe: EnrichedShoe, profile: RecommendationProfile): Recom
   const cappedScore = Math.max(0, Math.min(100, Math.round(score)));
   const fallbackTradeoff =
     shoe.editorialVerdict.lessSuitableFor || "controleer of de pasvorm en het gebruik echt bij jou passen";
+  const primaryFactors = matchedFactors.slice(0, 2);
+  const supportingFactors = matchedFactors.slice(2, 4);
 
   return {
     shoeId: shoe.id,
     matchScore: cappedScore,
     label: scoreBand(cappedScore),
-    primaryReason: `Deze schoen past goed omdat hij ${matchedFactors.slice(0, 2).join(" en ")}.`,
-    secondaryReason: matchedFactors[2] ? `Ook prettig: hij ${matchedFactors.slice(2, 4).join(" en ")}.` : shoe.editorialVerdict.summary,
+    primaryReason: primaryFactors.length
+      ? `Deze schoen sluit aan omdat hij ${primaryFactors.join(" en ")}.`
+      : "Deze schoen is een controleerbare optie, maar je antwoorden geven nog weinig harde richting.",
+    secondaryReason: supportingFactors.length ? `Daarnaast: hij ${supportingFactors.join(" en ")}.` : shoe.editorialVerdict.summary,
     tradeoffNote: tradeoffs.length ? tradeoffs[0] : fallbackTradeoff,
     matchedFactors
   };
@@ -195,14 +254,13 @@ export function getRecommendations(profile: RecommendationProfile) {
 }
 
 export const defaultProfile: RecommendationProfile = {
-  experienceLevel: "beginner",
-  runningGoal: "start_running",
-  targetDistance: "5k",
-  weeklyFrequency: "1_2",
-  preferredSurface: "road",
-  preferredFeel: "balanced",
+  experienceLevel: "not_sure",
+  runningGoal: "not_sure",
+  targetDistance: "not_sure",
+  weeklyFrequency: "not_sure",
+  preferredSurface: "not_sure",
+  preferredFeel: "not_sure",
   supportNeed: "not_sure",
-  injurySensitivity: "medium",
-  fitPreference: "not_sure",
-  budgetMax: 170
+  injurySensitivity: "not_sure",
+  fitPreference: "not_sure"
 };

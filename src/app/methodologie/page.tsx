@@ -1,17 +1,19 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+import { companyInfo } from "@/lib/company";
 import recommendationRules from "../../../data/recommendation-rules.json";
+
+export const metadata: Metadata = {
+  title: `Methodologie | Hoe ${companyInfo.platformName} hardloopschoenen beoordeelt`,
+  description:
+    "Lees hoe hardloopschoenen worden beoordeeld op productkwaliteit, persoonlijke match en prijsinformatie, met scorestatus en redactionele regels.",
+  alternates: {
+    canonical: "/methodologie"
+  }
+};
 
 export default function MethodologyPage() {
   const weights = recommendationRules.scoreModel.weights;
-  const scoreItems = [
-    ["Comfort", "Hoe prettig de schoen voelt tijdens gewone trainingen."],
-    ["Demping", "Hoe zacht en beschermend de schoen loopt."],
-    ["Stabiliteit", "Hoeveel steun en zekerheid de schoen geeft."],
-    ["Tempo", "Hoe makkelijk de schoen helpt om sneller te lopen."],
-    ["Grip", "Hoeveel vertrouwen de zool geeft op de juiste ondergrond."],
-    ["Veelzijdigheid", "Voor hoeveel soorten trainingen de schoen geschikt is."],
-    ["Prijs-kwaliteit", "Of je veel schoen krijgt voor de prijs."]
-  ];
 
   return (
     <main className="page-methodology">
@@ -20,7 +22,7 @@ export default function MethodologyPage() {
           <p className="eyebrow">Zo vergelijken we</p>
           <h1>Hoe we hardloopschoenen beoordelen</h1>
           <p className="lead">
-            We vergelijken hardloopschoenen op vaste punten en scheiden drie signalen: productkwaliteit, persoonlijke match en koopinformatie. Zo blijft advies begrijpelijk en onafhankelijk van winkelprijzen.
+            We vergelijken hardloopschoenen op vaste punten en scheiden drie signalen: productkwaliteit, persoonlijke match en koopinformatie. Daardoor zie je wat een schoen kan, waarom hij bij je past en welke prijsinformatie al gecontroleerd is.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-product">
@@ -34,161 +36,201 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      <section className="trust-answers">
+      <section className="methodology-summary-grid" aria-label="Kernprincipes van de beoordeling">
         <article>
-          <strong>Heeft een winkel invloed op de score?</strong>
-          <span>Nee. De beoordeling van de schoen staat los van winkelprijzen en affiliatevergoedingen.</span>
-        </article>
-        <article>
-          <strong>Staat de goedkoopste schoen altijd bovenaan?</strong>
-          <span>Nee. Prijs telt mee, maar pasvorm en gebruik zijn belangrijker.</span>
+          <span className="methodology-summary-kicker">Onafhankelijk</span>
+          <strong>Winkels sturen de score niet</strong>
+          <p>Productkwaliteit en persoonlijke match staan los van prijs, voorraad en affiliatevergoeding.</p>
         </article>
         <article>
-          <strong>Waarom een persoonlijke matchscore?</strong>
-          <span>Omdat jouw voeten, afstand en loopdoel anders kunnen zijn dan die van iemand anders.</span>
+          <span className="methodology-summary-kicker">Persoonlijk</span>
+          <strong>Een goede schoen past bij jouw situatie</strong>
+          <p>Loopdoel, ondergrond, steunbehoefte, pasvorm en budget bepalen samen welke richting past.</p>
+        </article>
+        <article>
+          <span className="methodology-summary-kicker">Controleerbaar</span>
+          <strong>We leggen trade-offs uit</strong>
+          <p>Je ziet pluspunten en nadelen, zonder algemene claims die voor iedere loper zouden gelden.</p>
         </article>
       </section>
 
-      <section className="grid">
-        <article className="panel">
-          <h2>Productkwaliteit</h2>
-          <p>Een redactionele beoordeling kijkt naar eigenschappen van de schoen zelf, zoals comfort, demping, stabiliteit, grip en duurzaamheid.</p>
-        </article>
-        <article className="panel">
-          <h2>Persoonlijke match</h2>
-          <p>Een matchscore kijkt naar jouw antwoorden, zoals ondergrond, loopdoel, afstand, steunbehoefte, pasvorm, gevoel en budget.</p>
-        </article>
-        <article className="panel">
-          <h2>Winkelprijzen</h2>
-          <p>Prijs en beschikbaarheid helpen bij kopen, maar zijn geen bewijs dat een schoen beter is of beter bij jou past.</p>
-        </article>
-      </section>
-
-      <section>
+      <section className="methodology-dropdown-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Drie aparte signalen</p>
-            <h2>Waarom score, match en prijs niet hetzelfde betekenen</h2>
+            <p className="eyebrow">Rustig uitgelegd</p>
+            <h2>Open alleen wat je wilt weten</h2>
+            <p>
+              De methodologie is verdeeld in categorieën. Scan eerst de hoofdpunten en open daarna alleen de uitleg die je nodig hebt.
+            </p>
           </div>
         </div>
-        <div className="method-list">
-          <article className="panel">
-            <h3>1. Productkwaliteit</h3>
-            <p>
-              Dit is onze beoordeling van de schoen als model. Een hoge productscore betekent dat de schoen sterk presteert binnen zijn categorie, maar niet automatisch dat hij voor iedere loper de juiste keuze is.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>2. Persoonlijke match</h3>
-            <p>
-              Dit is de koppeling tussen jouw profiel en de eigenschappen van de schoen. Een stabiele duurloopschoen kan voor de ene loper logisch zijn en voor een ander juist te zwaar, te stevig of te weinig snel.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>3. Winkelprijs</h3>
-            <p>
-              Dit is praktische koopinformatie van retailers of partners. Een scherpe prijs kan een goede deal zijn, maar verandert niets aan de productscore of aan de inhoudelijke uitleg waarom een schoen wel of niet past.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>4. Gebruikerservaring</h3>
-            <p>
-              Reviews kunnen helpen om patronen te herkennen, zoals pasvorm, slijtage of comfort na langere tijd. We behandelen gebruikerservaring als aanvullend signaal, niet als vervanging van productspecificaties of persoonlijke match.
-            </p>
-          </article>
-        </div>
-      </section>
 
-      <section>
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Datastatus</p>
-            <h2>Waar onze informatie vandaan komt</h2>
-          </div>
-        </div>
-        <div className="method-list">
-          <article className="panel">
-            <h3>Productgegevens</h3>
-            <p>
-              We gebruiken gestructureerde productinformatie van merken, publieke productspecificaties, retailerinformatie en redactionele controle. Als bronnen verschillen of specificaties ontbreken, kiezen we voorzichtigheid boven schijnzekerheid en markeren we informatie intern voor controle.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>Scores</h3>
-            <p>
-              Onze scores zijn redactionele beoordelingen op basis van vaste criteria. Ze maken schoenen vergelijkbaar, maar zijn geen laboratoriumtest, medisch advies of grootschalig praktijktestpanel. Waar informatie onzeker of onvolledig is, kiezen we voor voorzichtigheid en vermijden we schijnzekerheid.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>Prijzen en winkels</h3>
-            <p>
-              Winkelprijzen en affiliatevergoedingen tellen niet mee als productkwaliteit of persoonlijke match. We tonen prijzen pas publiek wanneer aanbiedingen gecontroleerd zijn of via een betrouwbare feed binnenkomen, en commerciële links moeten herkenbaar blijven.
-            </p>
-          </article>
-          <article className="panel">
-            <h3>Correcties</h3>
-            <p>
-              Zie je een fout? Meld die via de contactpagina. We passen productinformatie aan wanneer een correctie betrouwbaar en relevant is. Merken en retailers kunnen correcties aanleveren, maar commerciële relatie is geen reden om een score hoger te zetten.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Redactionele beoordeling</p>
-            <h2>Waar letten we op?</h2>
-          </div>
-        </div>
-        <div className="method-list">
-          {scoreItems.map(([title, text]) => (
-            <article className="panel" key={title}>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Persoonlijke match</p>
-            <h2>Wat telt mee in de keuzehulp?</h2>
-          </div>
-        </div>
-        <div className="weights-grid">
-          {Object.entries(weights).map(([key, value]) => (
-            <div className="weight-row" key={key}>
-              <span>{weightLabels[key as keyof typeof weights]}</span>
-              <strong>{value}</strong>
+        <div className="methodology-dropdown-grid">
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">01</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Score, match en prijs</span>
+                <strong>Drie signalen, drie betekenissen</strong>
+                <span>Productkwaliteit zegt iets anders dan persoonlijke match of koopinformatie.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <article>
+                <h3>Productkwaliteit</h3>
+                <p>Onze beoordeling van de schoen als model. Een hoge score betekent dat de schoen sterk presteert binnen zijn categorie, maar niet automatisch dat hij bij iedere loper past.</p>
+              </article>
+              <article>
+                <h3>Persoonlijke match</h3>
+                <p>De koppeling tussen jouw profiel en de eigenschappen van de schoen. Een stabiele duurloopschoen kan voor de ene loper logisch zijn en voor een ander juist te stevig of te zwaar.</p>
+              </article>
+              <article>
+                <h3>Prijs en winkelinformatie</h3>
+                <p>Prijzen helpen bij kopen, maar veranderen niets aan de productscore of de inhoudelijke uitleg waarom een schoen wel of niet past.</p>
+              </article>
             </div>
-          ))}
-        </div>
-      </section>
+          </details>
 
-      <section>
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Belofte</p>
-            <h2>Zo houden we het eerlijk</h2>
-          </div>
-        </div>
-        <div className="panel">
-          <p>
-            Deze regels moeten voorkomen dat een aanbeveling voelt als een zwarte doos. We leggen liever een duidelijke trade-off uit dan dat we een schoen zonder context als beste keuze presenteren.
-          </p>
-          <ul>
-            {recommendationRules.trustRules.map((rule) => (
-              <li key={rule}>{rule}</li>
-            ))}
-          </ul>
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">02</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Data en bronnen</span>
+                <strong>Voorzichtig met onvolledige informatie</strong>
+                <span>We combineren productspecificaties, publieke bronnen, retailerdata en redactionele controle.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <p>
+                We gebruiken gestructureerde productinformatie van merken, publieke productspecificaties, retailerinformatie en redactionele controle. Als bronnen verschillen of specificaties ontbreken, kiezen we voorzichtigheid boven schijnzekerheid.
+              </p>
+              <p>
+                Scores zijn redactionele beoordelingen op vaste criteria. Ze zijn bedoeld om schoenen vergelijkbaar te maken, niet als laboratoriumtest, medisch advies of absolute waarheid.
+              </p>
+              <p>
+                Winkelprijzen en affiliatevergoedingen tellen niet mee als productkwaliteit of persoonlijke match. Commerciële links moeten herkenbaar blijven.
+              </p>
+            </div>
+          </details>
+
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">03</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Scorestatus</span>
+                <strong>Niet elke score heeft dezelfde bewijsbasis</strong>
+                <span>We tonen of een score voorlopig, redactioneel gecontroleerd of getest is.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <div className="methodology-detail-list">
+                {scoreStatusItems.map(([title, text]) => (
+                  <article key={title}>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </details>
+
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">04</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Redactionele criteria</span>
+                <strong>Waar we inhoudelijk op letten</strong>
+                <span>We beoordelen schoenen op eigenschappen die invloed hebben op loopgevoel, gebruik en zekerheid.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <div className="methodology-detail-list">
+                {scoreItems.map(([title, text]) => (
+                  <article key={title}>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </details>
+
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">05</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Keuzehulpweging</span>
+                <strong>Waarom jouw profiel meeweegt</strong>
+                <span>Een aanbeveling moet passen bij doel, ondergrond, steunbehoefte, gevoel, pasvorm en budget.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <p>
+                De keuzehulp gebruikt een gewogen matchmodel. De exacte score is minder belangrijk dan de uitleg: waarom past deze schoen bij jouw situatie, en welk nadeel moet je accepteren?
+              </p>
+              <div className="methodology-weights-list">
+                {Object.entries(weights).map(([key, value]) => (
+                  <div className="weight-row" key={key}>
+                    <span>{weightLabels[key as keyof typeof weights]}</span>
+                    <strong>{value}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </details>
+
+          <details className="methodology-dropdown-card">
+            <summary className="methodology-dropdown-summary">
+              <span className="methodology-dropdown-index">06</span>
+              <span>
+                <span className="methodology-dropdown-kicker">Eerlijkheid en correcties</span>
+                <strong>Zo houden we het advies uitlegbaar</strong>
+                <span>Correcties zijn welkom, maar commerciële belangen mogen de beoordeling niet sturen.</span>
+              </span>
+            </summary>
+            <div className="methodology-dropdown-body">
+              <p>
+                Zie je een fout? Meld die via de contactpagina. We passen productinformatie aan wanneer een correctie betrouwbaar en relevant is. Merken en retailers kunnen correcties aanleveren, maar een commerciële relatie is geen reden om een score hoger te zetten.
+              </p>
+              <div className="methodology-detail-list">
+                {recommendationRules.trustRules.map((rule) => (
+                  <article key={rule}>
+                    <p>{rule}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </details>
         </div>
       </section>
     </main>
   );
 }
+
+const scoreItems = [
+  ["Comfort", "Hoe prettig de schoen voelt tijdens gewone trainingen."],
+  ["Demping", "Hoe zacht en beschermend de schoen loopt."],
+  ["Stabiliteit", "Hoeveel steun en zekerheid de schoen geeft."],
+  ["Tempo", "Hoe direct de schoen voelt wanneer je versnelt."],
+  ["Grip", "Hoe zeker de zool voelt op de juiste ondergrond."],
+  ["Veelzijdigheid", "Voor hoeveel soorten trainingen de schoen geschikt is."],
+  ["Prijs-kwaliteit", "Of je veel schoen krijgt voor de prijs."]
+];
+
+const scoreStatusItems = [
+  [
+    "Voorlopige redactionele inschatting",
+    "De score is gebaseerd op beschikbare productspecificaties en onze vaste weging. Dit helpt vergelijken, maar betekent nog niet dat alle productinformatie volledig brongecontroleerd of getest is."
+  ],
+  [
+    "Redactioneel gecontroleerd",
+    "Belangrijke productspecificaties en het redactionele oordeel zijn gecontroleerd. De score blijft een hulpmiddel naast pasvorm, doel en persoonlijke voorkeur."
+  ],
+  [
+    "Getest volgens methode",
+    "De score heeft naast broncontrole ook aanvullende praktijk- of testcontrole volgens onze gepubliceerde methode. We tonen dit alleen wanneer die basis er echt is."
+  ]
+];
 
 const weightLabels: Record<keyof typeof recommendationRules.scoreModel.weights, string> = {
   surfaceMatch: "Ondergrond",

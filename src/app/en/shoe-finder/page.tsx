@@ -33,7 +33,7 @@ export default function EnglishShoeFinderPage() {
 
       <section>
         <div className="section-heading">
-          <p className="eyebrow">MVP flow</p>
+          <p className="eyebrow">Short guided flow</p>
           <h2>Six questions instead of ten</h2>
         </div>
         <div className="trust-grid">

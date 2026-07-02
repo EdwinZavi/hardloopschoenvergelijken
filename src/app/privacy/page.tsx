@@ -3,7 +3,10 @@ import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: `Privacybeleid | ${companyInfo.platformName}`,
-  description: `Lees hoe ${companyInfo.platformName} omgaat met persoonsgegevens, keuzehulp-antwoorden, adminsessies, affiliate links en toekomstige reviews.`
+  description: `Lees hoe ${companyInfo.platformName} omgaat met persoonsgegevens, keuzehulp-antwoorden, adminsessies, affiliate links en toekomstige reviews.`,
+  alternates: {
+    canonical: "/privacy"
+  }
 };
 
 export default function PrivacyPage() {
@@ -12,7 +15,7 @@ export default function PrivacyPage() {
       <p className="eyebrow">Privacybeleid</p>
       <h1>Hoe {companyInfo.platformName} met gegevens omgaat</h1>
       <p className="lead">
-        {companyInfo.platformName} helpt je hardloopschoenen vergelijken. We verzamelen zo min mogelijk persoonsgegevens en leggen duidelijk uit welke gegevens nodig zijn om de website, keuzehulp en beheeromgeving te laten werken.
+        {companyInfo.platformName} laat je hardloopschoenen vergelijken zonder account. We verzamelen zo min mogelijk persoonsgegevens en leggen uit welke gegevens nodig zijn voor de website, keuzehulp en beheeromgeving.
       </p>
 
       <section className="trust-answers">
@@ -22,7 +25,7 @@ export default function PrivacyPage() {
         </article>
         <article>
           <strong>Keuzehulp blijft praktisch</strong>
-          <span>Antwoorden gebruiken we om matches en uitleg te tonen, niet om medische conclusies te trekken.</span>
+          <span>Antwoorden gebruiken we voor matches en uitleg, niet voor medische conclusies.</span>
         </article>
         <article>
           <strong>Commercie blijft apart</strong>
@@ -95,7 +98,7 @@ export default function PrivacyPage() {
               Sommige winkelverwijzingen kunnen affiliate links zijn. Dat betekent dat {companyInfo.platformName} een vergoeding kan ontvangen als je via zo'n link iets koopt. Voor jou hoeft de prijs daardoor niet hoger te worden.
             </p>
             <p>
-              Affiliatevergoedingen mogen de redactionele score, persoonlijke matchscore of uitleg waarom een schoen bij je past niet bepalen. Als een commerciële plaatsing, advertentie of gesponsorde positie wordt gebruikt, moet die herkenbaar worden gelabeld.
+              Affiliatevergoedingen mogen de redactionele score, persoonlijke matchscore of uitleg waarom een schoen bij je past niet bepalen. Commerciële plaatsingen, advertenties of gesponsorde posities moeten herkenbaar worden gelabeld.
             </p>
             <p>
               Zodra je doorklikt naar een winkel, geldt ook het privacy- en cookiebeleid van die winkel of partner.

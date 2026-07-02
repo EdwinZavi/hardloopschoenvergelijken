@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "check:retailer-sheet": "node scripts/import-retailer-offers.mjs --dry-run",
+    "import:retailer-sheet": "node scripts/import-retailer-offers.mjs --write",
     "check:feed-staging": "node scripts/seed-feed-staging.mjs --dry-run",
     "seed:feed-staging": "node scripts/seed-feed-staging.mjs",
     "seed:supabase": "node scripts/seed-supabase.mjs",

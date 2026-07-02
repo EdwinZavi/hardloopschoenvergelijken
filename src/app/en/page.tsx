@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ShoeVisual } from "@/components/ShoeVisual";
-import { getEnrichedShoes } from "@/lib/data";
+import { getEnrichedShoes, getNewestReleaseShoes } from "@/lib/data";
 import type { EnrichedShoe } from "@/types/product";
-import { enLabels, formatEuro } from "@/app/en/copy";
+import { enLabels, formatEnglishReleaseLabel, formatEuro } from "@/app/en/copy";
 
 export const metadata = {
   title: "Hardloopschoenvergelijken.nl in English | Loopwijzer",
@@ -14,29 +14,37 @@ const m3Cards = [
   {
     href: "/en/shoe-finder",
     icon: "5K",
+    imageAlt: "",
+    imageSrc: "/images/home/choice-road-runner.png",
     title: "Choose by goal",
-    text: "For 5K, half marathon, marathon, recovery runs or daily training.",
+    text: "Connect your distance and training goal to shoes built for that use.",
     cta: "Start with your goal"
   },
   {
     href: "/en/advice",
     icon: "FIT",
-    title: "Understand your fit",
-    text: "Get clarity on support, stability, cushioning and running feel.",
+    imageAlt: "",
+    imageSrc: "/images/home/method-detail-shoe.png",
+    title: "Check support and fit",
+    text: "See when neutral, light support or a roomier fit is the more logical route.",
     cta: "Read the guidance"
   },
   {
     href: "/en/compare",
     icon: "VS",
+    imageAlt: "",
+    imageSrc: "/images/home/compare-shoes-panel.png",
     title: "Compare honestly",
-    text: "No random top lists, but clear differences per shoe.",
+    text: "No loose top lists, but differences in cushioning, weight, support and use case.",
     cta: "Compare models"
   },
   {
     href: "/en/shoes",
     icon: "€",
+    imageAlt: "",
+    imageSrc: "/images/home/decision-table-compare.png",
     title: "Budget aware",
-    text: "See which shoes match your preferences and price range.",
+    text: "Price matters, but only after use case, fit and quality make sense.",
     cta: "Filter by budget"
   }
 ];
@@ -55,6 +63,11 @@ function getPopularShoes() {
   return popularShoeIds
     .map((id) => shoes.find((shoe) => shoe.id === id))
     .filter((shoe): shoe is EnrichedShoe => Boolean(shoe));
+}
+
+function getLatestReleaseWithImage(fallback?: EnrichedShoe) {
+  const releases = getNewestReleaseShoes(12);
+  return releases.find((shoe) => shoe.imageUrl) ?? releases[0] ?? fallback;
 }
 
 function HomeShoeCard({ duplicate = false, shoe }: { duplicate?: boolean; shoe: EnrichedShoe }) {
@@ -82,6 +95,7 @@ function HomeShoeCard({ duplicate = false, shoe }: { duplicate?: boolean; shoe: 
 
 export default function EnglishHomePage() {
   const popularShoes = getPopularShoes();
+  const latestRelease = getLatestReleaseWithImage(popularShoes[0]);
 
   return (
     <main className="page-home">
@@ -95,7 +109,7 @@ export default function EnglishHomePage() {
             <p className="eyebrow">Compare running shoes</p>
             <h1>Find the running shoe that truly fits you.</h1>
             <p className="lead">
-              Compare shoes by goal, cushioning, support, budget and running style. Not loose top lists, but clear decision signals.
+              Compare shoes by goal, cushioning, support, fit and price. You see not just what is popular, but why a shoe may or may not fit your situation.
             </p>
             <div className="actions">
               <Link className="button home-primary-cta" href="/en/shoe-finder">
@@ -106,11 +120,30 @@ export default function EnglishHomePage() {
               </Link>
             </div>
             <div className="home-hero-trust" aria-label="Trust signals">
-              <span>Independent guidance</span>
-              <span>Explainable scores</span>
-              <span>Product information separate from retailers</span>
+              <span>Explainable match</span>
+              <span>Editorial score separate</span>
+              <span>Retailer information separate from advice</span>
             </div>
           </div>
+          {latestRelease ? (
+            <Link className="home-latest-release-card" href={`/en/shoes/${latestRelease.slug}`} aria-label={`View ${latestRelease.fullName}`}>
+              <span className="home-latest-release-copy">
+                <span className="home-latest-release-kicker">Latest release with image</span>
+                <strong>{latestRelease.fullName}</strong>
+                <span>
+                  Release {formatEnglishReleaseLabel(latestRelease)} | {enLabels.shoeType[latestRelease.shoeType]}
+                </span>
+              </span>
+              <span className="home-latest-release-media" aria-hidden="true">
+                {latestRelease.imageUrl ? (
+                  <Image alt="" fill priority sizes="(max-width: 820px) 92vw, 1060px" src={latestRelease.imageUrl} />
+                ) : (
+                  <ShoeVisual shoe={latestRelease} size="hero" />
+                )}
+              </span>
+              <span className="home-latest-release-cta">View release</span>
+            </Link>
+          ) : null}
         </div>
       </section>
 
@@ -120,16 +153,21 @@ export default function EnglishHomePage() {
             <div>
               <p className="eyebrow">Why compare through Loopwijzer?</p>
               <h2>Do not just pick the most popular shoe.</h2>
-              <p>Discover which shoe matches your body, goal and way of running.</p>
+              <p>Start with your goal, surface and fit. Brand, score and price come after that.</p>
             </div>
           </div>
           <div className="home-m3-grid">
             {m3Cards.map((card) => (
               <Link className="home-m3-card" href={card.href} key={card.title}>
-                <span className="home-m3-icon" aria-hidden="true">{card.icon}</span>
-                <strong>{card.title}</strong>
-                <span>{card.text}</span>
-                <em>{card.cta}</em>
+                <span className="home-m3-media" aria-hidden="true">
+                  <Image alt={card.imageAlt} fill sizes="(max-width: 820px) 88vw, 520px" src={card.imageSrc} />
+                </span>
+                <span className="home-m3-body">
+                  <span className="home-m3-icon" aria-hidden="true">{card.icon}</span>
+                  <strong>{card.title}</strong>
+                  <span>{card.text}</span>
+                  <em>{card.cta}</em>
+                </span>
               </Link>
             ))}
           </div>
@@ -165,7 +203,7 @@ export default function EnglishHomePage() {
             <p className="eyebrow">Compare what really makes a difference</p>
             <h2>Not just brand and price, but fit, support and use case.</h2>
             <p>
-              Running shoes differ strongly by running goal. That is why we translate technical characteristics into practical decision questions.
+              Running shoes differ strongly by running goal. That is why we translate technical characteristics into practical questions: where do you run, how far, how much support do you want and what feel suits you?
             </p>
           </div>
           <div className="home-feature-grid">
@@ -185,7 +223,7 @@ export default function EnglishHomePage() {
             <p className="eyebrow">Why you can trust the outcome</p>
             <h2>Advice should stay explainable.</h2>
             <p>
-              We build hardloopschoenvergelijken.nl as a decision platform, not a webshop. Commercial links may not steer the advice.
+              We build hardloopschoenvergelijken.nl as a decision platform, not a webshop. A retailer price or partner link may not steer the explanation, score or personal match.
             </p>
           </div>
           <div className="home-final-actions">

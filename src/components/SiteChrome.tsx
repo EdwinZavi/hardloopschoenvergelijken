@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
+import { companyInfo } from "@/lib/company";
 
 function toEnglishPath(pathname: string) {
   if (pathname === "/en" || pathname.startsWith("/en/")) return pathname;
@@ -63,17 +64,43 @@ export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>
       ];
   const footerItems = isEnglish
     ? [
-        ...navItems,
+        { href: "/en", label: "Home" },
+        { href: "/en/shoe-finder", label: "Finder" },
+        { href: "/en/shoes", label: "Shoes" },
+        { href: "/en/compare", label: "Compare" },
+        { href: "/en/advice", label: "Advice" },
+        { href: "/en/contact", label: "Contact" }
+      ]
+    : [
+        { href: "/", label: "Home" },
+        { href: "/keuzehulp", label: "Keuzehulp" },
+        { href: "/schoenen", label: "Schoenen" },
+        { href: "/vergelijken", label: "Vergelijken" },
+        { href: "/advies", label: "Advies" },
+        { href: "/contact", label: "Contact" }
+      ];
+  const footerTrustItems = isEnglish
+    ? [
+        { href: "/en/methodology", label: "How we compare" },
+        { href: "/en/independence", label: "Independence" },
+        { href: "/en/privacy", label: "Privacy" },
+        { href: "/en/contact", label: "Report a correction" }
+      ]
+    : [
+        { href: "/methodologie", label: "Zo vergelijken we" },
+        { href: "/onafhankelijkheid", label: "Onafhankelijkheid" },
+        { href: "/privacy", label: "Privacybeleid" },
+        { href: "/contact", label: "Correctie doorgeven" }
+      ];
+  const footerLegalItems = isEnglish
+    ? [
         { href: "/en/about", label: "About" },
-        { href: "/en/contact", label: "Contact" },
         { href: "/en/independence", label: "Independence" },
         { href: "/en/privacy", label: "Privacy" },
         { href: "/en/cookies", label: "Cookies" }
       ]
     : [
-        ...navItems,
         { href: "/over-ons", label: "Over ons" },
-        { href: "/contact", label: "Contact" },
         { href: "/onafhankelijkheid", label: "Onafhankelijkheid" },
         { href: "/privacy", label: "Privacybeleid" },
         { href: "/cookies", label: "Cookiebeleid" }
@@ -85,7 +112,7 @@ export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>
 
   return (
     <>
-      <header className="site-header">
+      <header className="site-header site-header-home">
         <BrandLogo href={isEnglish ? "/en" : "/"} />
         <nav aria-label={isEnglish ? "Main navigation" : "Hoofdnavigatie"}>
           {navItems.map((item) => (
@@ -101,14 +128,53 @@ export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>
               EN
             </Link>
           </span>
+          <Link className="site-nav-cta" href={isEnglish ? "/en/shoe-finder" : "/keuzehulp"}>
+            {isEnglish ? "Start finder" : "Start keuzehulp"}
+          </Link>
         </nav>
       </header>
       {children}
-      <footer className="site-footer">
-        <BrandLogo href={isEnglish ? "/en" : "/"} />
-        <div className="footer-copy">
-          <nav aria-label={isEnglish ? "Footer navigation" : "Footer navigatie"}>
-            {footerItems.map((item) => (
+      <footer className="site-footer" aria-label={isEnglish ? "Footer" : "Voettekst"}>
+        <div className="footer-shell">
+          <div className="footer-link-group">
+            <strong>{isEnglish ? "Platform" : "Platform"}</strong>
+            <nav aria-label={isEnglish ? "Footer navigation" : "Footer navigatie"}>
+              {footerItems.map((item) => (
+                <Link href={item.href} key={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="footer-link-group">
+            <strong>{isEnglish ? "Trust" : "Vertrouwen"}</strong>
+            <nav aria-label={isEnglish ? "Trust links" : "Vertrouwenslinks"}>
+              {footerTrustItems.map((item) => (
+                <Link href={item.href} key={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <form action={isEnglish ? "/en/contact" : "/contact"} className="footer-signup" method="get">
+            <strong>{isEnglish ? "Updates" : "Updates"}</strong>
+            <p>{isEnglish ? "Get a note when new comparison data is available." : "Ontvang een seintje wanneer nieuwe vergelijkingsdata beschikbaar is."}</p>
+            <label htmlFor="footer-email">{isEnglish ? "Email address" : "E-mailadres"}</label>
+            <div>
+              <input id="footer-email" name="email" placeholder={isEnglish ? "Email address" : "E-mailadres"} type="email" />
+              <button type="submit">{isEnglish ? "Subscribe" : "Aanmelden"}</button>
+            </div>
+          </form>
+        </div>
+
+        <div className="footer-bottom">
+          <p>
+            © 2026 {companyInfo.platformName}. {isEnglish ? "Clearer running shoe decisions." : "Voor betere hardloopschoenkeuzes."}
+          </p>
+          <nav className="footer-legal-links" aria-label={isEnglish ? "Legal links" : "Juridische links"}>
+            {footerLegalItems.map((item) => (
               <Link href={item.href} key={item.href}>
                 {item.label}
               </Link>

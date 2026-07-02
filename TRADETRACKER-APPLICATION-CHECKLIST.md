@@ -11,6 +11,8 @@ Belangrijk: TradeTracker is geen gewone technische koppeling. Eerst moet de webs
 - Publieke catalogus met schoenen, productpagina's en vergelijkflow.
 - Keuzehulp met uitlegbare aanbevelingen.
 - Trustpagina's voor methodologie, onafhankelijkheid, over ons en contact.
+- Publisherbeschrijving en redactionele scheiding in `COMPLIANCE-READINESS.md`.
+- Retail fallback- en outreachcontract in `RETAIL-PARTNER-OUTREACH.md`.
 - Supabase catalogustabellen.
 - Supabase stagingtabellen voor feed-imports.
 - Demo staging-import voor feedrecords.
@@ -38,6 +40,8 @@ Belangrijk: TradeTracker is geen gewone technische koppeling. Eerst moet de webs
 6. Vraag goedkeuring aan voor relevante hardloopschoen-, sport- en retailerprogramma's.
 7. Vraag per goedgekeurde campagne om feedtoegang of download een kleine feedexport.
 8. Bewaar minimaal één voorbeeldbestand met echte kolomnamen voor de adapterbouw.
+
+Gebruik in de aanvraag geen claim dat Loopwijzer al is aangesloten bij TradeTracker, een retailer of campagne voordat die goedkeuring schriftelijk binnen is.
 
 ## Wat Je Aan TradeTracker Of Retailercampagnes Moet Vragen
 

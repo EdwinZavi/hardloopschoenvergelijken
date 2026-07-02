@@ -36,7 +36,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     ],
     faqs: [
       {
-        question: "What type of running shoe is best for beginners?",
+        question: "What type of running shoe often suits beginners?",
         answer: "Usually a comfortable daily trainer with enough cushioning and a predictable ride."
       },
       {
@@ -92,7 +92,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     title: "Compare stability running shoes",
     eyebrow: "More guidance while running",
     intro:
-      "Stability shoes add guidance during your stride. The best choice feels secure and comfortable without becoming heavy or overly corrective.",
+      "Stability shoes add guidance during your stride. A suitable option feels secure and comfortable without becoming heavy or overly corrective.",
     primaryCta: "Find shoes with more support",
     criteria: ["stable base", "comfort on longer runs", "not too heavy for daily use", "clear weight differences"],
     metaDescription: "Compare stability running shoes by support, comfort, cushioning and weight.",
@@ -106,7 +106,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
         text: "Support only helps if the shoe also feels good enough for regular training."
       },
       {
-        title: "Not a medical diagnosis",
+        title: "Not a substitute for specialist advice",
         text: "A stability shoe can improve running feel, but persistent pain should be checked by a specialist."
       }
     ],
@@ -206,7 +206,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     title: "Running shoes for a half marathon",
     eyebrow: "Longer distance",
     intro:
-      "For a half marathon you want a shoe that stays comfortable when fatigue builds. The best choice depends on pace, support needs and how much protection you want.",
+      "For a half marathon you want a shoe that stays comfortable when fatigue builds. The logical choice depends on pace, support needs and how much protection you want.",
     primaryCta: "Find my half-marathon shoe",
     criteria: ["comfort over distance", "stability when tired", "choice between easy and tempo", "fit over weight alone"],
     metaDescription: "Compare half-marathon running shoes for training, race day, comfort and support.",
@@ -264,7 +264,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     ],
     faqs: [
       {
-        question: "What shoe is best for 5K?",
+        question: "What type of shoe works well for 5K?",
         answer: "That depends on your goal. Beginners often do well in a daily trainer; faster runners may prefer a tempo shoe."
       },
       {
@@ -396,7 +396,7 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     title: "Best value running shoes",
     eyebrow: "Choose smarter",
     intro:
-      "The best value is not always the cheapest shoe. Look at versatility, durability, comfort and whether you can use the shoe for multiple training types.",
+      "Strong value is not always the lowest price. Look at versatility, durability, comfort and whether you can use the shoe for multiple training types.",
     primaryCta: "Find smart-value shoes",
     criteria: ["versatile use", "good comfort-price balance", "no unnecessary race tech", "logical for recreational runners"],
     metaDescription: "Compare running shoes with strong value for money across comfort, versatility, durability and price.",
@@ -417,10 +417,10 @@ const englishIntentPageCopy: Record<string, IntentPageCopy> = {
     faqs: [
       {
         question: "What is a good price for running shoes?",
-        answer: "It depends on your goal, but a reliable all-round shoe often delivers better value than the cheapest option."
+        answer: "It depends on your goal, but a reliable all-round shoe often delivers better value than the lowest-priced option."
       },
       {
-        question: "Which shoes have the best value?",
+        question: "Which shoes often deliver strong value?",
         answer: "Often versatile daily trainers without expensive race-day technology."
       },
       {

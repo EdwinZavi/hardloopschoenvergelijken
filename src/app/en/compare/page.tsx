@@ -47,7 +47,7 @@ function highlightForEnglish(label: string, shoe: EnrichedShoe, shoes: EnrichedS
   if (label === "Price from" && hasAnyPrice && shoe.priceFrom !== null && min((item) => item.priceFrom ?? Number.MAX_SAFE_INTEGER)) return "Lowest price";
   if (label === "Editorial score" && max((item) => item.editorialScore.overall)) return "Highest score";
   if (label === "Support" && max((item) => item.editorialScore.stability)) return "Most stable";
-  if (label === "Responsiveness" && max((item) => item.editorialScore.responsiveness)) return "Best tempo feel";
+  if (label === "Responsiveness" && max((item) => item.editorialScore.responsiveness)) return "Most direct";
   if (label === "Cushioning" && max((item) => item.editorialScore.cushioning)) return "Most cushioning";
   if (label === "Fit width" && (shoe.widthLabel === "wide" || shoe.fitProfile === "roomy")) return "Roomier";
   return undefined;
@@ -126,7 +126,7 @@ export default async function EnglishComparePage({ searchParams }: { searchParam
                 <ShoeVisual shoe={shoe} />
                 <p className="eyebrow">{shoe.brand}</p>
                 <h3>{shoe.fullName}</h3>
-                <p>{enLabels.shoeType[shoe.shoeType]} with {enLabels.level[shoe.cushioningLevel].toLowerCase()} cushioning.</p>
+                <p>{enLabels.shoeType[shoe.shoeType]} with {enLabels.level[shoe.cushioningLevel].toLowerCase()} cushioning and {enLabels.supportType[shoe.supportType].toLowerCase()}.</p>
                 <Link className="compare-link" href={`/en/compare?ids=${shoe.id}`}>
                   Select for comparison
                 </Link>

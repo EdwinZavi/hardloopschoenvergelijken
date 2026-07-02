@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${shoe.fullName} review | Hardloopschoenvergelijken.nl`,
-    description: `Compare ${shoe.fullName} by use case, cushioning, support, fit, editorial score and verified prices.`
+    title: `${shoe.fullName} comparison | Hardloopschoenvergelijken.nl`,
+    description: `Compare ${shoe.fullName} by use case, cushioning, support, fit, editorial score and available retailer information.`
   };
 }
 
@@ -137,13 +137,13 @@ export default async function EnglishShoeDetailPage({ params }: { params: Promis
         </article>
 
         <article className="panel">
-          <h2>Good choice if...</h2>
+          <h2>More logical if...</h2>
           <p>{matchExplanation(shoe)}</p>
         </article>
 
         <article className="panel">
           <h2>Check before buying</h2>
-          <p>This score is an editorial signal for comparison. It does not mean the shoe is the best choice for every runner.</p>
+          <p>This score is an editorial signal for comparison. It does not mean the shoe fits every runner or every training goal.</p>
           <Link href="/en/methodology">Read the methodology</Link>
         </article>
       </section>

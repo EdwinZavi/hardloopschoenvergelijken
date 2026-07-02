@@ -8,6 +8,7 @@ This folder contains the first seed dataset for the MVP.
 - `shoes.json`: core product records with editorial layer
 - `offers.json`: retailer offer records
 - `recommendation-rules.json`: explainable MVP recommendation rules, profile presets, scoring weights, trade-off rules, and trust rules
+- `retailer-offer-template.csv`: CSV template for the first manual retailer offer pilot
 
 ## Feed/API direction
 
@@ -26,6 +27,8 @@ Technical starting points:
 
 - `src/types/feed.ts`
 - `src/lib/feed-normalization.ts`
+- `scripts/import-retailer-offers.mjs`
+- `RETAILER-SHEET-IMPORT-RUNBOOK.md`
 - `BACKEND-FEED-ROADMAP.md`
 
 ## Why this matters

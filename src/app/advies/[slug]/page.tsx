@@ -42,6 +42,7 @@ export default async function IntentPage({ params }: IntentPageProps) {
   const isTrailPage = page.slug === "trail";
   const shoes = getEnrichedShoes().filter(page.filter).sort(page.sort).slice(0, 6);
   const compareIds = page.compareSeed.join(",");
+  const compareCountLabel = `${page.compareSeed.length} relevante opties`;
   const relatedPages = (seo?.relatedSlugs ?? [])
     .map((relatedSlug) => getIntentPage(relatedSlug))
     .filter((relatedPage): relatedPage is NonNullable<typeof relatedPage> => Boolean(relatedPage));
@@ -109,7 +110,7 @@ export default async function IntentPage({ params }: IntentPageProps) {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Keuzeadvies</p>
-              <h2>Waar moet je op letten?</h2>
+              <h2>Waar baseer je de keuze op?</h2>
             </div>
           </div>
           <div className="grid landing-guidance-grid">
@@ -123,14 +124,56 @@ export default async function IntentPage({ params }: IntentPageProps) {
         </section>
       ) : null}
 
+      {page.decisionFrame ? (
+        <section>
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Besliskader</p>
+              <h2>Controleer dit voordat je kiest</h2>
+            </div>
+          </div>
+          <div className="grid landing-guidance-grid">
+            <article className="panel landing-guidance-card">
+              <h3>Kies vooral op</h3>
+              <p>{page.decisionFrame.chooseBy}</p>
+            </article>
+            <article className="panel landing-guidance-card">
+              <h3>Let minder op</h3>
+              <p>{page.decisionFrame.lessBy}</p>
+            </article>
+            <article className="panel landing-guidance-card">
+              <h3>Veelgemaakte fout</h3>
+              <p>{page.decisionFrame.commonMistake}</p>
+            </article>
+            <article className="panel landing-guidance-card">
+              <h3>Wanneer niet deze route?</h3>
+              <p>{page.decisionFrame.whenNot}</p>
+            </article>
+          </div>
+        </section>
+      ) : null}
+
+      {page.dataNotice ? (
+        <section className="method-strip" aria-label="Datastatus voor deze adviesroute">
+          <div>
+            <p className="eyebrow">Datastatus</p>
+            <h2>{page.dataNotice.label}</h2>
+            <p>{page.dataNotice.text}</p>
+          </div>
+          <Link className="button secondary" href="/methodologie">
+            Bekijk methode
+          </Link>
+        </section>
+      ) : null}
+
       <section className="method-strip">
         <div>
           <p className="eyebrow">Makkelijk vergelijken</p>
-          <h2>Start met drie logische opties</h2>
-          <p>Deze selectie is een goed beginpunt. Vergelijk steun, demping, pasvorm, snelheid en prijs voordat je een keuze maakt.</p>
+          <h2>Start met {compareCountLabel}</h2>
+          <p>Gebruik deze selectie als startpunt. Vergelijk steun, demping, pasvorm, snelheid en prijs voordat je kiest.</p>
         </div>
         <Link className="button secondary" href={`/vergelijken?ids=${compareIds}`}>
-          Vergelijk deze drie schoenen
+          Vergelijk deze set
         </Link>
       </section>
 
@@ -138,7 +181,7 @@ export default async function IntentPage({ params }: IntentPageProps) {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Aanbevolen schoenen</p>
-            <h2>Hardloopschoenen die hierbij passen</h2>
+            <h2>Hardloopschoenen die bij deze vraag passen</h2>
           </div>
           <Link href={page.filterHref}>Bekijk alle resultaten</Link>
         </div>
@@ -154,7 +197,7 @@ export default async function IntentPage({ params }: IntentPageProps) {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Veelgestelde vragen</p>
-              <h2>Twijfels die vaak terugkomen</h2>
+              <h2>Vragen die vaak terugkomen</h2>
             </div>
           </div>
           <div className="faq-list">

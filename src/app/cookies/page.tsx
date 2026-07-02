@@ -4,7 +4,10 @@ import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: `Cookiebeleid | ${companyInfo.platformName}`,
-  description: `Lees welke cookies ${companyInfo.platformName} gebruikt, waarvoor ze dienen en wanneer toestemming nodig is.`
+  description: `Lees welke cookies ${companyInfo.platformName} gebruikt, waarvoor ze dienen en wanneer toestemming nodig is.`,
+  alternates: {
+    canonical: "/cookies"
+  }
 };
 
 const cookieRows = [
@@ -19,7 +22,7 @@ export default function CookiesPage() {
       <p className="eyebrow">Cookiebeleid</p>
       <h1>Welke cookies gebruikt {companyInfo.platformName}?</h1>
       <p className="lead">
-        Cookies zijn kleine bestanden die een website nodig kan hebben om goed te werken, voorkeuren te onthouden of gebruik te meten. {companyInfo.platformName} gebruikt nu alleen noodzakelijke cookies voor de beheeromgeving.
+        Cookies zijn kleine bestanden die een website nodig kan hebben om te werken, voorkeuren te onthouden of gebruik te meten. {companyInfo.platformName} gebruikt nu alleen noodzakelijke cookies voor de beheeromgeving.
       </p>
 
       <section className="policy-summary">

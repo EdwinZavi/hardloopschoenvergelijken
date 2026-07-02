@@ -5,7 +5,10 @@ import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: `Over ${companyInfo.platformName} | Hardloopschoenen vergelijken met uitleg`,
-  description: `Lees waarom ${companyInfo.platformName} is gebouwd en hoe we hardloopschoenen vergelijken op productkenmerken, persoonlijke match en prijs.`
+  description: `Lees waarom ${companyInfo.platformName} bestaat en hoe we hardloopschoenen vergelijken op productkenmerken, persoonlijke match en prijs.`,
+  alternates: {
+    canonical: "/over-ons"
+  }
 };
 
 export default function AboutPage() {
@@ -16,7 +19,7 @@ export default function AboutPage() {
           <p className="eyebrow">Over {companyInfo.platformName}</p>
           <h1>Een rustigere manier om hardloopschoenen te kiezen.</h1>
           <p className="lead">
-            {companyInfo.platformName} helpt Nederlandse hardlopers beter kiezen tussen hardloopschoenen. Met {companyInfo.tagline} combineren we gestructureerde productinformatie, keuzehulp, redactionele beoordeling en prijsvergelijking.
+            {companyInfo.platformName} is er voor Nederlandse hardlopers die willen begrijpen welke schoen bij hun training past. Met {companyInfo.tagline} combineren we productdata, keuzehulp, redactionele beoordeling en prijsvergelijking.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-wide">
@@ -37,7 +40,7 @@ export default function AboutPage() {
         </article>
         <article>
           <strong>Uitleg boven hype</strong>
-          <span>Een schoen is pas interessant als je begrijpt voor wie hij logisch is en waar je op moet letten.</span>
+          <span>Een schoen is pas interessant als je begrijpt voor wie hij past en waar je op moet letten.</span>
         </article>
         <article>
           <strong>Nederlandse lopers</strong>
@@ -48,7 +51,7 @@ export default function AboutPage() {
       <section className="policy-content standalone">
         <div className="policy-callout">
           <strong>Transparant in opbouw</strong>
-          <span>{companyInfo.platformName} kiest voor gecontroleerde productdata, duidelijke prijsinformatie en onderbouwing per schoen. We tonen liever duidelijk wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
+          <span>{companyInfo.platformName} kiest voor gecontroleerde productdata, herkenbare prijsinformatie en onderbouwing per schoen. We tonen liever wat we zeker weten dan dat we schijnzekerheid verkopen.</span>
         </div>
 
         <PolicySection title={`Waarom ${companyInfo.platformName} bestaat`}>

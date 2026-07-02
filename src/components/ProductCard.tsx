@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { formatPrice, labels } from "@/lib/labels";
+import Image from "next/image";
+import { formatPrice, labels, scoreStatusLabels } from "@/lib/labels";
 import { ShoeVisual } from "@/components/ShoeVisual";
 import type { EnrichedShoe } from "@/types/product";
 
@@ -13,7 +14,13 @@ type ProductCardProps = {
 export function ProductCard({ compareDisabled, compareHref, compareLabel, shoe }: ProductCardProps) {
   return (
     <article className="product-card">
-      <ShoeVisual shoe={shoe} />
+      <span className="product-card-media">
+        {shoe.imageUrl ? (
+          <Image alt="" fill sizes="(max-width: 820px) 100vw, 280px" src={shoe.imageUrl} />
+        ) : (
+          <ShoeVisual shoe={shoe} />
+        )}
+      </span>
       <div>
         <p className="eyebrow">{shoe.brand}</p>
         <h3>{shoe.fullName}</h3>
@@ -43,7 +50,10 @@ export function ProductCard({ compareDisabled, compareHref, compareLabel, shoe }
       </dl>
       <div className="card-footer">
         <strong>Redactionele score {shoe.editorialScore.overall.toFixed(1)}</strong>
-        <span>{shoe.priceFrom === null ? formatPrice(shoe.priceFrom) : `Vanaf ${formatPrice(shoe.priceFrom)}`}</span>
+        <span className="score-status">{scoreStatusLabels[shoe.scoreStatus]}</span>
+        <span className={shoe.priceFrom === null ? "price-state price-state-empty" : "price-state"}>
+          {shoe.priceFrom === null ? formatPrice(shoe.priceFrom) : `Vanaf ${formatPrice(shoe.priceFrom)}`}
+        </span>
         <Link href={`/schoenen/${shoe.slug}`}>Bekijk schoen</Link>
       </div>
       {compareHref && compareLabel && !compareDisabled ? <Link className="compare-link" href={compareHref}>{compareLabel}</Link> : null}

@@ -2,12 +2,7 @@ import type { MetadataRoute } from "next";
 import { getEnrichedShoes } from "@/lib/data";
 import { intentPages } from "@/lib/intent-pages";
 import { englishIntentPages } from "@/lib/intent-pages-en";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hardloopschoenvergelijken.nl";
-
-function absoluteUrl(path: string) {
-  return new URL(path, siteUrl).toString();
-}
+import { absoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

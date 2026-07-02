@@ -110,7 +110,7 @@ export const englishPages = {
     eyebrow: "Privacy",
     title: "Privacy policy",
     intro:
-      "We collect as little personal data as possible. The current MVP works without a personal account and uses URL-driven filters, comparisons and shoe finder answers.",
+      "We collect as little personal data as possible. The current public flow works without a personal account and uses URL-driven filters, comparisons and shoe finder answers.",
     bullets: [
       "Shoe Finder answers are used to show recommendations in the current flow.",
       "We do not use these answers to make medical diagnoses.",
@@ -121,7 +121,7 @@ export const englishPages = {
     eyebrow: "Cookies",
     title: "Cookie policy",
     intro:
-      "The MVP should work without unnecessary tracking. If analytics or marketing cookies are introduced later, they need clear consent and explanation.",
+      "The site should work without unnecessary tracking. If analytics or marketing cookies are introduced later, they need clear consent and explanation.",
     bullets: [
       "Essential technical cookies may be used for the site to function.",
       "Marketing or tracking cookies require a clear choice.",

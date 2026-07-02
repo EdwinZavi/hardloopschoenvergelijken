@@ -1,19 +1,19 @@
 const items = [
   {
-    title: "Onafhankelijke score",
-    text: "Schoenkwaliteit staat los van winkels en prijzen."
+    title: "Score los van winkels",
+    text: "Productkwaliteit wordt apart beoordeeld van prijs en partnerlinks."
   },
   {
-    title: "Prijs apart",
-    text: "Je ziet aanbiedingen zonder dat ze het advies bepalen."
+    title: "Prijs als koopinformatie",
+    text: "Aanbiedingen zijn koopinformatie, geen reden om een schoen hoger te zetten."
   },
   {
     title: "Nadelen zichtbaar",
-    text: "We noemen ook wanneer een schoen minder logisch is."
+    text: "Je ziet ook wanneer een schoen niet goed aansluit op je situatie."
   },
   {
-    title: "Uitleg per advies",
-    text: "Elke aanbeveling laat zien waarom hij bij jou past."
+    title: "Uitleg per aanbeveling",
+    text: "Elke aanbeveling koppelt je antwoorden aan concrete schoenkenmerken."
   }
 ];
 

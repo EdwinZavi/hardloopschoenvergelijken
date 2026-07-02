@@ -5,7 +5,10 @@ import { companyInfo } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: `Onafhankelijkheid en inkomsten | ${companyInfo.platformName}`,
-  description: `Lees hoe ${companyInfo.platformName} redactionele beoordeling, aanbevelingen, winkelprijzen en mogelijke inkomsten gescheiden houdt.`
+  description: `Lees hoe ${companyInfo.platformName} redactionele beoordeling, aanbevelingen, winkelprijzen en mogelijke inkomsten van elkaar scheidt.`,
+  alternates: {
+    canonical: "/onafhankelijkheid"
+  }
 };
 
 export default function IndependencePage() {
@@ -16,7 +19,7 @@ export default function IndependencePage() {
           <p className="eyebrow">Onafhankelijkheid en inkomsten</p>
           <h1>Hoe we vertrouwen en commercie gescheiden houden</h1>
           <p className="lead">
-            {companyInfo.platformName} kan inkomsten ontvangen via winkelverwijzingen of samenwerkingen. Dat mag niet bepalen welke schoen we als passend uitleggen. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen.
+            {companyInfo.platformName} kan inkomsten ontvangen via winkelverwijzingen of samenwerkingen. Dat mag niet bepalen welke schoen als passend wordt uitgelegd. Productkwaliteit, persoonlijke match en winkelinformatie blijven aparte signalen.
           </p>
         </div>
         <div className="page-hero-visual page-hero-visual-product">
@@ -41,7 +44,7 @@ export default function IndependencePage() {
         </article>
         <article>
           <strong>Prijs is een aparte laag</strong>
-          <span>Retailerprijzen helpen bij kopen, maar zijn niet hetzelfde als productkwaliteit.</span>
+          <span>Retailerprijzen zijn koopinformatie, geen bewijs dat een schoen beter bij je past.</span>
         </article>
       </section>
 
@@ -55,7 +58,7 @@ export default function IndependencePage() {
           </p>
         </PolicySection>
 
-        <PolicySection title="Wat bezoekers altijd moeten kunnen herkennen">
+        <PolicySection title="Wat bezoekers moeten kunnen herkennen">
           <ul>
             <li>Of een link naar een winkel een kooplink of partnerlink is.</li>
             <li>Of een positie redactioneel, persoonlijk aanbevolen of commercieel ingekocht is.</li>
@@ -75,23 +78,42 @@ export default function IndependencePage() {
 
         <PolicySection title="Wat we wel commercieel mogen tonen">
           <p>
-            We mogen prijzen, beschikbaarheid, aanbieders en kooplinks tonen om je aankoopbeslissing praktischer te maken. Die informatie komt van winkels, partners of handmatige invoer en kan veranderen.
+            We mogen prijzen, beschikbaarheid, aanbieders en kooplinks tonen om je aankoopbeslissing praktischer te maken. Die informatie komt van winkels, partners of handmatige invoer en kan wijzigen.
           </p>
           <p>
-            Daarom tonen we winkelinformatie apart van onze beoordeling. Een goedkope schoen is niet automatisch de beste schoen voor jou, en een winkelvergoeding maakt een schoen niet beter beoordeeld.
+            Daarom tonen we winkelinformatie apart van onze beoordeling. Een lage prijs maakt een schoen niet automatisch passend voor jou, en een winkelvergoeding maakt een schoen niet beter beoordeeld.
+          </p>
+        </PolicySection>
+
+        <PolicySection title="Waar winkelinformatie vandaan kan komen">
+          <p>
+            Prijs- en beschikbaarheidsdata kan later komen uit handmatig gecontroleerde invoer, directe retailerdata, een affiliate- of feednetwerk of TradeTracker na goedkeuring. Een bron wordt pas publiek gebruikt wanneer de productmatch, prijs, URL, bron en controledatum kloppen.
+          </p>
+          <p>
+            Zolang er geen gecontroleerde prijs of partnerlink is, tonen we liever dat prijsdata nog ontbreekt dan dat we een winkelrelatie, korting of voorraadstatus suggereren.
           </p>
         </PolicySection>
 
         <PolicySection title="Welke regels gelden voor kooplinks">
           <p>
-            Kooplinks en partnerlinks mogen bezoekers helpen om een schoen bij een winkel te bekijken, maar ze mogen geen redactioneel advies worden. Daarom gelden vaste regels voordat winkelinformatie prominent wordt getoond.
+            Kooplinks en partnerlinks mogen je naar een winkel sturen, maar ze mogen geen redactioneel advies worden. Daarom gelden vaste regels voordat winkelinformatie prominent wordt getoond.
           </p>
           <ul>
             <li>Partnerlinks moeten herkenbaar blijven wanneer ze worden gebruikt.</li>
             <li>Prijzen, voorraad en maatbeschikbaarheid moeten apart staan van de redactionele beoordeling.</li>
             <li>Gesponsorde posities of advertenties moeten duidelijk als commercieel herkenbaar zijn.</li>
             <li>Correcties van merken of retailers worden inhoudelijk beoordeeld en verhogen niet automatisch een score.</li>
+            <li>We gebruiken geen claims als laagste prijs, officiële partner of getest door experts zonder passende onderbouwing en toestemming.</li>
           </ul>
+        </PolicySection>
+
+        <PolicySection title="Voor merken en retailers">
+          <p>
+            Merken en retailers mogen fouten melden of gecontroleerde feedinformatie aanbieden via de <Link href="/contact">contactpagina</Link>. Die data is alleen bruikbaar wanneer de bron controleerbaar is en niet wordt gebruikt om advies te kopen.
+          </p>
+          <p>
+            Een commerciële relatie kan dus leiden tot betere winkelinformatie, maar niet tot een hogere score, een positie als persoonlijke aanbeveling of een redactionele claim die niet inhoudelijk klopt.
+          </p>
         </PolicySection>
 
         <PolicySection title="Meer over vertrouwen">

@@ -1,8 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ShoeVisual } from "@/components/ShoeVisual";
+import { companyInfo } from "@/lib/company";
 import { getEnrichedShoes, getPublicOffersForShoe } from "@/lib/data";
-import { formatPrice, labels } from "@/lib/labels";
+import { formatPrice, labels, scoreStatusDescriptions, scoreStatusLabels } from "@/lib/labels";
 import type { EnrichedShoe } from "@/types/product";
 
 type ProductPageProps = {
@@ -11,6 +14,21 @@ type ProductPageProps = {
 
 export function generateStaticParams() {
   return getEnrichedShoes().map((shoe) => ({ slug: shoe.slug }));
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const shoe = getEnrichedShoes().find((item) => item.slug === slug);
+
+  if (!shoe) return {};
+
+  return {
+    title: `${shoe.fullName} vergelijken | ${companyInfo.platformName}`,
+    description: `${shoe.fullName}: bekijk voor wie deze hardloopschoen past, waar je op moet letten en welke specs zoals demping, steun, pasvorm en prijs meetellen.`,
+    alternates: {
+      canonical: `/schoenen/${shoe.slug}`
+    }
+  };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -54,26 +72,34 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </div>
         <aside className="product-side-panel">
-          <ShoeVisual shoe={shoe} size="hero" />
+          <span className="product-hero-media">
+            {shoe.imageUrl ? (
+              <Image alt={`${shoe.fullName} productbeeld`} fill priority sizes="(max-width: 820px) 100vw, 420px" src={shoe.imageUrl} />
+            ) : (
+              <ShoeVisual shoe={shoe} size="hero" />
+            )}
+          </span>
           <div className="score-panel">
             <span>Redactionele score</span>
             <strong>{shoe.editorialScore.overall.toFixed(1)}</strong>
+            <em>{scoreStatusLabels[shoe.scoreStatus]}</em>
             <p>Deze score gaat over de schoen zelf. Winkelprijzen, voorraad en partnerlinks tellen niet mee in de beoordeling.</p>
+            <p>{scoreStatusDescriptions[shoe.scoreStatus]}</p>
           </div>
         </aside>
       </section>
 
       <section className="grid">
         <article className="panel">
-          <h2>Goede keuze als...</h2>
+          <h2>Kies deze als...</h2>
           <p>{shoe.editorialVerdict.bestFor}</p>
         </article>
         <article className="panel">
-          <h2>Minder logisch als...</h2>
+          <h2>Kijk verder als...</h2>
           <p>{shoe.editorialVerdict.lessSuitableFor}</p>
         </article>
         <article className="panel">
-          <h2>Let vooral op...</h2>
+          <h2>Controleer dit...</h2>
           <p>
             {labels.supportType[shoe.supportType]} met {labels.level[shoe.cushioningLevel].toLowerCase()} demping en een {labels.level[shoe.responsivenessLevel].toLowerCase()} gevoel bij tempo.
           </p>
@@ -85,13 +111,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Besliskader</p>
-            <h2>Waarom deze schoen wel/niet kiezen</h2>
-            <p>Gebruik dit als snelle controle voordat je naar prijzen kijkt: past het loopdoel, de steun en de pasvorm bij jouw situatie?</p>
+            <h2>Past deze schoen bij jouw training?</h2>
+            <p>Controleer eerst loopdoel, steun en pasvorm. Kijk daarna pas naar prijs of aanbieding.</p>
           </div>
         </div>
         <div className="product-choice-grid">
           <article className="product-choice-panel product-choice-panel-positive">
-            <h3>Wel kiezen als</h3>
+            <h3>Past wanneer</h3>
             <ul>
               {chooseReasons.map((reason) => (
                 <li key={reason}>{reason}</li>
@@ -99,7 +125,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </ul>
           </article>
           <article className="product-choice-panel product-choice-panel-caution">
-            <h3>Minder passend als</h3>
+            <h3>Wees voorzichtig als</h3>
             <ul>
               {cautionReasons.map((reason) => (
                 <li key={reason}>{reason}</li>
@@ -113,7 +139,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Beoordeling</p>
-            <h2>Waar scoort deze schoen op?</h2>
+            <h2>Waar beoordelen we deze schoen op?</h2>
           </div>
         </div>
         <div className="score-breakdown">
@@ -123,7 +149,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <ScoreBar label="Tempo-gevoel" value={shoe.editorialScore.responsiveness} />
           <ScoreBar label="Grip" value={shoe.editorialScore.grip} />
           <ScoreBar label="Veelzijdigheid" value={shoe.editorialScore.versatility} />
-          <ScoreBar label="Waarde" value={shoe.editorialScore.valueForMoney} />
+          <ScoreBar label="Prijs-kwaliteit" value={shoe.editorialScore.valueForMoney} />
         </div>
       </section>
 
@@ -179,13 +205,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div>
             <p className="eyebrow">Prijs vergelijken</p>
             <h2>Waar kun je deze schoen kopen?</h2>
-            <p>Prijsinformatie staat bewust los van ons productadvies. Een winkel kan ons via een partnerlink vergoeden, maar dat verandert de redactionele score, pluspunten of waarschuwingen niet.</p>
+            <p>Prijsinformatie staat los van ons productadvies. Een winkel kan ons via een partnerlink vergoeden, maar dat verandert de redactionele score, pluspunten of waarschuwingen niet.</p>
           </div>
         </div>
         <div className="product-price-disclosure">
           <strong>Redactioneel eerst, commercie apart.</strong>
           <p>
-            We beoordelen de schoen op eigenschappen zoals comfort, steun, pasvorm, grip en waarde. Daarna tonen we pas gecontroleerde winkeloffers, zodat een goedkope of affiliate-aangedreven aanbieding geen advies wordt.
+            We beoordelen de schoen op comfort, steun, pasvorm, grip en waarde. Daarna tonen we gecontroleerde winkeloffers, zodat een goedkope of affiliate-gedreven aanbieding geen advies wordt.
           </p>
           <p>
             Prijzen, voorraad, verzendkosten, retourvoorwaarden en maten kunnen bij de winkel wijzigen. Controleer die informatie altijd bij de retailer voordat je bestelt.
@@ -209,7 +235,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="empty-state">
             <h2>Prijsvergelijking in voorbereiding</h2>
             <p>
-              We tonen pas winkelprijzen wanneer aanbiedingen gecontroleerd zijn of via een betrouwbare feed binnenkomen. Zo voorkomen we dat onzekere prijsinformatie als koopadvies wordt gebruikt.
+              We tonen winkelprijzen pas wanneer aanbiedingen gecontroleerd zijn of via een betrouwbare feed binnenkomen. Onzekere prijsinformatie gebruiken we niet als koopadvies.
             </p>
           </div>
         )}
@@ -220,7 +246,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div>
             <p className="eyebrow">Ook bekijken</p>
             <h2>Vergelijkbare hardloopschoenen</h2>
-            <p>Alternatieven zijn gekozen op overlap in type, steun of demping, niet op winkelvergoeding.</p>
+            <p>Deze alternatieven overlappen in type, steun of demping. Winkelvergoeding speelt hier geen rol.</p>
           </div>
           {alternatives.length ? <Link href={`/vergelijken?ids=${[shoe.id, ...alternatives.slice(0, 2).map((item) => item.shoe.id)].join(",")}`}>Vergelijk met alternatieven</Link> : null}
         </div>
@@ -278,7 +304,7 @@ function getCautionReasons(shoe: EnrichedShoe) {
   if (shoe.widthLabel === "narrow" || shoe.fitProfile === "snug") {
     reasons.push("Je hebt brede voeten of wilt veel teenruimte; controleer de maatvoering extra kritisch.");
   } else if (shoe.supportType === "neutral") {
-    reasons.push("Je hebt duidelijke stabiliteitsbehoefte of blessuregevoeligheid en zoekt actieve ondersteuning.");
+    reasons.push("Je wilt merkbaar meer stabiliteit of je bent gevoelig voor pijntjes; controleer dan extra of een neutrale schoen genoeg begeleiding geeft.");
   } else {
     reasons.push("Je loopt vooral korte, snelle trainingen en gewicht belangrijker vindt dan bescherming.");
   }
@@ -300,7 +326,7 @@ function getAlternativeReason(current: EnrichedShoe, alternative: EnrichedShoe) 
   }
 
   if (alternative.editorialScore.valueForMoney > current.editorialScore.valueForMoney) {
-    return "Logisch om mee te nemen als prijs-kwaliteit zwaarder weegt in je keuze.";
+    return "Neem mee als prijs-kwaliteit zwaarder weegt in je keuze.";
   }
 
   return `Ligt dicht bij deze schoen qua ${labels.shoeType[alternative.shoeType].toLowerCase()} en gebruiksdoel.`;

@@ -1,32 +1,32 @@
 {
   "schemaVersion": "0.1.0",
-  "methodologyVersion": "mvp-explainable-rules-2026-04",
+  "methodologyVersion": "explainable-rules-2026-05-aud-005",
   "language": "nl",
   "purpose": "Eerste uitlegbare aanbevelingslogica voor de keuzehulp. De regels vertalen een lopersprofiel naar een matchscore, redenen en trade-offs zonder productkwaliteit, gebruikersreview en retailerprijs door elkaar te halen.",
   "inputs": {
     "experienceLevel": {
       "label": "Loopervaring",
-      "values": ["beginner", "recreational", "experienced"]
+      "values": ["not_sure", "beginner", "recreational", "experienced"]
     },
     "runningGoal": {
       "label": "Loopdoel",
-      "values": ["start_running", "general_fitness", "faster_5k_10k", "half_marathon_marathon", "trail_running"]
+      "values": ["not_sure", "start_running", "general_fitness", "faster_5k_10k", "half_marathon_marathon", "trail_running"]
     },
     "targetDistance": {
       "label": "Afstand",
-      "values": ["5k", "10k", "half_marathon", "marathon", "trail"]
+      "values": ["not_sure", "5k", "10k", "half_marathon", "marathon", "trail"]
     },
     "weeklyFrequency": {
       "label": "Aantal trainingen per week",
-      "values": ["1_2", "3_4", "5_plus"]
+      "values": ["not_sure", "1_2", "3_4", "5_plus"]
     },
     "preferredSurface": {
       "label": "Ondergrond",
-      "values": ["road", "trail", "mixed"]
+      "values": ["not_sure", "road", "trail", "mixed"]
     },
     "preferredFeel": {
       "label": "Gewenst loopgevoel",
-      "values": ["soft", "balanced", "responsive"]
+      "values": ["not_sure", "soft", "balanced", "responsive"]
     },
     "supportNeed": {
       "label": "Gewenste ondersteuning",
@@ -34,7 +34,7 @@
     },
     "injurySensitivity": {
       "label": "Blessuregevoeligheid",
-      "values": ["low", "medium", "high"]
+      "values": ["not_sure", "low", "medium", "high"]
     },
     "fitPreference": {
       "label": "Pasvormvoorkeur",
@@ -46,6 +46,11 @@
       "currency": "EUR"
     }
   },
+  "defaultHandling": {
+    "not_sure": "Onbekende antwoorden blijven zichtbaar in de resultaten. Ze geven een voorzichtige bonus aan veelzijdige, voorspelbare schoenen en worden niet gepresenteerd als harde informatie over de loper.",
+    "budget": "Geen budgetgrens betekent dat prijs niet als harde beperking wordt gebruikt. Budget mag pasvorm, steun, ondergrond en gebruiksdoel niet overrulen.",
+    "injurySensitivity": "Blessuregevoeligheid is alleen een voorzichtigheidssignaal voor comfort en stabiliteit. Dit is geen diagnose, behandeling of blessurepreventieclaim."
+  },
   "scoreModel": {
     "maxBaseScore": 100,
     "minimumUsefulScore": 50,
@@ -53,17 +58,17 @@
     "scoreBands": [
       {
         "min": 82,
-        "label": "Zeer sterke match",
+        "label": "Zeer logische match",
         "explanation": "Past duidelijk bij de belangrijkste antwoorden en heeft weinig harde tegenargumenten."
       },
       {
         "min": 68,
-        "label": "Goede match",
+        "label": "Logische match",
         "explanation": "Past bij de hoofdsituatie, maar heeft een of twee duidelijke trade-offs."
       },
       {
         "min": 50,
-        "label": "Mogelijke match",
+        "label": "Controleerbare match",
         "explanation": "Kan werken, maar vraagt extra controle op pasvorm, ondersteuning of gebruiksdoel."
       }
     ],
@@ -89,11 +94,29 @@
   },
   "matchingRules": [
     {
+      "id": "goal-not-sure",
+      "dimension": "goalAndUseCaseMatch",
+      "when": { "runningGoal": "not_sure" },
+      "prefer": {
+        "shoeType": ["daily_trainer", "stability"],
+        "primaryUseCase": ["daily_trainer"]
+      },
+      "avoid": { "shoeType": ["race"] },
+      "reason": "Als het doel nog niet vaststaat, is een voorspelbare trainingsschoen logischer dan een uitgesproken wedstrijdschoen."
+    },
+    {
       "id": "surface-road",
       "dimension": "surfaceMatch",
       "when": { "preferredSurface": "road" },
       "prefer": { "surfaceType": ["road", "mixed"] },
       "reason": "Je loopt vooral op de weg, daarom krijgen weg- en mixed schoenen voorrang."
+    },
+    {
+      "id": "surface-not-sure",
+      "dimension": "surfaceMatch",
+      "when": { "preferredSurface": "not_sure" },
+      "prefer": { "surfaceType": ["road", "mixed"] },
+      "reason": "Als de ondergrond nog niet zeker is, houden we de keuze breed en vermijden we te specifieke trailkeuzes als standaard."
     },
     {
       "id": "surface-trail",
@@ -144,6 +167,16 @@
       "reason": "Trailgebruik vraagt om schoenen die gebouwd zijn voor grip, ondergrondwissels en bescherming."
     },
     {
+      "id": "distance-not-sure",
+      "dimension": "distanceMatch",
+      "when": { "targetDistance": "not_sure" },
+      "prefer": {
+        "distanceBucket": ["all_round", "10k_marathon"],
+        "shoeType": ["daily_trainer", "stability"]
+      },
+      "reason": "Als de afstand nog niet zeker is, krijgen allround trainingsschoenen voorrang."
+    },
+    {
       "id": "distance-short",
       "dimension": "distanceMatch",
       "when": { "targetDistance": ["5k", "10k"] },
@@ -184,6 +217,16 @@
       "prefer": { "supportType": ["stability", "light_stability"] },
       "avoid": { "supportType": ["neutral"] },
       "reason": "Je zoekt duidelijke ondersteuning, daarom wegen stabiliteitsschoenen zwaarder."
+    },
+    {
+      "id": "feel-not-sure",
+      "dimension": "feelMatch",
+      "when": { "preferredFeel": "not_sure" },
+      "prefer": {
+        "cushioningLevel": ["medium", "high"],
+        "responsivenessLevel": ["medium"]
+      },
+      "reason": "Als het gewenste gevoel onbekend is, vermijden we extreme keuzes en geven we neutrale trainingsschoenen meer gewicht."
     },
     {
       "id": "feel-soft",
@@ -240,6 +283,20 @@
       "reason": "Bij een smallere pasvormvoorkeur krijgen compactere modellen meer gewicht."
     },
     {
+      "id": "experience-not-sure",
+      "dimension": "experienceSafety",
+      "when": { "experienceLevel": "not_sure" },
+      "prefer": {
+        "shoeType": ["daily_trainer", "stability"],
+        "responsivenessLevel": ["low", "medium"]
+      },
+      "avoid": {
+        "hasCarbonPlate": true,
+        "shoeType": ["race"]
+      },
+      "reason": "Als de loopervaring onbekend is, wegen voorspelbaarheid en rustige inzetbaarheid zwaarder dan maximale snelheid."
+    },
+    {
       "id": "experience-beginner",
       "dimension": "experienceSafety",
       "when": { "experienceLevel": "beginner" },
@@ -262,7 +319,7 @@
         "stabilityScoreMin": 7.5,
         "cushioningLevel": ["medium", "high"]
       },
-      "reason": "Bij blessuregevoeligheid wegen comfort, demping en stabiliteit extra zwaar."
+      "reason": "Als je blessuregevoelig bent of snel pijntjes voelt, wegen comfort, demping en stabiliteit extra zwaar. Dit blijft geen medisch advies."
     },
     {
       "id": "budget-conscious",
@@ -372,12 +429,12 @@
     }
   ],
   "explanationTemplates": {
-    "primaryReason": "Past goed omdat {matchedFactors}.",
-    "secondaryReason": "Daarnaast sluit de schoen aan op {supportingFactors}.",
+    "primaryReason": "Sluit aan omdat {matchedFactors}.",
+    "secondaryReason": "Ook relevant: de schoen sluit aan op {supportingFactors}.",
     "tradeoff": "Let op: {tradeoffFactors}.",
     "budgetTradeoff": "Deze schoen past inhoudelijk goed, maar zit boven je opgegeven budget.",
     "fitTradeoff": "Controleer de pasvorm extra goed, omdat dit model mogelijk minder aansluit bij je voetbreedte.",
-    "confidenceNote": "Dit is een regelgebaseerde MVP-aanbeveling. De uitleg is bewust zichtbaar zodat je de match kunt controleren."
+    "confidenceNote": "Dit is een regelgebaseerde aanbeveling. De uitleg blijft zichtbaar zodat je de match kunt controleren."
   },
   "tradeoffRules": [
     {
@@ -414,11 +471,12 @@
       "text": "een trailschoen is minder logisch voor dagelijks asfalt"
     }
   ],
-  "trustRules": [
-    "Prijs mag meewegen, maar een goedkope schoen wint niet automatisch.",
-    "Onze algemene beoordeling en jouw persoonlijke match blijven apart zichtbaar.",
-    "Elke aanbeveling moet uitleggen waarom de schoen past en waar je op moet letten.",
-    "Als er weinig passende schoenen zijn, leggen we dat eerlijk uit.",
-    "Carbon wedstrijdschoenen raden we niet standaard aan voor beginners."
-  ]
+    "trustRules": [
+      "Prijs mag meewegen, maar een goedkope schoen wint niet automatisch.",
+      "Onze algemene beoordeling en jouw persoonlijke match blijven apart zichtbaar.",
+      "Elke aanbeveling moet uitleggen waarom de schoen past en waar je op moet letten.",
+      "Als er weinig passende schoenen zijn, leggen we dat eerlijk uit.",
+      "Carbon wedstrijdschoenen raden we niet standaard aan voor beginners of onbekende profielen.",
+      "Onbekende antwoorden blijven zichtbaar en mogen niet klinken als zekere profielinformatie."
+    ]
 }
