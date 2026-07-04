@@ -17,7 +17,7 @@ export default function AboutPage() {
       <section className="page-hero-with-visual page-hero-with-visual-compact image-hero image-hero-surfaces">
         <div>
           <p className="eyebrow">Over {companyInfo.platformName}</p>
-          <h1>Een rustigere manier om hardloopschoenen te kiezen.</h1>
+          <h1>Rustiger hardloopschoenen kiezen.</h1>
           <p className="lead">
             {companyInfo.platformName} is er voor Nederlandse hardlopers die willen begrijpen welke schoen bij hun training past. Met {companyInfo.tagline} combineren we productdata, keuzehulp, redactionele beoordeling en prijsvergelijking.
           </p>
