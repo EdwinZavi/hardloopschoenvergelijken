@@ -4,8 +4,9 @@ import { intentPages } from "@/lib/intent-pages";
 import { englishIntentPages } from "@/lib/intent-pages-en";
 import { absoluteUrl } from "@/lib/seo";
 
+const contentLastModified = new Date("2026-07-04T00:00:00.000Z");
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const staticRoutes = [
     "/",
     "/schoenen",
@@ -36,31 +37,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...[...staticRoutes, ...englishStaticRoutes].map((path) => ({
       url: absoluteUrl(path),
-      lastModified: now,
+      lastModified: contentLastModified,
       changeFrequency: "weekly" as const,
       priority: path === "/" ? 1 : 0.7
     })),
     ...intentPages.map((page) => ({
       url: absoluteUrl(`/advies/${page.slug}`),
-      lastModified: now,
+      lastModified: contentLastModified,
       changeFrequency: "weekly" as const,
       priority: 0.85
     })),
     ...englishIntentPages.map((page) => ({
       url: absoluteUrl(`/en/advice/${page.slug}`),
-      lastModified: now,
+      lastModified: contentLastModified,
       changeFrequency: "weekly" as const,
       priority: 0.78
     })),
     ...getEnrichedShoes().map((shoe) => ({
       url: absoluteUrl(`/schoenen/${shoe.slug}`),
-      lastModified: now,
+      lastModified: contentLastModified,
       changeFrequency: "weekly" as const,
       priority: 0.72
     })),
     ...getEnrichedShoes().map((shoe) => ({
       url: absoluteUrl(`/en/shoes/${shoe.slug}`),
-      lastModified: now,
+      lastModified: contentLastModified,
       changeFrequency: "weekly" as const,
       priority: 0.62
     }))

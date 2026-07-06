@@ -1258,6 +1258,12 @@ p {
   animation-play-state: paused;
 }
 
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .home-shoe-track {
+    animation: none;
+  }
+}
+
 .home-shoe-card {
   flex: 0 0 clamp(260px, 24vw, 320px);
   scroll-snap-align: start;
@@ -9254,7 +9260,6 @@ main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .
     padding: 4px 0;
   }
 
-  .site-header-home nav > a:nth-of-type(5),
   .site-header-home .site-nav-cta {
     display: none;
   }
@@ -9317,10 +9322,6 @@ main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .
 }
 
 @media (max-width: 420px) {
-  .site-header-home nav > a:nth-of-type(4) {
-    display: none;
-  }
-
   .site-header-home .language-switch {
     margin-left: 0;
   }

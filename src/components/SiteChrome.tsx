@@ -120,11 +120,19 @@ export function SiteChrome({ children }: Readonly<{ children: React.ReactNode }>
               {item.label}
             </Link>
           ))}
-          <span className="language-switch" aria-label="Language switch">
-            <Link aria-current={!isEnglish ? "page" : undefined} href={dutchHref}>
+          <span className="language-switch" aria-label={isEnglish ? "Language selector" : "Taalkeuze"}>
+            <Link
+              aria-current={!isEnglish ? "page" : undefined}
+              aria-label={!isEnglish ? "Nederlands geselecteerd" : "Switch to Dutch"}
+              href={dutchHref}
+            >
               NL
             </Link>
-            <Link aria-current={isEnglish ? "page" : undefined} href={englishHref}>
+            <Link
+              aria-current={isEnglish ? "page" : undefined}
+              aria-label={isEnglish ? "English selected" : "Schakel naar Engels"}
+              href={englishHref}
+            >
               EN
             </Link>
           </span>

@@ -10,45 +10,6 @@ export const metadata = {
   description: "English running shoe comparison for goals, fit, cushioning, support and price."
 };
 
-const m3Cards = [
-  {
-    href: "/en/shoe-finder",
-    icon: "5K",
-    imageAlt: "",
-    imageSrc: "/images/home/choice-road-runner.png",
-    title: "Choose by goal",
-    text: "Connect your distance and training goal to shoes built for that use.",
-    cta: "Start with your goal"
-  },
-  {
-    href: "/en/advice",
-    icon: "FIT",
-    imageAlt: "",
-    imageSrc: "/images/home/method-detail-shoe.png",
-    title: "Check support and fit",
-    text: "See when neutral, light support or a roomier fit is the more logical route.",
-    cta: "Read the guidance"
-  },
-  {
-    href: "/en/compare",
-    icon: "VS",
-    imageAlt: "",
-    imageSrc: "/images/home/compare-shoes-panel.png",
-    title: "Compare honestly",
-    text: "No loose top lists, but differences in cushioning, weight, support and use case.",
-    cta: "Compare models"
-  },
-  {
-    href: "/en/shoes",
-    icon: "€",
-    imageAlt: "",
-    imageSrc: "/images/home/decision-table-compare.png",
-    title: "Budget aware",
-    text: "Price matters, but only after use case, fit and quality make sense.",
-    cta: "Filter by budget"
-  }
-];
-
 const popularShoeIds = [
   "nike-pegasus-41",
   "asics-novablast-5",
@@ -144,33 +105,6 @@ export default function EnglishHomePage() {
               <span className="home-latest-release-cta">View release</span>
             </Link>
           ) : null}
-        </div>
-      </section>
-
-      <section className="home-section home-m3-section" aria-label="Why compare through Loopwijzer">
-        <div className="home-section-inner">
-          <div className="home-section-header home-section-header-centered">
-            <div>
-              <p className="eyebrow">Why compare through Loopwijzer?</p>
-              <h2>Do not just pick the most popular shoe.</h2>
-              <p>Start with your goal, surface and fit. Brand, score and price come after that.</p>
-            </div>
-          </div>
-          <div className="home-m3-grid">
-            {m3Cards.map((card) => (
-              <Link className="home-m3-card" href={card.href} key={card.title}>
-                <span className="home-m3-media" aria-hidden="true">
-                  <Image alt={card.imageAlt} fill sizes="(max-width: 820px) 88vw, 520px" src={card.imageSrc} />
-                </span>
-                <span className="home-m3-body">
-                  <span className="home-m3-icon" aria-hidden="true">{card.icon}</span>
-                  <strong>{card.title}</strong>
-                  <span>{card.text}</span>
-                  <em>{card.cta}</em>
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 

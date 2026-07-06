@@ -13,45 +13,6 @@ export const metadata: Metadata = {
   }
 };
 
-const m3Cards = [
-  {
-    href: "/keuzehulp",
-    icon: "5K",
-    imageAlt: "",
-    imageSrc: "/images/home/choice-road-runner.png",
-    title: "Begin bij je loopdoel",
-    text: "Loop je 5 km, train je voor een halve marathon of ga je het bos in? Kies eerst waarvoor je de schoen gebruikt.",
-    cta: "Start met je profiel"
-  },
-  {
-    href: "/advies/stabiliteit",
-    icon: "FIT",
-    imageAlt: "",
-    imageSrc: "/images/home/method-detail-shoe.png",
-    title: "Voorkom druk en twijfel",
-    text: "Vergelijk steun, breedte en teenruimte voordat score of merknaam de keuze overneemt.",
-    cta: "Bekijk pasvormadvies"
-  },
-  {
-    href: "/vergelijken",
-    icon: "VS",
-    imageAlt: "",
-    imageSrc: "/images/home/compare-shoes-panel.png",
-    title: "Leg modellen naast elkaar",
-    text: "Zie het verschil in demping, gewicht, steun en gebruik zonder dat er meteen één winnaar wordt aangewezen.",
-    cta: "Vergelijk modellen"
-  },
-  {
-    href: "/schoenen",
-    icon: "€",
-    imageAlt: "",
-    imageSrc: "/images/home/decision-table-compare.png",
-    title: "Koop niet alleen op korting",
-    text: "Een aanbieding telt pas mee als de schoen bij je training, voet en ondergrond past.",
-    cta: "Filter op budget"
-  }
-];
-
 const featuredRelease = {
   cta: "Bekijk schoenen",
   href: "/schoenen",
@@ -218,56 +179,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section home-proof-section" aria-label="Waarom Loopwijzer helpt bij kiezen">
-        <div className="home-section-inner home-proof-layout">
-          <div className="home-proof-copy">
-            <p className="eyebrow">Van twijfel naar shortlist</p>
-            <h2>We vergelijken niet alleen specs; we vertalen ze naar jouw keuze.</h2>
-            <p>
-              Een schoen voelt pas logisch als afstand, ondergrond, steun, breedte en budget samen kloppen. Daarom tonen we productdata, redactionele uitleg en winkelinformatie naast elkaar, maar niet door elkaar.
-            </p>
-          </div>
-          <span className="home-proof-image" aria-hidden="true">
-            <Image alt="" fill sizes="(max-width: 820px) 88vw, 320px" src="/images/home/choice-road-runner.png" />
-          </span>
-          <div className="home-proof-stats" aria-label="Platformsignalen">
-            {proofStats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-section home-m3-section" aria-label="Waarom vergelijken via Loopwijzer">
-        <div className="home-section-inner">
-          <div className="home-section-header home-section-header-centered">
-            <div>
-              <p className="eyebrow">Waarom vergelijken via Loopwijzer?</p>
-              <h2>Kies niet op merknaam alleen.</h2>
-              <p>Begin bij afstand, ondergrond en pasvorm. Daarna vergelijk je merk, score en prijs met meer houvast.</p>
-            </div>
-          </div>
-          <div className="home-m3-grid">
-            {m3Cards.map((card) => (
-              <Link className="home-m3-card" href={card.href} key={card.title}>
-                <span className="home-m3-media" aria-hidden="true">
-                  <Image alt={card.imageAlt} fill sizes="(max-width: 820px) 88vw, 520px" src={card.imageSrc} />
-                </span>
-                <span className="home-m3-body">
-                  <span className="home-m3-icon" aria-hidden="true">{card.icon}</span>
-                  <strong>{card.title}</strong>
-                  <span>{card.text}</span>
-                  <em>{card.cta}</em>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="home-section home-carousel-section" aria-label="Populaire hardloopschoenen">
         <div className="home-section-inner">
           <div className="home-section-header">
@@ -286,6 +197,29 @@ export default function HomePage() {
             ))}
             {carouselShoes.map((shoe) => (
               <HomeCarouselCard duplicate key={`${shoe.title}-duplicate`} shoe={shoe} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-proof-section" aria-label="Waarom Loopwijzer helpt bij kiezen">
+        <div className="home-section-inner home-proof-layout">
+          <div className="home-proof-copy">
+            <p className="eyebrow">Van twijfel naar shortlist</p>
+            <h2>We vergelijken niet alleen specs; we vertalen ze naar jouw keuze.</h2>
+            <p>
+              Een schoen voelt pas logisch als afstand, ondergrond, steun, breedte en budget samen kloppen. Daarom tonen we productdata, redactionele uitleg en winkelinformatie naast elkaar, maar niet door elkaar.
+            </p>
+          </div>
+          <span className="home-proof-image" aria-hidden="true">
+            <Image alt="" fill sizes="(max-width: 820px) 88vw, 320px" src="/images/home/choice-road-runner.png" />
+          </span>
+          <div className="home-proof-stats" aria-label="Platformsignalen">
+            {proofStats.map((stat) => (
+              <div key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
             ))}
           </div>
         </div>

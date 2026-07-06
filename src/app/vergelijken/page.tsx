@@ -306,8 +306,12 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
                     )}
                   </span>
                   <span>{shoe.fullName}</span>
-                  <Link href={`/schoenen/${shoe.slug}`}>Bekijk schoen</Link>
-                  <Link href={removeHref(shoes, shoe.id)}>Verwijder</Link>
+                  <Link href={`/schoenen/${shoe.slug}`} aria-label={`Bekijk ${shoe.fullName}`}>
+                    Bekijk schoen
+                  </Link>
+                  <Link href={removeHref(shoes, shoe.id)} aria-label={`Verwijder ${shoe.fullName} uit vergelijking`}>
+                    Verwijder
+                  </Link>
                 </th>
               ))}
             </tr>

@@ -1,4 +1,5 @@
 import { brands as jsonBrands, getEnrichedShoes as getJsonEnrichedShoes, offers as jsonOffers } from "@/lib/data";
+import { isPublicOffer } from "@/lib/offer-publication";
 import { getSupabaseConfigStatus } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import type {
@@ -231,18 +232,10 @@ function mapOffer(row: OfferRow): Offer {
   };
 }
 
-function isPlaceholderOfferUrl(url: string) {
-  return url.includes("example.com") || url.includes("localhost");
-}
-
-function isPublicCatalogOffer(offer: Offer) {
-  return offer.offerStatus === "verified" && !isPlaceholderOfferUrl(offer.url);
-}
-
 function enrichShoesFromRows(shoeRows: ShoeRow[], offerRows: OfferRow[]): EnrichedShoe[] {
   const offersByShoe = new Map<string, Offer[]>();
 
-  for (const offer of offerRows.map(mapOffer).filter(isPublicCatalogOffer)) {
+  for (const offer of offerRows.map(mapOffer).filter(isPublicOffer)) {
     const shoeOffers = offersByShoe.get(offer.shoeId) ?? [];
     shoeOffers.push(offer);
     offersByShoe.set(offer.shoeId, shoeOffers);

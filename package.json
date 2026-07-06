@@ -13,6 +13,8 @@
     "check:feed-staging": "node scripts/seed-feed-staging.mjs --dry-run",
     "seed:feed-staging": "node scripts/seed-feed-staging.mjs",
     "seed:supabase": "node scripts/seed-supabase.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:routes": "node --test tests/rendered-route-smoke.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -78,7 +78,12 @@ export function CompareShoePickerItem({
         <span className={shoe.priceFrom === null ? "price-state price-state-empty" : "price-state"}>{priceLabel}</span>
 
         {actionDisabled ? (
-          <span aria-disabled="true" className="compare-shoe-picker-item__action disabled">
+          <span
+            aria-disabled="true"
+            aria-label={`${compareLabel}. Verwijder eerst een andere schoen uit je vergelijking.`}
+            className="compare-shoe-picker-item__action disabled"
+            role="note"
+          >
             {compareLabel}
           </span>
         ) : (

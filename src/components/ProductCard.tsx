@@ -57,7 +57,16 @@ export function ProductCard({ compareDisabled, compareHref, compareLabel, shoe }
         <Link href={`/schoenen/${shoe.slug}`}>Bekijk schoen</Link>
       </div>
       {compareHref && compareLabel && !compareDisabled ? <Link className="compare-link" href={compareHref}>{compareLabel}</Link> : null}
-      {compareLabel && compareDisabled ? <span aria-disabled="true" className="compare-link disabled">{compareLabel}</span> : null}
+      {compareLabel && compareDisabled ? (
+        <span
+          aria-disabled="true"
+          aria-label={`${compareLabel}. Verwijder eerst een andere schoen uit je vergelijking.`}
+          className="compare-link disabled"
+          role="note"
+        >
+          {compareLabel}
+        </span>
+      ) : null}
     </article>
   );
 }

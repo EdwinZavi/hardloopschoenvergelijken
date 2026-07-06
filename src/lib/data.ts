@@ -1,6 +1,7 @@
 import brandsData from "../../data/brands.json";
 import offersData from "../../data/offers.json";
 import shoesData from "../../data/shoes.json";
+import { getOfferStatus as getPublishedOfferStatus, isPlaceholderOfferUrl, isPublicOffer as offerIsPublic } from "@/lib/offer-publication";
 import type { Brand, EnrichedShoe, Offer, OfferStatus, Shoe, DataStatus, ScoreStatus } from "@/types/product";
 
 export const brands = brandsData as Brand[];
@@ -16,15 +17,15 @@ export function getShoeScoreStatus(shoe: Shoe): ScoreStatus {
 }
 
 export function getOfferStatus(offer: Offer): OfferStatus {
-  return offer.offerStatus ?? (isPlaceholderOffer(offer) ? "placeholder" : "verified");
+  return getPublishedOfferStatus(offer);
 }
 
 export function isPlaceholderOffer(offer: Offer) {
-  return offer.url.includes("example.com");
+  return isPlaceholderOfferUrl(offer.url);
 }
 
 export function isPublicOffer(offer: Offer) {
-  return getOfferStatus(offer) === "verified" && !isPlaceholderOffer(offer);
+  return offerIsPublic(offer);
 }
 
 export function getOffersForShoe(shoeId: string) {
