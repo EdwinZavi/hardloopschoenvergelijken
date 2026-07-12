@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: "/keuzehulp",
-    mustContain: ["Welke hardloopschoen past bij jou?", "Hoeveel ervaring heb je met hardlopen?"]
+    mustContain: ["Welke hardloopschoen past bij jou?", "Hoe ervaren ben je en hoe vaak loop je?"]
   },
   {
     path: "/vergelijken?ids=nike-pegasus-41,hoka-clifton-9,brooks-ghost-16",

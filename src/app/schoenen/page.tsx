@@ -153,6 +153,39 @@ const sortLabels = {
   value: "Beste waarde voor gebruik"
 };
 
+const quickStartFilters = [
+  {
+    description: "Rustige dagelijkse trainers om mee op te bouwen.",
+    href: "/schoenen?primaryUseCase=beginner_daily&shoeType=daily_trainer",
+    label: "Beginner"
+  },
+  {
+    description: "Meer bescherming voor rustige kilometers.",
+    href: "/schoenen?cushioningLevel=high",
+    label: "Veel demping"
+  },
+  {
+    description: "Meer begeleiding als je extra zekerheid zoekt.",
+    href: "/schoenen?supportType=stability",
+    label: "Stabiliteit"
+  },
+  {
+    description: "Modellen met meer ruimte in de pasvorm.",
+    href: "/schoenen?widthLabel=wide",
+    label: "Brede voeten"
+  },
+  {
+    description: "Grip en bescherming voor onverharde routes.",
+    href: "/schoenen?surfaceType=trail&shoeType=trail",
+    label: "Trail"
+  },
+  {
+    description: "Budgetfilter gaat aan zodra prijsdata gecontroleerd live staat.",
+    href: "/schoenen?maxPrice=170",
+    label: "Onder €170"
+  }
+];
+
 export default async function ShoesPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
   const filters = parseFilters(params);
@@ -206,6 +239,22 @@ export default async function ShoesPage({ searchParams }: { searchParams: Search
             <p>{signal.detail}</p>
           </article>
         ))}
+      </section>
+
+      <section className="catalog-quick-start" aria-label="Snel starten met filters">
+        <div>
+          <p className="eyebrow">Snelle start</p>
+          <h2>Kies eerst je situatie</h2>
+          <p>Geen zin om alle filters te begrijpen? Begin met een veelvoorkomende keuze en verfijn daarna pas je shortlist.</p>
+        </div>
+        <div className="catalog-quick-start-grid">
+          {quickStartFilters.map((item) => (
+            <Link href={item.href} key={item.label}>
+              <strong>{item.label}</strong>
+              <span>{item.description}</span>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <div className="filter-layout">

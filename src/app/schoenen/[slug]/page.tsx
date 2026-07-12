@@ -46,6 +46,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .sort((a, b) => b.editorialScore.overall - a.editorialScore.overall)
     .slice(0, 3)
     .map((item) => ({ shoe: item, reason: getAlternativeReason(shoe, item) }));
+  const primaryAlternative = alternatives[0];
+  const priceStatus = offers.length
+    ? `${offers.length} gecontroleerde ${offers.length === 1 ? "aanbieding" : "aanbiedingen"}`
+    : "Prijsvergelijking in voorbereiding";
 
   return (
     <main className="page-product">
@@ -89,21 +93,32 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </aside>
       </section>
 
-      <section className="grid">
-        <article className="panel">
-          <h2>Kies deze als...</h2>
-          <p>{shoe.editorialVerdict.bestFor}</p>
+      <section className="product-decision-summary" aria-label="Snel beslissen">
+        <article className="product-decision-card product-decision-card-positive">
+          <span>Past goed voor</span>
+          <strong>{shoe.editorialVerdict.bestFor}</strong>
         </article>
-        <article className="panel">
-          <h2>Kijk verder als...</h2>
-          <p>{shoe.editorialVerdict.lessSuitableFor}</p>
+        <article className="product-decision-card product-decision-card-caution">
+          <span>Let op als</span>
+          <strong>{shoe.editorialVerdict.lessSuitableFor}</strong>
         </article>
-        <article className="panel">
-          <h2>Controleer dit...</h2>
-          <p>
-            {labels.supportType[shoe.supportType]} met {labels.level[shoe.cushioningLevel].toLowerCase()} demping en een {labels.level[shoe.responsivenessLevel].toLowerCase()} gevoel bij tempo.
-          </p>
-          <Link href="/methodologie">Zo beoordelen we schoenen</Link>
+        <article className="product-decision-card">
+          <span>Belangrijk alternatief</span>
+          {primaryAlternative ? (
+            <>
+              <strong>{primaryAlternative.shoe.fullName}</strong>
+              <p>{primaryAlternative.reason}</p>
+              <Link href={`/schoenen/${primaryAlternative.shoe.slug}`}>Bekijk alternatief</Link>
+            </>
+          ) : (
+            <strong>Geen logisch alternatief gevonden in de huidige catalogus</strong>
+          )}
+        </article>
+        <article className="product-decision-card">
+          <span>Prijsstatus</span>
+          <strong>{priceStatus}</strong>
+          <p>Prijs en partnerlinks tellen niet mee in de redactionele score.</p>
+          <Link href="/methodologie">Bekijk methode</Link>
         </article>
       </section>
 

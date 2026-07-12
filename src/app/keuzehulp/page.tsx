@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { RecommendationCard } from "@/components/RecommendationCard";
 import { defaultProfile, getRecommendations } from "@/lib/recommendations";
 import type { RecommendationProfile } from "@/types/recommendation";
@@ -24,120 +25,103 @@ type Option<T extends string> = {
 
 type ProfileQuestionKey = Exclude<keyof RecommendationProfile, "budgetMax">;
 
-type Question<T extends ProfileQuestionKey> = {
-  key: T;
-  title: string;
-  helper: string;
-  options: Option<Extract<RecommendationProfile[T], string>>[];
+type QuestionOption = {
+  label: string;
+  description: string;
+  patch: Partial<RecommendationProfile>;
 };
 
-const questions: Question<ProfileQuestionKey>[] = [
+type GuidedQuestion = {
+  keys: ProfileQuestionKey[];
+  title: string;
+  helper: string;
+  options: QuestionOption[];
+};
+
+const questions: GuidedQuestion[] = [
   {
-    key: "experienceLevel",
-    title: "Hoeveel ervaring heb je met hardlopen?",
-    helper: "Je hoeft dit niet precies te weten. Bij twijfel krijgen voorspelbare trainingsschoenen meer gewicht.",
+    keys: ["experienceLevel", "weeklyFrequency"],
+    title: "Hoe ervaren ben je en hoe vaak loop je?",
+    helper: "Zo bepalen we of een rustige basisschoen, een duurzamere trainingsschoen of een specialistischer model logisch is.",
     options: [
-      { value: "not_sure", label: "Weet ik nog niet", description: "Neem een rustige start als uitgangspunt." },
-      { value: "beginner", label: "Beginner", description: "Ik bouw net op of loop nog onregelmatig." },
-      { value: "recreational", label: "Recreatief", description: "Ik loop geregeld en wil vooral prettig trainen." },
-      { value: "experienced", label: "Ervaren", description: "Ik vergelijk bewuster op tempo, gewicht en specifieke eigenschappen." }
+      { label: "Weet ik nog niet", description: "Houd het advies breed en voorzichtig.", patch: { experienceLevel: "not_sure", weeklyFrequency: "not_sure" } },
+      { label: "Beginner / 1-2 keer", description: "Ik bouw rustig op of loop nog onregelmatig.", patch: { experienceLevel: "beginner", weeklyFrequency: "1_2" } },
+      { label: "Recreatief / 3-4 keer", description: "Ik loop geregeld en zoek vooral een betrouwbare basisschoen.", patch: { experienceLevel: "recreational", weeklyFrequency: "3_4" } },
+      { label: "Ervaren / veel kilometers", description: "Ik vergelijk bewuster op tempo, gewicht en specifieke eigenschappen.", patch: { experienceLevel: "experienced", weeklyFrequency: "5_plus" } }
     ]
   },
   {
-    key: "runningGoal",
-    title: "Waarvoor wil je de schoenen vooral gebruiken?",
-    helper: "Een rustige training vraagt iets anders dan een snelle 10 kilometer of een rondje door het bos.",
+    keys: ["runningGoal", "targetDistance"],
+    title: "Wat is je belangrijkste doel of afstand?",
+    helper: "Een eerste 5 kilometer vraagt iets anders dan tempo, lange duurlopen of trail.",
     options: [
-      { value: "not_sure", label: "Weet ik nog niet", description: "Geef veelzijdige trainingsschoenen voorrang." },
-      { value: "start_running", label: "Rustig beginnen", description: "Ik wil vooral comfortabel en gecontroleerd opbouwen." },
-      { value: "general_fitness", label: "Fit blijven", description: "Ik zoek een fijne schoen voor gewone trainingen." },
-      { value: "faster_5k_10k", label: "Sneller lopen", description: "Ik wil meer tempo maken op 5 of 10 kilometer." },
-      { value: "half_marathon_marathon", label: "Langere afstanden", description: "Ik train voor een halve of hele marathon." },
-      { value: "trail_running", label: "Onverhard lopen", description: "Ik loop vooral op bospaden, zand, modder of trailroutes." }
+      { label: "Nog geen vast doel", description: "Geef veelzijdige trainingsschoenen voorrang.", patch: { runningGoal: "not_sure", targetDistance: "not_sure" } },
+      { label: "Rustig beginnen", description: "Comfortabel opbouwen tot ongeveer 5 kilometer.", patch: { runningGoal: "start_running", targetDistance: "5k" } },
+      { label: "Fit blijven", description: "Gewone trainingen rond 5 tot 10 kilometer.", patch: { runningGoal: "general_fitness", targetDistance: "10k" } },
+      { label: "Sneller lopen", description: "Meer tempo maken op 5 of 10 kilometer.", patch: { runningGoal: "faster_5k_10k", targetDistance: "10k" } },
+      { label: "Halve marathon", description: "Langere duurlopen waarbij comfort zwaarder weegt.", patch: { runningGoal: "half_marathon_marathon", targetDistance: "half_marathon" } },
+      { label: "Marathon", description: "Veel kilometers en langdurige bescherming.", patch: { runningGoal: "half_marathon_marathon", targetDistance: "marathon" } },
+      { label: "Trail", description: "Bospaden, zand, modder of technische routes.", patch: { runningGoal: "trail_running", targetDistance: "trail" } }
     ]
   },
   {
-    key: "targetDistance",
-    title: "Welke afstand loop je meestal of wil je opbouwen?",
-    helper: "Een 5 kilometer vraagt iets anders dan lange duurlopen. Als je twijfelt, houden we de keuze breed.",
-    options: [
-      { value: "not_sure", label: "Nog niet zeker", description: "Ik wil eerst een allround advies." },
-      { value: "5k", label: "Tot 5 km", description: "Korte rustige rondes of eerste opbouw." },
-      { value: "10k", label: "Rond 10 km", description: "Regelmatige trainingen en iets langere rondes." },
-      { value: "half_marathon", label: "Halve marathon", description: "Langere duurlopen waarbij comfort zwaarder weegt." },
-      { value: "marathon", label: "Marathon", description: "Veel kilometers en langdurige bescherming zijn belangrijk." },
-      { value: "trail", label: "Trailafstand", description: "De route en grip wegen zwaarder dan exacte kilometers." }
-    ]
-  },
-  {
-    key: "weeklyFrequency",
-    title: "Hoe vaak train je meestal per week?",
-    helper: "Bij meer trainingen wordt duurzaamheid, comfort en voorspelbaarheid belangrijker.",
-    options: [
-      { value: "not_sure", label: "Wisselt nog", description: "Ik wil een schoen die breed inzetbaar blijft." },
-      { value: "1_2", label: "1-2 keer", description: "Ik loop af en toe of bouw rustig op." },
-      { value: "3_4", label: "3-4 keer", description: "Ik train regelmatig en zoek een betrouwbare basisschoen." },
-      { value: "5_plus", label: "5+ keer", description: "Ik maak veel kilometers en wil goed kunnen afwisselen." }
-    ]
-  },
-  {
-    key: "preferredSurface",
+    keys: ["preferredSurface"],
     title: "Waar loop je meestal?",
     helper: "Asfalt en trail vragen om andere zolen, grip en bescherming.",
     options: [
-      { value: "not_sure", label: "Nog niet zeker", description: "Neem een veelzijdige weg- of mixed schoen als startpunt." },
-      { value: "road", label: "Op de weg", description: "Asfalt, stoep, fietspad of verharde paden." },
-      { value: "trail", label: "Op trail", description: "Bos, zand, modder, stenen of smalle paden." },
-      { value: "mixed", label: "Gemengd", description: "Ik wissel weg en onverhard af." }
+      { label: "Nog niet zeker", description: "Neem een veelzijdige weg- of mixed schoen als startpunt.", patch: { preferredSurface: "not_sure" } },
+      { label: "Op de weg", description: "Asfalt, stoep, fietspad of verharde paden.", patch: { preferredSurface: "road" } },
+      { label: "Op trail", description: "Bos, zand, modder, stenen of smalle paden.", patch: { preferredSurface: "trail" } },
+      { label: "Gemengd", description: "Ik wissel weg en onverhard af.", patch: { preferredSurface: "mixed" } }
     ]
   },
   {
-    key: "supportNeed",
-    title: "Hoeveel steun wil je van je schoen?",
-    helper: "Twijfel je? Dan krijgen stabiele, makkelijk lopende opties meer gewicht.",
+    keys: ["supportNeed", "injurySensitivity"],
+    title: "Hoeveel steun en voorzichtigheid wil je?",
+    helper: "Dit is geen medisch advies. We gebruiken het alleen om rustige, stabiele keuzes zwaarder of lichter te wegen.",
     options: [
-      { value: "not_sure", label: "Weet ik niet", description: "Geef stabiele, voorspelbare modellen voorrang." },
-      { value: "neutral", label: "Neutraal", description: "Ik heb geen extra stabiliteit nodig." },
-      { value: "some_support", label: "Wat extra steun", description: "Ik wil stabiliteit zonder zware correctie." },
-      { value: "stability", label: "Veel steun", description: "Ik zoek duidelijke steun tijdens het lopen." }
+      { label: "Weet ik niet", description: "Geen medische aanname, wel voorspelbare opties.", patch: { supportNeed: "not_sure", injurySensitivity: "not_sure" } },
+      { label: "Neutraal", description: "Ik heb geen extra stabiliteit of voorzichtigheid nodig.", patch: { supportNeed: "neutral", injurySensitivity: "low" } },
+      { label: "Wat extra steun", description: "Comfort en stabiliteit mogen iets zwaarder wegen.", patch: { supportNeed: "some_support", injurySensitivity: "medium" } },
+      { label: "Veel steun", description: "Ik wil duidelijke stabiliteit en extra rustige keuzes.", patch: { supportNeed: "stability", injurySensitivity: "high" } }
     ]
   },
   {
-    key: "injurySensitivity",
-    title: "Moeten we extra voorzichtig zijn met pijntjes of blessuregevoeligheid?",
-    helper: "Dit is geen medische diagnose. Bij pijn of terugkerende klachten blijft advies van een specialist belangrijk.",
-    options: [
-      { value: "not_sure", label: "Weet ik niet", description: "Gebruik geen medische aanname in het advies." },
-      { value: "low", label: "Niet bijzonder", description: "Ik heb geen extra voorzichtigheid nodig." },
-      { value: "medium", label: "Soms gevoelig", description: "Comfort en steun mogen zwaarder meewegen." },
-      { value: "high", label: "Extra voorzichtig", description: "Geef rustige steun- en comfortsignalen voorrang." }
-    ]
-  },
-  {
-    key: "preferredFeel",
+    keys: ["preferredFeel"],
     title: "Hoe wil je dat de schoen voelt?",
     helper: "Dit gaat over het gevoel onder je voet: zacht, normaal of juist snel.",
     options: [
-      { value: "not_sure", label: "Weet ik niet", description: "Kies een neutraal loopgevoel als uitgangspunt." },
-      { value: "balanced", label: "Normaal en stabiel", description: "Niet te zacht en niet te fel." },
-      { value: "soft", label: "Zacht en comfortabel", description: "Prettig voor rustige kilometers." },
-      { value: "responsive", label: "Snel en veerkrachtig", description: "Meer energie bij tempo en intervallen." }
-    ]
-  },
-  {
-    key: "fitPreference",
-    title: "Hoe breed moet de schoen voelen?",
-    helper: "Een goede hardloopschoen moet niet knellen. Pasvorm kan belangrijker zijn dan een hoge score.",
-    options: [
-      { value: "not_sure", label: "Weet ik niet", description: "Gebruik een normale pasvorm als startpunt." },
-      { value: "regular", label: "Normaal", description: "Standaard pasvorm werkt meestal goed voor mij." },
-      { value: "wide", label: "Ruimer", description: "Ik heb bredere voeten of wil meer ruimte bij mijn tenen." },
-      { value: "narrow", label: "Smaller", description: "Ik wil dat de schoen wat strakker om mijn voet zit." }
+      { label: "Weet ik niet", description: "Kies een neutraal loopgevoel als uitgangspunt.", patch: { preferredFeel: "not_sure" } },
+      { label: "Normaal en stabiel", description: "Niet te zacht en niet te fel.", patch: { preferredFeel: "balanced" } },
+      { label: "Zacht en comfortabel", description: "Prettig voor rustige kilometers.", patch: { preferredFeel: "soft" } },
+      { label: "Snel en veerkrachtig", description: "Meer energie bij tempo en intervallen.", patch: { preferredFeel: "responsive" } }
     ]
   }
 ];
 
 const totalSteps = questions.length + 1;
+
+const helperProfileVisuals = [
+  {
+    src: "/images/keuzehulp-shoe-choice-guide.png",
+    alt: "Visuele keuzehulp met verschillende hardloopschoenkeuzes"
+  },
+  {
+    src: "/images/keuzehulp-shoe-model-guide.png",
+    alt: "Visuele keuzehulp met hardloopschoenmodellen per loopstijl"
+  },
+  {
+    src: "/images/keuzehulp-shoe-decision-guide.png",
+    alt: "Visuele keuzehulp met hardloper die verschillende schoeneigenschappen afweegt"
+  }
+] as const;
+
+const fitPreferenceOptions = [
+  { value: "not_sure", label: "Weet ik niet", description: "Gebruik een normale pasvorm als voorzichtig startpunt." },
+  { value: "regular", label: "Normaal", description: "Standaard pasvorm werkt meestal goed voor mij." },
+  { value: "wide", label: "Ruimer", description: "Ik heb bredere voeten of wil meer ruimte bij mijn tenen." },
+  { value: "narrow", label: "Smaller", description: "Ik wil dat de schoen compacter om mijn voet zit." }
+] as const satisfies Option<RecommendationProfile["fitPreference"]>[];
 
 const profileValueOptions = {
   experienceLevel: ["not_sure", "beginner", "recreational", "experienced"],
@@ -214,8 +198,17 @@ function makeHref(profile: RecommendationProfile, step: number, patch: Partial<R
   return `/keuzehulp?${params.toString()}#keuzehulp-vraag`;
 }
 
-function makeSkipHref(profile: RecommendationProfile, step: number, question?: Question<ProfileQuestionKey>) {
-  return question ? makeHref(profile, step + 1, { [question.key]: "not_sure" } as Partial<RecommendationProfile>) : makeHref(profile, step + 1);
+function unknownPatchFor(question?: GuidedQuestion) {
+  if (!question) return {};
+  return Object.fromEntries(question.keys.map((key) => [key, "not_sure"])) as Partial<RecommendationProfile>;
+}
+
+function makeSkipHref(profile: RecommendationProfile, step: number, question?: GuidedQuestion) {
+  return makeHref(profile, step + 1, unknownPatchFor(question));
+}
+
+function isOptionSelected(profile: RecommendationProfile, option: QuestionOption) {
+  return Object.entries(option.patch).every(([key, value]) => profile[key as keyof RecommendationProfile] === value);
 }
 
 function makeCompareHref(ids: string[]) {
@@ -333,6 +326,8 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
   const recommendations = isResultsStep ? getRecommendations(profile) : [];
   const compareHref = makeCompareHref(recommendations.map(({ shoe }) => shoe.id));
   const summaryItems = profileSummaryItems(profile);
+  const helperProfileVisual = helperProfileVisuals[Math.min(step, helperProfileVisuals.length - 1)];
+  const helperShellStyle = { "--helper-shell-bg": `url(${helperProfileVisual.src})` } as CSSProperties;
 
   return (
     <main className="page-helper">
@@ -342,7 +337,7 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
             <p className="eyebrow">Keuzehulp hardloopschoenen</p>
             <h1>Welke hardloopschoen past bij jou?</h1>
             <p className="lead">
-              Beantwoord korte vragen over ervaring, doel, afstand, training, ondergrond, steun, pijntjes, gevoel, pasvorm en budget. Weet je iets niet, dan nemen we geen harde aanname.
+              Beantwoord zes korte stappen over training, doel, ondergrond, steun, gevoel, pasvorm en budget. Weet je iets niet, dan nemen we geen harde aanname.
             </p>
           </div>
           <div className="page-hero-visual page-hero-visual-portrait">
@@ -363,7 +358,7 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
       )}
 
       {!isResultsStep ? (
-        <section className="helper-shell helper-shell-visual" id="keuzehulp-vraag" aria-label="Keuzehulp vragen">
+        <section className="helper-shell helper-shell-visual" id="keuzehulp-vraag" aria-label="Keuzehulp vragen" style={helperShellStyle}>
           <div className="helper-progress">
             <span>
               Stap {Math.min(step + 1, totalSteps)} van {totalSteps} · onbekend mag ook
@@ -382,13 +377,13 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
                   <p>{currentQuestion.helper}</p>
                   <div className="option-grid">
                     {currentQuestion.options.map((option) => {
-                      const selected = profile[currentQuestion.key] === option.value;
+                      const selected = isOptionSelected(profile, option);
                       return (
                         <Link
                           aria-current={selected ? "true" : undefined}
                           className={selected ? "option-card selected" : "option-card"}
-                          href={makeHref(profile, step + 1, { [currentQuestion.key]: option.value })}
-                          key={option.value}
+                          href={makeHref(profile, step + 1, option.patch)}
+                          key={option.label}
                         >
                           <strong>{option.label}</strong>
                           <span>{option.description}</span>
@@ -401,11 +396,22 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
                 <form action="/keuzehulp" className="budget-form">
                   <input name="step" type="hidden" value={totalSteps} />
                   {Object.entries(profile).map(([key, value]) =>
-                    key === "budgetMax" || value === undefined ? null : <input key={key} name={key} type="hidden" value={String(value)} />
+                    key === "budgetMax" || key === "fitPreference" || value === undefined ? null : <input key={key} name={key} type="hidden" value={String(value)} />
                   )}
-                  <p className="eyebrow">Budget</p>
-                  <h2>Wat wil je maximaal uitgeven?</h2>
-                  <p>Vul alleen een harde grens in als je die hebt. Budget mag ordenen, maar pasvorm, steun en rustig gebruik blijven belangrijker.</p>
+                  <p className="eyebrow">Pasvorm en budget</p>
+                  <h2>Hoe moet de schoen voelen rond je voet?</h2>
+                  <p>Pasvorm kan belangrijker zijn dan een hoge score. Vul alleen een budget in als je een harde grens hebt.</p>
+                  <div className="fit-budget-options" role="radiogroup" aria-label="Pasvormvoorkeur">
+                    {fitPreferenceOptions.map((option) => (
+                      <label className="fit-budget-option" key={option.value}>
+                        <input name="fitPreference" type="radio" value={option.value} defaultChecked={profile.fitPreference === option.value} />
+                        <span>
+                          <strong>{option.label}</strong>
+                          <small>{option.description}</small>
+                        </span>
+                      </label>
+                    ))}
+                  </div>
                   <label className="budget-control">
                     <span>Maximaal budget in euro</span>
                     <input name="budgetMax" type="number" min="80" max="300" step="10" placeholder="Bijvoorbeeld 170" defaultValue={profile.budgetMax ?? ""} />
@@ -413,9 +419,6 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
                   <div className="helper-actions">
                     <Link className="button secondary" href={makeHref(profile, step - 1)}>
                       Vorige
-                    </Link>
-                    <Link className="button secondary" href={makeHref(profile, totalSteps, { budgetMax: undefined })}>
-                      Geen budgetgrens
                     </Link>
                     <button className="button" type="submit">
                       Bekijk mijn advies
@@ -440,19 +443,6 @@ export default async function ChoiceHelperPage({ searchParams }: { searchParams:
               ) : null}
             </div>
 
-            <aside className="helper-flow-card" aria-label="Profielcontext">
-              <span>Profiel in opbouw</span>
-              <strong>{Math.min(step + 1, totalSteps)} van {totalSteps} stappen</strong>
-              <p>We gebruiken onbekende antwoorden voorzichtig. Het advies blijft een shortlist, geen medische conclusie.</p>
-              <div>
-                {summaryItems.slice(0, 5).map((item) => (
-                  <small key={item.label}>
-                    <b>{item.label}</b>
-                    <em>{item.value}</em>
-                  </small>
-                ))}
-              </div>
-            </aside>
           </div>
         </section>
       ) : (
