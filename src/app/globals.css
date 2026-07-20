@@ -1213,7 +1213,7 @@ p {
 }
 
 .home-m3-card em {
-  align-self: end;
+  align-self: flex-end;
   color: var(--guide);
   font-style: normal;
   font-weight: 950;
@@ -4868,7 +4868,7 @@ main > .lead,
 }
 
 .admin-filter-form {
-  align-items: end;
+  align-items: flex-end;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -8948,7 +8948,7 @@ main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .
 }
 
 .home-m3-body em {
-  align-self: end;
+  align-self: flex-end;
 }
 
 .page-home .home-m3-card::after {
@@ -9432,7 +9432,7 @@ main :is(.product-card, .option-card, .decision-card, .article-card, .advice-car
 }
 
 .product-decision-card a {
-  align-self: end;
+  align-self: flex-end;
   color: var(--brand);
   font-weight: 900;
   text-decoration: none;
@@ -9569,5 +9569,496 @@ main :is(.product-card, .option-card, .decision-card, .article-card, .advice-car
 @media (max-width: 420px) {
   .site-header-home .language-switch {
     margin-left: 0;
+  }
+}
+
+/* Design QA pass 2026-07-17: spacing, alignment, buttons and M3 surface consistency. */
+:root {
+  --qa-page-x: clamp(18px, 4vw, 56px);
+  --qa-section-y: clamp(44px, 7vw, 92px);
+  --qa-section-gap: clamp(22px, 3.4vw, 42px);
+  --qa-card-gap: clamp(14px, 2vw, 22px);
+  --qa-radius-panel: 28px;
+  --qa-radius-card: 24px;
+  --qa-surface-border: rgba(183, 197, 221, 0.78);
+  --qa-surface-shadow: 0 18px 44px -32px rgba(8, 29, 61, 0.38);
+}
+
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) {
+  background: #fff;
+}
+
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) > :is(section, div):not(.home-hero-media):not(.home-hero-light) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) > section + section,
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) > div + section,
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) > section + div {
+  margin-top: var(--qa-section-gap);
+}
+
+.page-home .home-section {
+  padding-block: clamp(58px, 8vw, 112px);
+}
+
+.page-home .home-section + .home-section {
+  border-top: 1px solid rgba(214, 219, 231, 0.64);
+}
+
+.page-home .home-section-inner,
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) :is(
+  .filter-layout,
+  .catalog-command-strip,
+  .catalog-quick-start,
+  .compare-lab-strip,
+  .decision-panel,
+  .compare-picker,
+  .comparison-wrap,
+  .difference-grid,
+  .methodology-summary-grid,
+  .methodology-dropdown-section,
+  .trust-answers,
+  .policy-layout,
+  .policy-summary,
+  .policy-content.standalone,
+  .product-decision-summary,
+  .recommendations-grid,
+  .landing-grid,
+  .landing-faq,
+  .landing-related,
+  .method-strip
+) {
+  max-width: 1180px;
+  width: min(1180px, calc(100% - (var(--qa-page-x) * 2)));
+}
+
+.section-heading,
+.home-section-header,
+.result-header,
+.catalog-header,
+.product-header,
+.compare-adjust-section .section-heading,
+.page-compare .decision-panel .section-heading {
+  align-items: flex-end;
+  gap: clamp(16px, 3vw, 32px);
+  margin-bottom: clamp(18px, 3vw, 30px);
+}
+
+.section-heading > div,
+.home-section-header > div,
+.result-header > div,
+.catalog-header > div,
+.product-header > div {
+  display: grid;
+  gap: 10px;
+  max-width: 780px;
+}
+
+main :is(.section-heading, .home-section-header, .result-header, .catalog-header, .product-header) :is(h1, h2, h3, p) {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+main :is(.button, button[type="submit"], .compare-link, .card-actions a, .site-nav-cta) {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 900;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.1;
+  min-height: 46px;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+main :is(.button.secondary, .compare-link.disabled) {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.card-actions,
+.helper-actions,
+.compare-actions,
+.product-actions,
+.home-hero-actions,
+.intent-actions,
+.method-strip {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+main:is(
+  .page-shoes,
+  .page-product,
+  .page-compare,
+  .page-helper,
+  .page-advice,
+  .page-methodology,
+  .page-policy
+) :is(
+  .panel,
+  .product-card,
+  .option-card,
+  .decision-card,
+  .methodology-dropdown-card,
+  .article-card,
+  .advice-card,
+  .shoe-card,
+  .compare-card,
+  .policy-section,
+  .policy-callout,
+  .filter-panel,
+  .catalog-results-panel,
+  .decision-panel,
+  .comparison-wrap,
+  .helper-shell,
+  .score-breakdown,
+  .weights-grid,
+  .product-choice-panel,
+  .product-price-disclosure,
+  .empty-state,
+  .result-toolbar,
+  .comparison-section,
+  .landing-faq,
+  .landing-related,
+  .method-strip,
+  .catalog-quick-start,
+  .trust-answers article,
+  .methodology-summary-grid article,
+  .compare-picker-grid > article,
+  .compare-shoe-picker-item
+) {
+  border-color: var(--qa-surface-border);
+  border-radius: var(--qa-radius-card);
+  box-shadow: var(--qa-surface-shadow);
+}
+
+main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+  .decision-panel,
+  .comparison-wrap,
+  .catalog-quick-start,
+  .helper-shell,
+  .policy-layout,
+  .policy-content.standalone,
+  .methodology-dropdown-section
+) {
+  border-radius: var(--qa-radius-panel);
+}
+
+.product-card,
+.recommendation-card,
+.decision-card,
+.article-card,
+.advice-card,
+.shoe-card,
+.compare-card,
+.landing-guidance-card,
+.product-decision-card {
+  align-content: start;
+  display: grid;
+  gap: var(--qa-card-gap);
+}
+
+.product-card .card-footer,
+.recommendation-card .card-footer {
+  align-items: flex-end;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.product-card .compare-link,
+.recommendation-card .card-actions,
+.decision-card a,
+.product-decision-card a {
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.option-card {
+  align-items: flex-start;
+  display: grid;
+  gap: 8px;
+}
+
+.option-card::after {
+  flex: 0 0 auto;
+}
+
+.page-helper .helper-shell {
+  padding-block: clamp(28px, 5vw, 56px);
+}
+
+.page-helper .helper-shell::before {
+  opacity: 0.2;
+}
+
+.page-helper .helper-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.helper-flow-main {
+  margin-inline: auto;
+  max-width: 920px;
+}
+
+.page-compare .compare-picker-grid,
+.catalog-grid,
+.recommendations-grid,
+.landing-grid,
+.methodology-dropdown-grid,
+.product-decision-summary,
+.catalog-quick-start-grid {
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.compare-shoe-picker-item,
+.product-card {
+  overflow: hidden;
+}
+
+.compare-shoe-picker-item__aside,
+.compare-shoe-picker-item__main,
+.compare-shoe-picker-item__heading {
+  min-width: 0;
+}
+
+.compare-selection-bar,
+.result-toolbar,
+.catalog-results-panel,
+.filter-panel,
+.policy-section,
+.policy-callout {
+  padding: clamp(18px, 3vw, 30px);
+}
+
+.policy-content.standalone {
+  display: grid;
+  gap: clamp(18px, 3vw, 28px);
+}
+
+main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+  .page-hero-with-visual.image-hero,
+  .intent-hero.image-hero,
+  .compare-picker-hero.image-hero,
+  .compare-result-hero.image-hero
+) {
+  margin-top: clamp(20px, 3vw, 34px);
+  min-height: clamp(420px, 58vw, 640px);
+  padding: clamp(96px, 12vw, 150px) var(--qa-page-x) clamp(42px, 7vw, 78px);
+}
+
+main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+  .page-hero-with-visual.image-hero,
+  .intent-hero.image-hero,
+  .compare-picker-hero.image-hero,
+  .compare-result-hero.image-hero
+) > div:first-child {
+  max-width: 780px;
+}
+
+main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+  .page-hero-with-visual.image-hero,
+  .intent-hero.image-hero,
+  .compare-picker-hero.image-hero,
+  .compare-result-hero.image-hero
+) h1 {
+  font-size: clamp(2.35rem, 4.1vw, 4.45rem);
+}
+
+.site-header-home {
+  gap: clamp(14px, 2.4vw, 28px);
+}
+
+.site-header-home nav {
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.site-header-home nav a:not(.site-nav-cta),
+.language-switch a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 34px;
+}
+
+.footer-shell {
+  align-items: start;
+  gap: clamp(22px, 4vw, 48px);
+}
+
+@media (max-width: 900px) {
+  .section-heading,
+  .home-section-header,
+  .result-header,
+  .catalog-header,
+  .product-header,
+  .page-compare .decision-panel .section-heading {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading > .button,
+  .section-heading > a,
+  .home-section-header > a,
+  .result-header > a,
+  .catalog-header > a,
+  .product-header > a {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --qa-page-x: 16px;
+    --qa-section-gap: 28px;
+  }
+
+  .page-home .home-section {
+    padding-block: 48px;
+  }
+
+  .page-home .home-section-inner,
+  main:is(
+    .page-shoes,
+    .page-product,
+    .page-compare,
+    .page-helper,
+    .page-advice,
+    .page-methodology,
+    .page-policy
+  ) :is(
+    .filter-layout,
+    .catalog-command-strip,
+    .catalog-quick-start,
+    .compare-lab-strip,
+    .decision-panel,
+    .compare-picker,
+    .comparison-wrap,
+    .difference-grid,
+    .methodology-summary-grid,
+    .methodology-dropdown-section,
+    .trust-answers,
+    .policy-layout,
+    .policy-summary,
+    .policy-content.standalone,
+    .product-decision-summary,
+    .recommendations-grid,
+    .landing-grid,
+    .landing-faq,
+    .landing-related,
+    .method-strip
+  ) {
+    width: calc(100% - 28px);
+  }
+
+  main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+    .page-hero-with-visual.image-hero,
+    .intent-hero.image-hero,
+    .compare-picker-hero.image-hero,
+    .compare-result-hero.image-hero
+  ) {
+    min-height: 0;
+    padding: 132px 18px 42px;
+  }
+
+  main:is(.page-shoes, .page-product, .page-compare, .page-helper, .page-advice, .page-methodology, .page-policy) :is(
+    .page-hero-with-visual.image-hero,
+    .intent-hero.image-hero,
+    .compare-picker-hero.image-hero,
+    .compare-result-hero.image-hero
+  ) h1 {
+    font-size: clamp(1.9rem, 9vw, 2.55rem);
+    line-height: 1.06;
+  }
+
+  main :is(.button, button[type="submit"], .compare-link, .card-actions a) {
+    width: 100%;
+  }
+
+  .card-actions,
+  .helper-actions,
+  .compare-actions,
+  .product-actions,
+  .home-hero-actions,
+  .intent-actions,
+  .method-strip {
+    align-items: stretch;
+  }
+
+  .product-card .card-footer,
+  .recommendation-card .card-footer,
+  .compare-selection-bar,
+  .result-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .compare-selection-bar,
+  .result-toolbar,
+  .catalog-results-panel,
+  .filter-panel,
+  .policy-section,
+  .policy-callout {
+    padding: 18px;
+  }
+
+  .site-footer {
+    padding-inline: 18px;
   }
 }
